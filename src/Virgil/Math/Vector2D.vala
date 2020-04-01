@@ -1,4 +1,4 @@
-namespace Virgil.Math {
+namespace Virgil {
     public class Vector2D {
         public float x = 0.0f;
         public float y = 0.0f;
@@ -14,18 +14,18 @@ namespace Virgil.Math {
         }
 
         public void Subtract (Vector2D vector) {
-            x += vector.x;
-            y += vector.y;
+            x -= vector.x;
+            y -= vector.y;
         }
 
         public void Multiply (Vector2D vector) {
-            x += vector.x;
-            y += vector.y;
+            x *= vector.x;
+            y *= vector.y;
         }
 
         public void Divide (Vector2D vector) {
-            x += vector.x;
-            y += vector.y;
+            x /= vector.x;
+            y /= vector.y;
         }
     }
 }
