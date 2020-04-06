@@ -27,8 +27,7 @@ subdir ('example')
 shared_virgil = shared_library (
     'virgil',
     sources_virgil,
-    dependencies: [library_dependencies, vapi],
-    install: true
+    dependencies: [library_dependencies, vapi]
 )
 
-example = executable('testing', 'example/main.vala', dependencies: [library_dependencies, vapi], link_with: shared_virgil)
+example = executable('testing', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil)

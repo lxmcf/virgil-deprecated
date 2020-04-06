@@ -3,10 +3,6 @@ using SDL.Video;
 using SDLGraphics;
 
 namespace Virgil {
-    public static void print () {
-        GLib.print ("TEST!\n");
-    }
-
     public class Game {
         public int window_width;
         public int window_height;

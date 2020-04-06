@@ -8,22 +8,22 @@ namespace Virgil {
             this.y = destination_y;
         }
 
-        public void Add (Vector2D vector) {
+        public void add (Vector2D vector) {
             x += vector.x;
             y += vector.y;
         }
 
-        public void Subtract (Vector2D vector) {
+        public void subtract (Vector2D vector) {
             x -= vector.x;
             y -= vector.y;
         }
 
-        public void Multiply (Vector2D vector) {
+        public void multiply (Vector2D vector) {
             x *= vector.x;
             y *= vector.y;
         }
 
-        public void Divide (Vector2D vector) {
+        public void divide (Vector2D vector) {
             x /= vector.x;
             y /= vector.y;
         }
