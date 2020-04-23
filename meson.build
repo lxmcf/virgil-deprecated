@@ -11,13 +11,15 @@ library_dependencies = [
     dependency('gobject-2.0'),
 
     meson.get_compiler('c').find_library('SDL2'),
-    meson.get_compiler('c').find_library('SDL2_gfx')
+    meson.get_compiler('c').find_library('SDL2_gfx'),
+    meson.get_compiler('c').find_library('SDL2_image')
 ]
 
 # VAPI Dependencies
 vapi = [
     meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('sdl2-gfx', dirs: vapi_dir)
+    meson.get_compiler('vala').find_library('sdl2-gfx', dirs: vapi_dir),
+    meson.get_compiler('vala').find_library('sdl2-image', dirs: vapi_dir)
 ]
 
 # subdirectories
