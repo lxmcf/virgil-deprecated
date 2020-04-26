@@ -18,13 +18,15 @@ namespace Virgil.Graphics {
 
         public Sprite (Renderer sprite_renderer, string sprite_file = "") {
             texture = load_texture (sprite_renderer, sprite_file);
-            texture.query (out texture_format, null, out width, out height);
+            texture.query (null, null, out width, out height);
 
             texture_rectangle.x = 0;
             texture_rectangle.y = 0;
 
             texture_rectangle.w = width;
             texture_rectangle.h = height;
+
+            renderer = sprite_renderer;
         }
 
         // Not yet implimented
@@ -33,16 +35,15 @@ namespace Virgil.Graphics {
         // Not yet implimented
         public Sprite.from_tilesheets () { }
 
-        public bool draw (int position_x = 0, int position_y = 0) {
+        public bool draw (int position_x, int position_y) {
             if(texture != null) {
-                Rect destination_rectange = {
-                    x = position_x,
-                    y = position_y,
-                    w = width * scale_x,
-                    h = height * scale_y
-                }
+                var destination_rectange = Rect ();
+                destination_rectange.x = position_x;
+                destination_rectange.y = position_y;
+                destination_rectange.w = width;
+                destination_rectange.h = width;
 
-                renderer.copy (texture, destination_rectange, texture_rectangle);
+                renderer.copy (texture, texture_rectangle, destination_rectange);
 
                 return true;
             } else {

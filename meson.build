@@ -29,7 +29,10 @@ subdir ('example')
 shared_virgil = shared_library (
     'virgil',
     sources_virgil,
-    dependencies: [library_dependencies, vapi]
+    dependencies: [library_dependencies, vapi],
+    install: false
 )
 
-example = executable('testing', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil)
+install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), 'build'))
+
+example = executable('testing', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil, install: false)
