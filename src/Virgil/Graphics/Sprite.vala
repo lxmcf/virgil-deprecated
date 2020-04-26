@@ -33,8 +33,21 @@ namespace Virgil.Graphics {
         // Not yet implimented
         public Sprite.from_tilesheets () { }
 
-        public void draw () {
-            renderer.copy ()
+        public bool draw (int position_x = 0, int position_y = 0) {
+            if(texture != null) {
+                Rect destination_rectange = {
+                    x = position_x,
+                    y = position_y,
+                    w = width * scale_x,
+                    h = height * scale_y
+                }
+
+                renderer.copy (texture, destination_rectange, texture_rectangle);
+
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

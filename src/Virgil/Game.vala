@@ -9,9 +9,9 @@ namespace Virgil {
 
         public bool running;
 
-        public static Window main_window;
-        public static Renderer main_renderer;
-        public static FramerateManager main_framerate { get; private set; }
+        public Window main_window;
+        public Renderer main_renderer;
+        public FramerateManager main_framerate { get; private set; }
 
         public Game () {
             SDL.init (SDL.InitFlag.EVERYTHING);
@@ -56,7 +56,7 @@ namespace Virgil {
           }
         }
 
-        public virtual void start () {}
+        public virtual void start () { }
         public virtual void update () { }
         public virtual void draw () { }
     }
