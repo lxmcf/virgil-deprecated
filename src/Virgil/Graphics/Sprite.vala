@@ -20,11 +20,12 @@ namespace Virgil.Graphics {
             texture = load_texture (sprite_renderer, sprite_file);
             texture.query (null, null, out width, out height);
 
-            texture_rectangle.x = 0;
-            texture_rectangle.y = 0;
-
-            texture_rectangle.w = width;
-            texture_rectangle.h = height;
+            texture_rectangle = Rect () {
+                x = 0,
+                y = 0,
+                w = width,
+                h = height
+            };
 
             renderer = sprite_renderer;
         }
@@ -37,18 +38,25 @@ namespace Virgil.Graphics {
 
         public bool draw (int position_x, int position_y) {
             if(texture != null) {
-                var destination_rectange = Rect ();
-                destination_rectange.x = position_x;
-                destination_rectange.y = position_y;
-                destination_rectange.w = width;
-                destination_rectange.h = width;
+                Rect destination_rectange = Rect() {
+                    x = position_x,
+                    y = position_y,
+                    w = width * scale_x,
+                    h = height * scale_y
+                };
 
                 renderer.copy (texture, texture_rectangle, destination_rectange);
-
-                return true;
-            } else {
-                return false;
             }
+
+            return (texture != null);
+        }
+
+        public int get_width () {
+            return width;
+        }
+
+        public int get_height () {
+            return height;
         }
     }
 }
