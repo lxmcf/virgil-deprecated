@@ -30,12 +30,6 @@ namespace Virgil.Graphics {
             renderer = sprite_renderer;
         }
 
-        // Not yet implimented
-        public Sprite.from_spritesheet () { }
-
-        // Not yet implimented
-        public Sprite.from_tilesheets () { }
-
         public bool draw (int position_x, int position_y) {
             if(texture != null) {
                 Rect destination_rectange = Rect() {

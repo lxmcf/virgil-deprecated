@@ -4,6 +4,7 @@ using Virgil.Graphics;
 namespace Example {
     public class ExampleGame : Virgil.Game {
         public Sprite sprite;
+
         public int count = 0;
 
         public ExampleGame () {

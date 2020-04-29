@@ -19,5 +19,10 @@ Virgil is a basic 2D game engine built using SDL2 and designed for Linux and dir
 ```sh
 meson build
 cd build
-ninja
+ninja install
+
+# This is a temporaray executable
+./example
 ```
+
+> _**Note:** Virgil is not affiliated with the [Elementary OS](https://elementary.io) project, I just love what they are doing!_
