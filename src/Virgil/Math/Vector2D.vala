@@ -8,6 +8,13 @@ namespace Virgil {
             this.y = destination_y;
         }
 
+        public bool equals (Vector2D vector) {
+            bool does_x = this.x == vector.x;
+            bool does_y = this.y == vector.y;
+
+            return (does_x && does_y);
+        }
+
         public void add (Vector2D vector) {
             x += vector.x;
             y += vector.y;

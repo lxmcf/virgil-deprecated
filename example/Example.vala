@@ -1,6 +1,8 @@
 using Virgil;
 using Virgil.Graphics;
 
+using SDL.Input;
+
 namespace Example {
     public class ExampleGame : Virgil.Game {
         public Sprite sprite;

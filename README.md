@@ -22,7 +22,7 @@ cd build
 ninja install
 
 # This is a temporaray executable
-./example
+./virgil-example
 ```
 
 > _**Note:** Virgil is not affiliated with the [Elementary OS](https://elementary.io) project, I just love what they are doing!_

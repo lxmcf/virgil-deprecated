@@ -9,7 +9,6 @@ vapi_dir = join_paths(meson.current_source_dir(), 'vapi')
 library_dependencies = [
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
-    dependency ('gio-2.0'),
 
     meson.get_compiler('c').find_library('SDL2'),
     meson.get_compiler('c').find_library('SDL2_gfx'),
@@ -37,4 +36,4 @@ shared_virgil = shared_library (
 install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), 'build'))
 
 subdir ('example')
-executable('testing', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil)
+executable('virgil-example', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil)

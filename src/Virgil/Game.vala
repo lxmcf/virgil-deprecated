@@ -3,6 +3,7 @@ using SDL.Video;
 using SDLGraphics;
 
 using Virgil.Graphics;
+using Virgil.Input;
 
 namespace Virgil {
     public class Game {
@@ -15,6 +16,8 @@ namespace Virgil {
         public Renderer main_renderer;
         public FramerateManager main_framerate { get; private set; }
 
+        public EventController main_event;
+
         public Colour draw_colour;
 
         public Game () {
@@ -23,10 +26,15 @@ namespace Virgil {
             main_framerate = FramerateManager ();
             main_framerate.init ();
 
+            main_event = new EventController ();
+            main_event.close_event.connect(e => {
+                running = false;
+            });
+
             draw_colour = new Colour ();
         }
 
-        public void initialise (int width, int height, string window_title = "Virgil Game Engine", uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI | SDL.Video.WindowFlags.SHOWN) {
+        public void initialise (int width = 640, int height = 360, string window_title = "Virgil Game Engine", uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI | SDL.Video.WindowFlags.SHOWN) {
             main_window = new Window (window_title, Window.POS_CENTERED, Window.POS_CENTERED, width, height, window_flags);
             main_renderer = Renderer.create (main_window, -1, RendererFlags.ACCELERATED | RendererFlags.PRESENTVSYNC);
 
@@ -42,14 +50,14 @@ namespace Virgil {
         public void run () {
             start ();
 
-            print ("Game started\n");
+            print ("> Game started\n");
 
             while (running) {
                 main_framerate.run ();
+                main_event.run ();
 
                 main_renderer.clear ();
 
-                events ();
                 update ();
                 draw ();
 
@@ -58,19 +66,7 @@ namespace Virgil {
 
             SDL.quit ();
 
-            print ("Game ended\n");
-        }
-
-        public void events () {
-            Event event;
-
-            while (Event.poll (out event) == 1) {
-                switch (event.type) {
-                    case EventType.QUIT:
-                        running = false;
-                    break;
-                }
-            }
+            print ("> Game ended\n");
         }
 
         public virtual void start () { }

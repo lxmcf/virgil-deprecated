@@ -18,6 +18,6 @@ sources_virgil = files (
 
     'Virgil/Graphics/Sprite.vala',
     'Virgil/Graphics/Colour.vala',
-
-    'Virgil/Engine/Resource.vala'
+    
+    'Virgil/Engine/EventController.vala'
 )
