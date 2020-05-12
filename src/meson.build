@@ -1,7 +1,7 @@
 # Config data
 config_data = configuration_data ()
 config_data.set ('PROJECT_NAME', meson.project_name ())
-config_data.set ('VERSION', meson.project_version ())
+config_data.set ('PROJECT_VERSION', meson.project_version ())
 
 config_header = configure_file (
     input: 'config.vala.in',
@@ -19,5 +19,7 @@ sources_virgil = files (
     'Virgil/Graphics/Sprite.vala',
     'Virgil/Graphics/Colour.vala',
     
-    'Virgil/Engine/EventController.vala'
+    'Virgil/Engine/EventController.vala',
+    'Virgil/Engine/FramerateController.vala',
+    'Virgil/Engine/WindowManager.vala'
 )

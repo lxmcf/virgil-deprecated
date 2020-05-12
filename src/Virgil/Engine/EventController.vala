@@ -1,6 +1,6 @@
 using SDL;
 
-namespace Virgil.Input {
+namespace Virgil {
     public class EventController {
         private Event event;
 
