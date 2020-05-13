@@ -10,17 +10,19 @@ namespace Example {
         public int count = 0;
 
         public ExampleGame () {
-            initialise (640, 360, "Example Project");
+            initialise ();
         }
 
         public override void start () {
-            sprite = new Sprite (main_renderer, "assets/default.png");
+            sprite = new Sprite (main_window.get_renderer (), "assets/default.png");
 
-            set_draw_colour (new Colour (88, 151, 233));
+            main_window.set_background_colour (new Colour (88, 151, 233));
         }
 
         public override void update () {
             count++;
+
+            print (main_framerate.frame_count.to_string () + "\n");
         }
 
         public override void draw () {

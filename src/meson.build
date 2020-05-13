@@ -18,8 +18,8 @@ sources_virgil = files (
 
     'Virgil/Graphics/Sprite.vala',
     'Virgil/Graphics/Colour.vala',
-    
-    'Virgil/Engine/EventController.vala',
-    'Virgil/Engine/FramerateController.vala',
+
+    'Virgil/Engine/EventManager.vala',
+    'Virgil/Engine/FramerateManager.vala',
     'Virgil/Engine/WindowManager.vala'
 )

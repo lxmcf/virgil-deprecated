@@ -5,6 +5,7 @@ namespace Virgil.Graphics {
         public uint8 blue;
         public uint8 alpha;
 
+        // TODO: Create alternate creation methods from string and HSV
         public Colour (uint8 r = 0, uint8 g = 0, uint8 b = 0, uint8 a = 255) {
             red = r;
             green = g;
@@ -21,7 +22,4 @@ namespace Virgil.Graphics {
             return (does_red && does_green && does_blue && does_alpha);
         }
     }
-
-    // A duplicate class to allow for both spelling's of Colour
-    public class Color : Colour { }
 }

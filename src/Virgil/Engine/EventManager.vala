@@ -1,10 +1,10 @@
 using SDL;
 
 namespace Virgil {
-    public class EventController {
+    public class EventManager {
         private Event event;
 
-        public EventController () { }
+        public EventManager () { }
 
         public signal void close_event ();
 
