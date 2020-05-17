@@ -1,25 +1,13 @@
-# Config data
-config_data = configuration_data ()
-config_data.set ('PROJECT_NAME', meson.project_name ())
-config_data.set ('PROJECT_VERSION', meson.project_version ())
+subdir ('Virgil')
+subdir ('Example')
 
-config_header = configure_file (
-    input: 'config.vala.in',
-    output: 'config.vala',
-    configuration: config_data
+# Virgil shared library
+shared_virgil = shared_library (
+    meson.project_name (),
+    sources_virgil,
+    config_header,
+    dependencies: [library_dependencies, vapi],
+    install: false
 )
 
-# Virgil library
-sources_virgil = files (
-    'Virgil/Game.vala',
-    'Virgil/GameObject.vala',
-
-    'Virgil/Math/Vector2D.vala',
-
-    'Virgil/Graphics/Sprite.vala',
-    'Virgil/Graphics/Colour.vala',
-
-    'Virgil/Engine/EventManager.vala',
-    'Virgil/Engine/FramerateManager.vala',
-    'Virgil/Engine/WindowManager.vala'
-)
+executable('virgil-example', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil)

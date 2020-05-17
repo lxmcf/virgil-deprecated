@@ -23,15 +23,4 @@ vapi = [
 # subdirectories
 subdir ('src')
 
-shared_virgil = shared_library (
-    meson.project_name (),
-    sources_virgil,
-    config_header,
-    dependencies: [library_dependencies, vapi],
-    install: false
-)
-
-install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), 'build'))
-
-subdir ('example')
-executable('virgil-example', sources_example, dependencies: [library_dependencies, vapi], link_with: shared_virgil)
+install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), 'build/src'))
