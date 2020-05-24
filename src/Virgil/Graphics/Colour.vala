@@ -5,12 +5,18 @@ namespace Virgil.Graphics {
         public uint8 blue;
         public uint8 alpha;
 
-        // TODO: Create alternate creation methods from string and HSV
         public Colour (uint8 r = 0, uint8 g = 0, uint8 b = 0, uint8 a = 255) {
             red = r;
             green = g;
             blue = b;
             alpha = a;
+        }
+
+        public Colour.from_colour (Colour colour) {
+            red = colour.red;
+            green = colour.green;
+            blue = colour.blue;
+            alpha = colour.alpha;
         }
 
         public bool equals (Colour colour) {
@@ -20,6 +26,17 @@ namespace Virgil.Graphics {
             bool does_alpha = this.alpha == (colour.alpha);
 
             return (does_red && does_green && does_blue && does_alpha);
+        }
+
+        public uint32 to_int () {
+            uint8 r = red;
+            uint8 g = green << 8;
+            uint8 b = blue << 16;
+            uint8 a = alpha << 24;
+
+            uint32 colour = (uint32)(a + b + g + r);
+
+            return colour;
         }
     }
 }

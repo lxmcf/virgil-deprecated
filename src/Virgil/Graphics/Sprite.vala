@@ -31,8 +31,8 @@ namespace Virgil.Graphics {
         }
 
         public bool draw (int position_x, int position_y) {
-            if(texture != null) {
-                Rect destination_rectange = Rect() {
+            if (texture != null) {
+                Rect destination_rectange = Rect () {
                     x = position_x,
                     y = position_y,
                     w = width * scale_x,

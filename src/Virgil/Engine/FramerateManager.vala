@@ -2,7 +2,6 @@ using SDL;
 
 namespace Virgil {
     public class FramerateManager {
-        // TODO:
         public uint32 frame_count { get; private set; }
 
         // TODO: Rename to more accurate variables after initial SDL port
@@ -49,7 +48,7 @@ namespace Virgil {
                 SDL.Timer.delay (target_ticks - current_ticks);
             } else {
                 frame_count = 0;
-                base_ticks = get_ticks();
+                base_ticks = get_ticks ();
             }
 
             return delta_time;

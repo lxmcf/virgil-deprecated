@@ -18,7 +18,7 @@ namespace Virgil {
             main_framerate = new FramerateManager ();
 
             main_event = new EventManager ();
-            main_event.close_event.connect(e => {
+            main_event.close_event.connect (e => {
                 running = false;
             });
         }

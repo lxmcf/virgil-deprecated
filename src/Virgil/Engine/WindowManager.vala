@@ -16,7 +16,7 @@ namespace Virgil {
 
         public Colour background_colour;
 
-        public WindowManager(uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI | SDL.Video.WindowFlags.SHOWN, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED /*| SDL.Video.RendererFlags.PRESENTVSYNC */) {
+        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI | SDL.Video.WindowFlags.SHOWN, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED | SDL.Video.RendererFlags.PRESENTVSYNC) {
             this.window_flags = window_flags;
             this.renderer_flags = renderer_flags;
 
@@ -28,14 +28,14 @@ namespace Virgil {
         }
 
         public void create_window () {
-            this.window = new Window (window_title , Window.POS_CENTERED, Window.POS_CENTERED, window_width, window_height, window_flags);
+            window = new Window (window_title , Window.POS_CENTERED, Window.POS_CENTERED, window_width, window_height, window_flags);
         }
 
         public void create_renderer () {
             if (window != null) {
                 this.renderer = Renderer.create (window, -1, renderer_flags);
 
-                renderer.set_draw_color (background_colour.red, background_colour.green, background_colour.blue, background_colour.alpha);
+                set_background_colour (background_colour);
                 renderer.clear ();
             } else {
                 this.renderer = null;
@@ -47,7 +47,7 @@ namespace Virgil {
         public void set_background_colour (Colour colour) {
             background_colour = colour;
 
-            renderer.set_draw_color (background_colour.red, background_colour.green, background_colour.blue, background_colour.alpha);
+            renderer.set_draw_color (colour.red, colour.green, colour.blue, colour.alpha);
         }
 
         public unowned Window? get_window () {
