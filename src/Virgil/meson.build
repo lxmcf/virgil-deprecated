@@ -16,10 +16,13 @@ sources_virgil = files (
 
     'Math/Vector2D.vala',
 
+    'Input/Key.vala',
+
     'Graphics/Sprite.vala',
     'Graphics/Colour.vala',
 
     'Engine/EventManager.vala',
     'Engine/FramerateManager.vala',
-    'Engine/WindowManager.vala'
+    'Engine/WindowManager.vala',
+    'Engine/KeyboardManager.vala'
 )

@@ -7,25 +7,26 @@ namespace Virgil {
     public class Game {
         public bool running;
 
-        public WindowManager main_window;
-        public EventManager main_event;
-        public FramerateManager main_framerate;
+        public WindowManager manager_window;
+        public EventManager manager_event;
+        public FramerateManager manager_framerate;
+        public KeyboardManager manager_keyboard;
 
         public Game () {
             SDL.init (SDL.InitFlag.EVERYTHING);
 
-            main_window = new WindowManager ();
-            main_framerate = new FramerateManager ();
+            manager_window = new WindowManager ();
+            manager_framerate = new FramerateManager ();
 
-            main_event = new EventManager ();
-            main_event.close_event.connect (e => {
-                running = false;
-            });
+            manager_keyboard = new KeyboardManager ();
+
+            manager_event = new EventManager ();
+            link_events ();
         }
 
         public void initialise () {
-            main_window.create_window ();
-            main_window.create_renderer ();
+            manager_window.create_window ();
+            manager_window.create_renderer ();
 
             running = true;
         }
@@ -34,16 +35,16 @@ namespace Virgil {
             start ();
 
             while (running) {
-                main_framerate.run ();
+                manager_framerate.run ();
 
-                main_window.renderer_begin ();
+                manager_window.renderer_begin ();
 
-                main_event.run ();
+                manager_event.run ();
 
                 update ();
                 draw ();
 
-                main_window.renderer_end ();
+                manager_window.renderer_end ();
             }
 
             SDL.quit ();
@@ -52,5 +53,20 @@ namespace Virgil {
         public virtual void start () { }
         public virtual void update () { }
         public virtual void draw () { }
+
+        private void link_events () {
+            // Link basic quit event
+            manager_event.close_event.connect (() => {
+                running = false;
+            });
+
+            manager_event.key_down_event.connect ((e, key) => {
+                manager_keyboard.update_key (key.keysym.sym, true);
+            });
+
+            manager_event.key_up_event.connect ((e, key) => {
+                manager_keyboard.update_key (key.keysym.sym, false);
+            });
+        }
     }
 }

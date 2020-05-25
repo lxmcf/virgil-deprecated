@@ -3,7 +3,7 @@ namespace Virgil {
         public float x = 0.0f;
         public float y = 0.0f;
 
-        public Vector2D (float destination_x, float destination_y) {
+        public Vector2D (float destination_x = 0.0f, float destination_y = 0.0f) {
             this.x = destination_x;
             this.y = destination_y;
         }
