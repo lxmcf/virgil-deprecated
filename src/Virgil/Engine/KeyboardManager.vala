@@ -1,5 +1,3 @@
-// TODO: Create ID based reference system to avoid so many foreach statements
-
 namespace Virgil {
     public class KeyboardManager {
         private GLib.List<Virgil.Input.Key> key_list;
@@ -18,12 +16,12 @@ namespace Virgil {
             return false;
         }
 
-        public bool check_keyboard (SDL.Input.Keycode key) {
+        public bool check_key (SDL.Input.Keycode key) {
             bool key_down = false;
 
             if (key_exists (key)) {
                 foreach (Virgil.Input.Key item in key_list) {
-                    if(item.is_down) {
+                    if (item.is_down) {
                         key_down = true;
 
                         break;

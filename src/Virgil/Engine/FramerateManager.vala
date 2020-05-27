@@ -33,7 +33,7 @@ namespace Virgil {
         }
 
         // TODO: Document this returns as ms, maybe look to convert to float
-        public uint32 run () {
+        public uint32 update () {
             uint32 current_ticks = get_ticks ();
             uint32 target_ticks;
 

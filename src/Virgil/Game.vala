@@ -35,11 +35,11 @@ namespace Virgil {
             start ();
 
             while (running) {
-                manager_framerate.run ();
+                manager_framerate.update ();
 
                 manager_window.renderer_begin ();
 
-                manager_event.run ();
+                manager_event.update ();
 
                 update ();
                 draw ();

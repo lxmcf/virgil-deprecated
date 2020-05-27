@@ -12,7 +12,7 @@ namespace Virgil {
 
         public signal void key_up_event (SDL.KeyboardEvent key);
 
-        public void run () {
+        public void update () {
             while (Event.poll (out event) == 1) {
                 switch (event.type) {
                     case EventType.QUIT:
