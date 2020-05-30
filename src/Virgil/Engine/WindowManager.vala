@@ -16,7 +16,7 @@ namespace Virgil {
 
         public Colour background_colour;
 
-        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI | SDL.Video.WindowFlags.SHOWN, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED | SDL.Video.RendererFlags.PRESENTVSYNC) {
+        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED | SDL.Video.RendererFlags.PRESENTVSYNC) {
             this.window_flags = window_flags;
             this.renderer_flags = renderer_flags;
 
@@ -39,8 +39,6 @@ namespace Virgil {
                 renderer.clear ();
             } else {
                 this.renderer = null;
-
-                print ("* Error: Renderer can not be initialised with no window attached!");
             }
         }
 

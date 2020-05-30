@@ -24,7 +24,7 @@ namespace Virgil {
                     break;
 
                     case EventType.KEYUP:
-                    key_up_event (event.key);
+                        key_up_event (event.key);
                     break;
                 }
             }
