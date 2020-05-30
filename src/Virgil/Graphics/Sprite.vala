@@ -11,8 +11,8 @@ namespace Virgil.Graphics {
         public int width;
         public int height;
 
-        public int scale_x = 1;
-        public int scale_y = 1;
+        public double scale_x = 1;
+        public double scale_y = 1;
 
         private unowned Renderer renderer;
 
@@ -35,8 +35,8 @@ namespace Virgil.Graphics {
                 Rect destination_rectange = Rect () {
                     x = position_x,
                     y = position_y,
-                    w = width * scale_x,
-                    h = height * scale_y
+                    w = (int)((double)width * scale_x),
+                    h = (int)((double)height * scale_y)
                 };
 
                 renderer.copy (texture, texture_rectangle, destination_rectange);
@@ -51,6 +51,11 @@ namespace Virgil.Graphics {
 
         public int get_height () {
             return height;
+        }
+
+        public void set_scale (double scale_x, double scale_y) {
+            this.scale_x = scale_x;
+            this.scale_y = scale_y;
         }
     }
 }

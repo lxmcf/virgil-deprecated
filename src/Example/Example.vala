@@ -7,6 +7,7 @@ using SDL.Input;
 namespace Example {
     public class ExampleGame : Virgil.Game {
         public Sprite sprite;
+        public Sprite sprite_alt;
 
         public int count = 0;
         public int xaxis = 0;
@@ -17,6 +18,9 @@ namespace Example {
 
         public override void start () {
             sprite = new Sprite (manager_window.get_renderer (), "assets/default.png");
+            sprite.set_scale (1.5, 1.5);
+
+            sprite_alt = new Sprite (manager_window.get_renderer (), "assets/default.png");
 
             manager_window.set_background_colour (new Colour (88, 151, 233));
 
@@ -50,6 +54,7 @@ namespace Example {
 
         public override void draw () {
             sprite.draw (x, y);
+            sprite_alt.draw (x, y + 64);
         }
     }
 }

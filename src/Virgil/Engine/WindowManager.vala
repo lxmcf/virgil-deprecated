@@ -16,7 +16,7 @@ namespace Virgil {
 
         public Colour background_colour;
 
-        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED | SDL.Video.RendererFlags.PRESENTVSYNC) {
+        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED) {
             this.window_flags = window_flags;
             this.renderer_flags = renderer_flags;
 
@@ -34,6 +34,8 @@ namespace Virgil {
         public void create_renderer () {
             if (window != null) {
                 this.renderer = Renderer.create (window, -1, renderer_flags);
+
+                renderer.set_logical_size (window_width, window_height);
 
                 set_background_colour (background_colour);
                 renderer.clear ();
