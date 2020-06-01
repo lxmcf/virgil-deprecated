@@ -69,5 +69,21 @@ namespace Virgil {
                 keyboard.update_key (key.keysym.sym, false);
             });
         }
+
+        public unowned WindowManager get_window_manager () {
+            return manager_window;
+        }
+
+        public unowned EventManager get_event_manager () {
+            return event;
+        }
+
+        public unowned FramerateManager get_framerate_manager () {
+            return framerate;
+        }
+
+        public unowned KeyboardManager get_keyboard_manager () {
+            return keyboard;
+        }
     }
 }

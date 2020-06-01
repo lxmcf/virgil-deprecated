@@ -34,5 +34,15 @@ namespace Virgil {
             x /= vector.x;
             y /= vector.y;
         }
+
+        public void set_value (float? destination_x, float? destination_y) {
+            if (destination_x != null) {
+                x = destination_x;
+            }
+
+            if (destination_y != null) {
+                y = destination_y;
+            }
+        }
     }
 }

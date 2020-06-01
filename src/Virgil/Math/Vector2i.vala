@@ -15,24 +15,34 @@ namespace Virgil {
             return (does_x && does_y);
         }
 
-        public void add (Vector2D vector) {
+        public void add (Vector2i vector) {
             x += vector.x;
             y += vector.y;
         }
 
-        public void subtract (Vector2D vector) {
+        public void subtract (Vector2i vector) {
             x -= vector.x;
             y -= vector.y;
         }
 
-        public void multiply (Vector2D vector) {
+        public void multiply (Vector2i vector) {
             x *= vector.x;
             y *= vector.y;
         }
 
-        public void divide (Vector2D vector) {
+        public void divide (Vector2i vector) {
             x /= vector.x;
             y /= vector.y;
+        }
+
+        public void set_value (int? destination_x, int? destination_y) {
+            if (destination_x != null) {
+                x = destination_x;
+            }
+
+            if (destination_y != null) {
+                y = destination_y;
+            }
         }
     }
 }
