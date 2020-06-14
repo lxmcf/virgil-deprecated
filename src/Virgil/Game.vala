@@ -7,7 +7,7 @@ namespace Virgil {
     public class Game {
         public bool running;
 
-        public WindowManager manager_window;
+        public static WindowManager manager_window;
         public EventManager event;
         public FramerateManager framerate;
         public KeyboardManager keyboard;

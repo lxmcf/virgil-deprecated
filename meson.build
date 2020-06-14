@@ -23,7 +23,7 @@ vapi = [
 # subdirectories
 subdir ('src')
 
-install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), 'build'))
+install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), meson.current_build_dir()))
 
 # Virgil shared library
 shared_virgil = shared_library (

@@ -13,6 +13,7 @@ config_header = configure_file (
 sources_virgil = files (
     'Game.vala',
     'GameObject.vala',
+    'GameState.vala',
 
     'Math/Vector2D.vala',
     'Math/Vector2i.vala',
