@@ -1,6 +1,12 @@
 # Virgil
 
-Virgil is a basic 2D game engine built using SDL2 and designed for Linux and directly compatability aimed at [Elementary OS](https://elementary.io)...
+Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
+
+### What is Virgil?
+
+The Vala Game Library (VGL), or formally known as 'Virgi' is my answer to 'if I can't find it, I'll make it'. I grew tired of installing Windows VM's to use common 2D game engines and having to run around in circles finding a Linux compatible engine I can use to fruitlessly make simple games.
+
+Virgil is built from the ground up using Vala and the SDL2 library and it's sister libraries such as SDL2Image, this is my first major project as well as my first dip into 'proper development' using a new language.
 
 ### Dependencies
 
@@ -24,4 +30,18 @@ ninja install
 ./virgil-example
 ```
 
-> _**Note:** Virgil is not affiliated with the [Elementary OS](https://elementary.io) project, I just love what they are doing!_
+> _**Note:** Virgil is not affiliated with the [elementary OS](https://elementary.io) project, I just love what they are doing!_
+
+### Operating System Support
+
+If you are interested in using Virgil and want some help, the below table is an up to date place you can find what platforms are officially supported by Virgil, please keep in mind this is not set in stone and community member are more than welcome to build your own port for a new platform.
+
+| OS | Architecture | Support Level |
+|:-:|:-:|:-:|
+| Linux | x86 | Full |
+| Linux | armhf | Full |
+| Linux | arm64 | Full |
+| MacOS | x86 | Partial |
+| BSD | x86 | Minimal |
+| Windows | x86 | None |
+| Windows | arm64 | None |
