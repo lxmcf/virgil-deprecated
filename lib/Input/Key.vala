@@ -1,3 +1,5 @@
+// TODO: Impliment is_pressed boolean
+
 namespace Virgil.Input {
     public class Key {
         public SDL.Input.Keycode keycode;

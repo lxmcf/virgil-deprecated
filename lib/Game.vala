@@ -7,7 +7,7 @@ namespace Virgil {
     public class Game {
         public bool running;
 
-        public static WindowManager manager_window;
+        public WindowManager manager_window;
         public EventManager event;
         public FramerateManager framerate;
         public KeyboardManager keyboard;
@@ -29,7 +29,7 @@ namespace Virgil {
             running = true;
         }
 
-        public void run () {
+        public int run () {
             start ();
 
             while (running) {
@@ -46,6 +46,9 @@ namespace Virgil {
             }
 
             SDL.quit ();
+            
+            // TODO: Create exit code system
+            return 0;
         }
 
         public virtual void start () { }
@@ -68,22 +71,6 @@ namespace Virgil {
             event.key_up_event.connect ((e, key) => {
                 keyboard.update_key (key.keysym.sym, false);
             });
-        }
-
-        public unowned WindowManager get_window_manager () {
-            return manager_window;
-        }
-
-        public unowned EventManager get_event_manager () {
-            return event;
-        }
-
-        public unowned FramerateManager get_framerate_manager () {
-            return framerate;
-        }
-
-        public unowned KeyboardManager get_keyboard_manager () {
-            return keyboard;
         }
     }
 }

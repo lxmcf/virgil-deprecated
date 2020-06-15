@@ -10,12 +10,12 @@ config_header = configure_file (
 )
 
 # Virgil library
-sources_virgil = files (
+libvirgil_sources = files (
     'Game.vala',
     'GameObject.vala',
     'GameState.vala',
 
-    'Math/Vector2D.vala',
+    'Math/Vector2f.vala',
     'Math/Vector2i.vala',
 
     'Input/Key.vala',

@@ -1,6 +1,5 @@
 sources_example = files (
-    'Main.vala',
-    'Example.vala',
+    'Demo.vala',
 
     'Objects/Player.vala'
 )

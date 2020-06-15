@@ -26,22 +26,24 @@ meson build --prefix=/usr
 cd build
 ninja install
 
-# This is a temporaray executable
-./virgil-example
+# Demo app
+./virgil-demo
 ```
 
 > _**Note:** Virgil is not affiliated with the [elementary OS](https://elementary.io) project, I just love what they are doing!_
 
 ### Operating System Support
 
-If you are interested in using Virgil and want some help, the below table is an up to date place you can find what platforms are officially supported by Virgil, please keep in mind this is not set in stone and community member are more than welcome to build your own port for a new platform.
+If you are interested in using Virgil and want some help, the below table is an up to date place you can find what platforms are officially supported by Virgil, please keep in mind this is not set in stone and community members are encouragede to fork and build your own port for a new platform.
 
 | OS | Architecture | Support Level |
 |:-:|:-:|:-:|
-| Linux | x86 | Full |
+| Linux | x86_64 | Full |
 | Linux | armhf | Full |
-| Linux | arm64 | Full |
-| MacOS | x86 | Partial |
-| BSD | x86 | Minimal |
-| Windows | x86 | None |
-| Windows | arm64 | None |
+| Linux | aarch64 | Full |
+| MacOS | x86_64 | Partial |
+| BSD | x86_64 | Minimal |
+| Windows | x86_64 | None |
+| Windows | aarch64 | None |
+| WSL | x86_64 | None |
+| WSL | aarch64 | None |

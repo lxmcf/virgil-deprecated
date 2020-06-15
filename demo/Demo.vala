@@ -4,8 +4,8 @@ using Virgil.Input;
 
 using SDL.Input;
 
-namespace Example {
-    public class ExampleGame : Virgil.Game {
+namespace Virgil {
+    public class Demo : Game {
         public Player player;
 
         public override void start () {
@@ -28,5 +28,11 @@ namespace Example {
         public override void draw () {
             player.draw ();
         }
+    }
+
+    public static int main (string[] args) {
+        var demo = new Virgil.Demo ();
+
+        return demo.run ();
     }
 }

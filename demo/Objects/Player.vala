@@ -4,8 +4,8 @@ using Virgil.Graphics;
 using SDL.Video;
 using SDL.Input;
 
-namespace Example {
-    public class Player : Virgil.GameObject {
+namespace Virgil {
+    public class Player : GameObject {
         public Vector2i transform;
         public int xaxis;
         public int yaxis;
