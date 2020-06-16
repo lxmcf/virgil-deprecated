@@ -9,7 +9,7 @@ namespace Virgil {
         public Player player;
 
         public override void start () {
-            player = new Player (keyboard, manager_window.get_renderer ());
+            player = new Player (manager_window.get_renderer ());
 
             manager_window.set_background_colour (new Colour (88, 151, 233));
 

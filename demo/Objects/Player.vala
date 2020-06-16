@@ -14,11 +14,11 @@ namespace Virgil {
 
         private unowned KeyboardManager keyboard;
 
-        public Player (KeyboardManager keyboard_manager, Renderer renderer) {
+        public Player (Renderer renderer) {
             transform = new Vector2i (0, 0);
 
             sprite = new Sprite (renderer, "assets/default.png");
-            keyboard = keyboard_manager;
+            keyboard = GameState.get_keyboard_state ();
         }
 
         public override void update () {

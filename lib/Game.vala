@@ -7,20 +7,23 @@ namespace Virgil {
     public class Game {
         public bool running;
 
+        // FIXME: Split window manager into seperate Window and Renderer managers
+        // TODO: Move all managers to GameState class
         public WindowManager manager_window;
-        public EventManager event;
+
+        public unowned EventManager event;
         public FramerateManager framerate;
-        public KeyboardManager keyboard;
+        public unowned KeyboardManager keyboard;
 
         public Game () {
             SDL.init (SDL.InitFlag.EVERYTHING);
 
             manager_window = new WindowManager ();
-            framerate = new FramerateManager ();
 
-            keyboard = new KeyboardManager ();
+            framerate = GameState.FramerateManager ();
+            keyboard = GameState.get_keyboard_state ();
+            event = GameState.get_event_state ();
 
-            event = new EventManager ();
             link_events ();
 
             manager_window.create_window ();
@@ -46,7 +49,7 @@ namespace Virgil {
             }
 
             SDL.quit ();
-            
+
             // TODO: Create exit code system
             return 0;
         }
