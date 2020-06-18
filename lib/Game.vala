@@ -3,6 +3,8 @@ using SDL.Video;
 
 using Virgil.Graphics;
 
+using Virgil.Input;
+
 namespace Virgil {
     public class Game {
         public bool running;
@@ -12,7 +14,7 @@ namespace Virgil {
         public WindowManager manager_window;
 
         public unowned EventManager event;
-        public FramerateManager framerate;
+        public unowned FramerateManager framerate;
         public unowned KeyboardManager keyboard;
 
         public Game () {
@@ -20,7 +22,7 @@ namespace Virgil {
 
             manager_window = new WindowManager ();
 
-            framerate = GameState.FramerateManager ();
+            framerate = GameState.get_framerate_state  ();
             keyboard = GameState.get_keyboard_state ();
             event = GameState.get_event_state ();
 
@@ -73,6 +75,12 @@ namespace Virgil {
 
             event.key_up_event.connect ((e, key) => {
                 keyboard.update_key (key.keysym.sym, false);
+            });
+
+            event.mouse_down_event.connect ((e, mouse) => {
+                if (mouse.button == MouseCode.LEFT) {
+                    print ("Left pressed!\n");
+                }
             });
         }
     }

@@ -8,6 +8,8 @@ add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi
 
 # Variables
 vapi_dir = join_paths(meson.current_source_dir(), 'vapi')
+data_dir = join_paths(meson.current_source_dir(), 'data')
+build_dir = join_paths(join_paths(meson.current_source_dir(), meson.current_build_dir()))
 
 # Library Dependencies
 libvirgil_dependencies = [
@@ -27,7 +29,7 @@ libvirgil_vapi = [
 # subdirectories
 subdir ('lib')
 
-install_subdir('assets', install_dir: join_paths(meson.current_source_dir(), meson.current_build_dir()))
+install_subdir(data_dir + '/assets', install_dir: build_dir)
 
 # Virgil shared library
 libvirgil = library (
