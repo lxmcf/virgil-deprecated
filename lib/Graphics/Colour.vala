@@ -34,7 +34,7 @@ namespace Virgil.Graphics {
             uint8 b = blue << 16;
             uint8 a = alpha << 24;
 
-            uint32 colour = (uint32)(a + b + g + r);
+            uint32 colour = (a + b + g + r);
 
             return colour;
         }

@@ -22,7 +22,7 @@ namespace Virgil {
 
             window_width = 640;
             window_height = 360;
-            window_title = Constants.PROJECT_NAME + " v" + Constants.PROJECT_VERSION;
+            window_title = Config.PROJECT_NAME + " v" + Config.PROJECT_VERSION;
 
             background_colour = new Colour ();
         }

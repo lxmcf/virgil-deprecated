@@ -11,14 +11,19 @@ namespace Virgil.Graphics {
         public int width;
         public int height;
 
+        // TODO: Impliment sprite validation (If file exists on creation, set to false)
+        public bool is_valid;
+
         public double scale_x = 1;
         public double scale_y = 1;
 
         private unowned Renderer renderer;
 
-        public Sprite (Renderer sprite_renderer, string sprite_file = "") {
+        public Sprite (Renderer sprite_renderer, string? sprite_file = null) {
             texture = load_texture (sprite_renderer, sprite_file);
             texture.query (null, null, out width, out height);
+
+            is_valid = true;
 
             texture_rectangle = Rect () {
                 x = 0,

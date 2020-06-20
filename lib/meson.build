@@ -27,5 +27,8 @@ libvirgil_sources = files (
     'Engine/EventManager.vala',
     'Engine/FramerateManager.vala',
     'Engine/WindowManager.vala',
-    'Engine/KeyboardManager.vala'
+    'Engine/KeyboardManager.vala',
+
+    # In development
+    'Engine/RenderManager.vala'
 )
