@@ -11,11 +11,14 @@ namespace Virgil.Graphics {
         public int width;
         public int height;
 
+        public int output_width;
+        public int output_height;
+
         // TODO: Impliment sprite validation (If file exists on creation, set to false)
         public bool is_valid;
 
-        public double scale_x = 1;
-        public double scale_y = 1;
+        public double scale_x;
+        public double scale_y;
 
         private unowned Renderer renderer;
 
@@ -24,6 +27,8 @@ namespace Virgil.Graphics {
             texture.query (null, null, out width, out height);
 
             is_valid = true;
+
+            set_scale (1, 1);
 
             texture_rectangle = Rect () {
                 x = 0,
@@ -58,9 +63,29 @@ namespace Virgil.Graphics {
             return height;
         }
 
+        public int get_output_width () {
+            return output_width;
+        }
+
+        public int get_output_height () {
+            return output_height;
+        }
+
         public void set_scale (double scale_x, double scale_y) {
             this.scale_x = scale_x;
             this.scale_y = scale_y;
+
+            this.output_width = (int)((double)width * scale_x);
+            this.output_height = (int)((double)height * scale_y);
+        }
+
+        public Rect get_output_rectangle (int position_x, int position_y) {
+            return Rect () {
+                x = position_x,
+                y = position_y,
+                w = output_width,
+                h = output_height
+            };
         }
     }
 }

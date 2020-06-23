@@ -137,7 +137,10 @@ namespace SDL {
 	 * The return value does not include {@link SDL.InitFlag.NOPARACHUTE}.
 	 */
 	[CCode (cname = "SDL_WasInit")]
-	public static uint32 get_initialized (uint32 flags);
+    public static uint32 get_initialized (uint32 flags);
+    
+    [CCode (cname = "SDL_GetPlatform")]
+    public static string get_platform ();
 
 
 	/**

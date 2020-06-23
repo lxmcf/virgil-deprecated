@@ -37,6 +37,8 @@ namespace Virgil {
         public int run () {
             start ();
 
+            print (SDL.get_platform ());
+
             while (running) {
                 framerate.update ();
 

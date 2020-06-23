@@ -16,7 +16,7 @@ namespace Virgil {
 
         public Colour background_colour;
 
-        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED) {
+        public WindowManager (uint32 window_flags = SDL.Video.WindowFlags.ALLOW_HIGHDPI | SDL.Video.WindowFlags.FOREIGN, uint32 renderer_flags = SDL.Video.RendererFlags.ACCELERATED) {
             this.window_flags = window_flags;
             this.renderer_flags = renderer_flags;
 

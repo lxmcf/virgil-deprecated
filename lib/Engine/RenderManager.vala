@@ -41,7 +41,9 @@ namespace Virgil {
         }
 
         public bool draw_sprite (Sprite sprite, int x, int y) {
-            if (sprite != null) {
+            if (sprite.is_valid) {
+                render.copy (sprite.texture, sprite.texture_rectangle, sprite.get_output_rectangle (x, y));
+
                 return true;
             } else {
                 return false;

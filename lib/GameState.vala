@@ -15,7 +15,8 @@ namespace Virgil {
                 return new FramerateManager ();
             });
         }
-
+        
+        [Description (nick="test1", blurb="This is some example text")]
         public static unowned KeyboardManager get_keyboard_state () {
             return keyboard.once(() => {
                 return new KeyboardManager ();
