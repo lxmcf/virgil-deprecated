@@ -19,6 +19,10 @@ namespace Virgil {
             keyboard.add_key (new Virgil.Input.Key (Keycode.d));
 
             keyboard.add_key (new Virgil.Input.Key (Keycode.SPACE));
+
+            string test = SDL.get_platform ();
+
+            print (test + "\n");
         }
 
         public override void update () {
