@@ -1,14 +1,14 @@
-// TODO: Impliment is_pressed boolean
-
 namespace Virgil.Input {
-    public class Key {
+    public class KeyItem {
         public SDL.Input.Keycode keycode;
         public bool is_down;
+        public bool is_pressed;
 
-        public Key (SDL.Input.Keycode keycode) {
+        public KeyItem (SDL.Input.Keycode keycode) {
             this.keycode = keycode;
 
             is_down = false;
+            is_pressed = false;
         }
     }
 }

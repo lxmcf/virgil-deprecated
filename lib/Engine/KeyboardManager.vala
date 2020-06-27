@@ -1,16 +1,17 @@
 using SDL.Input;
+using Virgil.Input;
 
 namespace Virgil {
     public class KeyboardManager {
-        private GLib.List<Virgil.Input.Key> key_list;
+        private GLib.List<Virgil.Input.KeyItem> key_list;
 
         public KeyboardManager () {
-            key_list = new GLib.List<Virgil.Input.Key> ();
+            key_list = new GLib.List<Virgil.Input.KeyItem> ();
         }
 
-        public bool add_key (Virgil.Input.Key key) {
-            if (!key_exists (key.keycode)) {
-                key_list.append (key);
+        public bool add_key (Keycode key) {
+            if (!key_exists (key)) {
+                key_list.append (new KeyItem (key));
 
                 return true;
             }
@@ -22,7 +23,7 @@ namespace Virgil {
             bool key_down = false;
 
             if (key_exists (key)) {
-                foreach (Virgil.Input.Key item in key_list) {
+                foreach (Virgil.Input.KeyItem item in key_list) {
                     if (item.keycode == key) {
                         if (item.is_down) {
                             key_down = true;
@@ -38,7 +39,7 @@ namespace Virgil {
 
         public void update_key (Keycode key, bool down) {
             if (key_exists (key)) {
-                foreach (Virgil.Input.Key item in key_list) {
+                foreach (Virgil.Input.KeyItem item in key_list) {
                     if (item.keycode == key) {
                         item.is_down = down;
                     }
@@ -49,7 +50,7 @@ namespace Virgil {
         private bool key_exists (Keycode key) {
             bool found_key = false;
 
-            foreach (Virgil.Input.Key item in key_list) {
+            foreach (Virgil.Input.KeyItem item in key_list) {
                 if (item.keycode == key) {
                     found_key = true;
 

@@ -15,10 +15,13 @@ libvirgil_sources = files (
     'GameObject.vala',
     'GameState.vala',
 
+    'IO/File.vala',
+
     'Math/Vector2f.vala',
     'Math/Vector2i.vala',
 
-    'Input/Key.vala',
+    'Input/Items/KeyItem.vala',
+    'Input/Items/MouseItem.vala',
     'Input/MouseButton.vala',
 
     'Graphics/Sprite.vala',
@@ -28,6 +31,7 @@ libvirgil_sources = files (
     'Engine/FramerateManager.vala',
     'Engine/WindowManager.vala',
     'Engine/KeyboardManager.vala',
+    'Engine/MouseManager.vala',
 
     # In development
     'Engine/RenderManager.vala'

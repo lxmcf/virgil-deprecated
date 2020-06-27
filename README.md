@@ -42,6 +42,7 @@ If you are interested in using Virgil and want some help, the below table is an 
 | Linux | armhf | Full |
 | Linux | aarch64 | Full |
 | MacOS | x86_64 | Partial |
+| MacOS | aarch64 | Partial |
 | BSD | x86_64 | Minimal |
 | Windows | x86_64 | None |
 | Windows | aarch64 | None |

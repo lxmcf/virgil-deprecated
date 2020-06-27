@@ -9,20 +9,16 @@ namespace Virgil {
         public Player player;
 
         public override void start () {
-            player = new Player (manager_window.get_renderer ());
+            player = new Player ();
 
-            manager_window.set_background_colour (new Colour (88, 151, 233));
+            render.set_background_colour (new Colour (88, 151, 233));
 
-            keyboard.add_key (new Virgil.Input.Key (Keycode.w));
-            keyboard.add_key (new Virgil.Input.Key (Keycode.a));
-            keyboard.add_key (new Virgil.Input.Key (Keycode.s));
-            keyboard.add_key (new Virgil.Input.Key (Keycode.d));
+            keyboard.add_key (Keycode.w);
+            keyboard.add_key (Keycode.a);
+            keyboard.add_key (Keycode.s);
+            keyboard.add_key (Keycode.d);
 
-            keyboard.add_key (new Virgil.Input.Key (Keycode.SPACE));
-
-            string test = SDL.get_platform ();
-
-            print (test + "\n");
+            keyboard.add_key (Keycode.SPACE);
         }
 
         public override void update () {

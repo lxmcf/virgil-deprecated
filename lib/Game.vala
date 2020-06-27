@@ -2,34 +2,35 @@ using SDL;
 using SDL.Video;
 
 using Virgil.Graphics;
-
 using Virgil.Input;
 
 namespace Virgil {
     public class Game {
         public bool running;
 
-        // FIXME: Split window manager into seperate Window and Renderer managers
-        // TODO: Move all managers to GameState class
-        public WindowManager manager_window;
+        public unowned WindowManager window;
+        public unowned RenderManager render;
 
         public unowned EventManager event;
         public unowned FramerateManager framerate;
         public unowned KeyboardManager keyboard;
+        public unowned MouseManager mouse;
 
         public Game () {
             SDL.init (SDL.InitFlag.EVERYTHING);
 
-            manager_window = new WindowManager ();
+            window = GameState.get_window_state ();
+            render = GameState.get_render_state ();
 
-            framerate = GameState.get_framerate_state  ();
-            keyboard = GameState.get_keyboard_state ();
             event = GameState.get_event_state ();
+            framerate = GameState.get_framerate_state ();
+            keyboard = GameState.get_keyboard_state ();
+            mouse = GameState.get_mouse_state ();
 
             link_events ();
 
-            manager_window.create_window ();
-            manager_window.create_renderer ();
+            window.initialise ();
+            render.initialise (window);
 
             running = true;
         }
@@ -40,19 +41,18 @@ namespace Virgil {
             while (running) {
                 framerate.update ();
 
-                manager_window.renderer_begin ();
+                render.clear ();
 
                 event.update ();
 
                 update ();
                 draw ();
 
-                manager_window.renderer_end ();
+                render.present ();
             }
 
             SDL.quit ();
 
-            // TODO: Create exit code system
             return 0;
         }
 
@@ -77,10 +77,12 @@ namespace Virgil {
                 keyboard.update_key (key.keysym.sym, false);
             });
 
-            event.mouse_down_event.connect ((e, mouse) => {
-                if (mouse.button == MouseCode.LEFT) {
-                    print ("Left pressed!\n");
-                }
+            event.mouse_down_event.connect ((e, sdl_mouse) => {
+                mouse.update_button (sdl_mouse.button, true);
+            });
+
+            event.mouse_up_event.connect ((e, sdl_mouse) => {
+                mouse.update_button (sdl_mouse.button, false);
             });
         }
     }
