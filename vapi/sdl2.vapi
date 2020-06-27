@@ -137,7 +137,7 @@ namespace SDL {
 	 * The return value does not include {@link SDL.InitFlag.NOPARACHUTE}.
 	 */
 	[CCode (cname = "SDL_WasInit")]
-	public static uint32 get_initialized (uint32 flags);
+    public static uint32 get_initialized (uint32 flags);
 
 
 	/**
@@ -158,8 +158,11 @@ namespace SDL {
 	 *
 	 * @param flags any of the flags used by {@link SDL.init}.
 	 */
-	[CCode (cname = "SDL_QuitSubSystem")]
+	[CCode (cname = "SDL_QuitSubSystem", cprefix = "SDL_")]
 	public static void quit_subsystem (uint32 flags);
+
+    [CCode (cname = "SDL_GetPlatform")]
+    public static unowned string get_platform ();
 
 	//
 	// CPU Info
