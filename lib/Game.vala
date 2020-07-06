@@ -53,7 +53,7 @@ namespace Virgil {
 
             SDL.quit ();
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         public virtual void start () { }

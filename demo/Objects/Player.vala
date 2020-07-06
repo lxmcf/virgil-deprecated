@@ -30,10 +30,6 @@ namespace Virgil {
             yaxis = (int)keyboard.check_key (Keycode.s) - (int)keyboard.check_key (Keycode.w);
 
             transform.add (new Vector2i (xaxis, yaxis));
-
-            if (mouse.check_button (Virgil.Input.MouseButton.LEFT)) {
-                print ("Left pressed!\n");
-            }
         }
 
         public override void draw () {

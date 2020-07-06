@@ -1,5 +1,4 @@
 using Virgil;
-using Virgil.IO;
 
 using SDL.Video;
 using SDLImage;
@@ -17,29 +16,25 @@ namespace Virgil.Graphics {
         public double scale_x = 1;
         public double scale_y = 1;
 
-        //private unowned Renderer renderer;
 
         public Sprite (string? sprite_file = null) {
+            unowned Renderer render = GameState.get_render_state ().get_renderer ();
 
-            if (File.exists (sprite_file)) {
-                unowned Renderer render = GameState.get_render_state ().get_renderer ();
+            IO.File test = new IO.File.from_gresource ("/com/github/lxmcf/virgil/image/default.png");
 
-                texture = load_texture (render, sprite_file);
-                texture.query (null, null, out width, out height);
+            texture = load_texture_rw (render, test.get_rwops (), false);
+            texture.query (null, null, out width, out height);
 
-                is_valid = true;
+            is_valid = true;
 
-                set_scale (1, 1);
+            set_scale (1, 1);
 
-                texture_rectangle = Rect () {
-                    x = 0,
-                    y = 0,
-                    w = width,
-                    h = height
-                };
-            } else {
-                is_valid = false;
-            }
+            texture_rectangle = Rect () {
+                x = 0,
+                y = 0,
+                w = width,
+                h = height
+            };
         }
 
         public int get_width () {

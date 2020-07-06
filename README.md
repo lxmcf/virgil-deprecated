@@ -24,7 +24,7 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 ```sh
 meson build --prefix=/usr
 cd build
-ninja install
+ninja
 
 # Demo app
 ./virgil-demo
@@ -41,6 +41,7 @@ If you are interested in using Virgil and want some help, the below table is an 
 | Linux | x86_64 | Full |
 | Linux | armhf | Full |
 | Linux | aarch64 | Full |
+| Linux | RISC-V | Planned |
 | MacOS | x86_64 | Partial |
 | MacOS | aarch64 | Partial |
 | BSD | x86_64 | Minimal |
