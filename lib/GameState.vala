@@ -1,12 +1,12 @@
 namespace Virgil {
     public class GameState {
-        public static GLib.Once<WindowManager> window;
-        public static GLib.Once<RenderManager> render;
+        public static Once<WindowManager> window;
+        public static Once<RenderManager> render;
 
-        public static GLib.Once<EventManager> event;
-        public static GLib.Once<FramerateManager> framerate;
-        public static GLib.Once<KeyboardManager> keyboard;
-        public static GLib.Once<MouseManager> mouse;
+        public static Once<EventManager> event;
+        public static Once<FramerateManager> framerate;
+        public static Once<KeyboardManager> keyboard;
+        public static Once<MouseManager> mouse;
 
         public static unowned WindowManager? get_window_state () {
             return window.once (() => {

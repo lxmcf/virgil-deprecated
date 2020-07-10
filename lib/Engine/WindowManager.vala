@@ -9,6 +9,8 @@ namespace Virgil {
         public uint32 flags;
         public string title;
 
+        public DisplayMode display_mode;
+
         public void initialise (uint32 flags = 0) {
             title = Config.PROJECT_NAME + " v" + Config.PROJECT_VERSION;
             width = 640;
@@ -16,6 +18,8 @@ namespace Virgil {
             this.flags = flags;
 
             window = new Window (title, Window.POS_CENTERED, Window.POS_CENTERED, width, height, flags);
+
+            window.get_display_mode (out display_mode);
         }
 
         public unowned Window? get_window () {

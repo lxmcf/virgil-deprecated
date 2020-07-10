@@ -18,7 +18,6 @@ gnome = import ('gnome')
 libvirgil_dependencies = [
     dependency ('glib-2.0'),
     dependency ('gio-2.0'),
-    # dependency ('gobject-2.0'),
 
     meson.get_compiler ('c').find_library ('SDL2'),
     meson.get_compiler ('c').find_library ('SDL2_image')

@@ -1,5 +1,4 @@
 using SDL;
-using SDL.Video;
 
 using Virgil.Graphics;
 using Virgil.Input;
@@ -17,7 +16,7 @@ namespace Virgil {
         public unowned MouseManager mouse;
 
         public Game () {
-            SDL.init (SDL.InitFlag.EVERYTHING);
+            SDL.init (InitFlag.EVERYTHING);
 
             window = GameState.get_window_state ();
             render = GameState.get_render_state ();

@@ -8,11 +8,11 @@ namespace Virgil {
 
         public signal void close_event ();
 
-        public signal void key_down_event (SDL.KeyboardEvent key);
-        public signal void key_up_event (SDL.KeyboardEvent key);
+        public signal void key_down_event (KeyboardEvent key);
+        public signal void key_up_event (KeyboardEvent key);
 
-        public signal void mouse_down_event (SDL.MouseButtonEvent mouse);
-        public signal void mouse_up_event (SDL.MouseButtonEvent mouse);
+        public signal void mouse_down_event (MouseButtonEvent mouse);
+        public signal void mouse_up_event (MouseButtonEvent mouse);
 
         public void update () {
             while (Event.poll (out event) == 1) {

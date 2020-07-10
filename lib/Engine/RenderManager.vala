@@ -5,7 +5,6 @@ using Virgil.Graphics;
 namespace Virgil {
     public class RenderManager {
         public Renderer? render;
-        //public RendererInfo? render_info;
 
         public Colour background_colour;
 
@@ -13,7 +12,6 @@ namespace Virgil {
             background_colour = new Colour ();
 
             render = Renderer.create (window.get_window (), -1, flags);
-            //render.get_info (out render_info);
         }
 
         public unowned Renderer get_renderer () {
@@ -27,10 +25,6 @@ namespace Virgil {
         public void set_background_colour (Colour colour) {
             background_colour = colour;
         }
-
-        //  public uint32 get_flags () {
-        //      return render_info.flags;
-        //  }
 
         public int clear () {
             set_renderer_colour (background_colour);
