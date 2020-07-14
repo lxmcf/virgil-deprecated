@@ -15,8 +15,8 @@ namespace Virgil {
         private unowned RenderManager render;
         private unowned FramerateManager frame;
 
-        public Player () {
-            transform = new Vector2i (0, 0);
+        public Player () { 
+            transform = new Vector2i.zero ();
 
             sprite = new Sprite ("assets/default.png");
             keyboard = GameState.get_keyboard_state ();
@@ -29,10 +29,7 @@ namespace Virgil {
             int xaxis = (int)keyboard.check_key (Keycode.d) - (int)keyboard.check_key (Keycode.a);
             int yaxis = (int)keyboard.check_key (Keycode.s) - (int)keyboard.check_key (Keycode.w);
 
-            int point_x = (int)((xaxis * 100) * frame.delta_time);
-            int point_y = (int)((yaxis * 100) * frame.delta_time);
-
-            transform.add (new Vector2i (point_x, point_y));
+            transform.add (new Vector2i (xaxis, yaxis));
 
             print (frame.delta_time.to_string () + "\n");
         }

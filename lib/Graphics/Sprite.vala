@@ -1,4 +1,5 @@
 using Virgil;
+using Virgil.IO;
 
 using SDL.Video;
 using SDLImage;
@@ -6,28 +7,27 @@ using SDLImage;
 namespace Virgil.Graphics {
     public class Sprite {
         public Texture? texture;
-        public Rect texture_rectangle;
+        public Rect? texture_rectangle;
 
-        public int width;
-        public int height;
+        public int? width;
+        public int? height;
 
         public bool is_valid;
 
         public double scale_x = 1;
         public double scale_y = 1;
 
-
         public Sprite (string? sprite_file = null) {
             unowned Renderer render = GameState.get_render_state ().get_renderer ();
 
-            IO.File test = new IO.File.from_gresource ("/com/github/lxmcf/virgil/image/default.png");
+            IO.File file = new IO.File.from_gresource ("/com/github/lxmcf/virgil/image/default.png");
 
-            texture = load_texture_rw (render, test.get_rwops (), false);
+            texture = load_texture_rw (render, file.get_rwops (), false);
             texture.query (null, null, out width, out height);
 
             is_valid = true;
 
-            set_scale (1, 1);
+            set_scale (1.0, 1.0);
 
             texture_rectangle = Rect () {
                 x = 0,
@@ -35,6 +35,23 @@ namespace Virgil.Graphics {
                 w = width,
                 h = height
             };
+        }
+
+        public Sprite.from_gresource (string sprite = "/com/github/lxmcf/virgil/image/default.png") {
+            if (FileUtility.file_exists (sprite)) {
+                unowned Renderer render = GameState.get_render_state ().get_renderer ();
+
+                IO.File file = new IO.File.from_gresource (sprite);
+
+                texture = load_texture_rw (render, file.get_rwops (), false);
+                texture.query (null, null, out width, out height);
+
+                
+            }
+        }
+
+        public Sprite.from_file (string? sprite = null) {
+
         }
 
         public int get_width () {
@@ -61,6 +78,14 @@ namespace Virgil.Graphics {
 
         public Rect get_texture_rectangle () {
             return texture_rectangle;
+        }
+
+        private void nullify () {
+            texture = null;
+            texture_rectangle = null;
+
+            width = null;
+            height = null;
         }
     }
 }

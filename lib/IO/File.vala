@@ -3,6 +3,7 @@ using SDL;
 namespace Virgil.IO {
     public class File {
         public string filename;
+        public bool exists;
 
         public uint8[] byte_data;
         public RWops rwops_data;
@@ -10,7 +11,7 @@ namespace Virgil.IO {
         public int length;
 
         public File (string file) {
-            if (check_exists (file, false)) {
+            if (FileUtility.file_exists (file, false)) {
                 rwops_data = new RWops.from_file (file, "rb");
 
                 uint8[] data_array = new uint8[1];
@@ -49,20 +50,20 @@ namespace Virgil.IO {
             return rwops_data;
         }
 
-        private bool check_exists (string file, bool is_gresource) {
-            bool file_exists = false;
+        //  public static bool exists (string file, bool is_gresource = true) {
+        //      bool file_exists = false;
 
-            if (is_gresource) {
-                try {
-                    file_exists = resources_get_info (file, ResourceLookupFlags.NONE, null, null);
-                } catch (Error e) {
-                    error (e.message);
-                }
-            } else {
-                file_exists = FileUtils.test (file, FileTest.EXISTS);
-            }
+        //      if (is_gresource) {
+        //          try {
+        //              file_exists = resources_get_info (file, ResourceLookupFlags.NONE, null, null);
+        //          } catch (Error e) {
+        //              error (e.message);
+        //          }
+        //      } else {
+        //          file_exists = FileUtils.test (file, FileTest.EXISTS);
+        //      }
 
-            return file_exists;
-        }
+        //      return file_exists;
+        //  }
     }
 }
