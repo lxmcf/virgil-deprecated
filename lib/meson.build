@@ -17,8 +17,9 @@ libvirgil_sources = files (
 
     'Constants.vala',
 
-    'IO/File.vala',
+    'IO/Asset.vala',
     'IO/FileUtility.vala',
+    'IO/AssetType.vala',
 
     'Math/Vector2f.vala',
     'Math/Vector2i.vala',
@@ -26,9 +27,12 @@ libvirgil_sources = files (
     'Input/Items/KeyItem.vala',
     'Input/Items/MouseItem.vala',
     'Input/MouseButton.vala',
+    'Input/KeyState.vala',
+    'Input/Key.vala',
 
     'Graphics/Sprite.vala',
     'Graphics/Colour.vala',
+    'Graphics/Surface.vala',
 
     'Engine/EventManager.vala',
     'Engine/FramerateManager.vala',

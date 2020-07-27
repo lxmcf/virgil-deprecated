@@ -1,20 +1,19 @@
-using SDL.Video;
-
 using Virgil.Graphics;
 
 namespace Virgil {
     public class RenderManager {
-        public Renderer? render;
+        public SDL.Video.Renderer? render;
+        public Surface? target;
 
         public Colour background_colour;
 
         public void initialise (WindowManager window, uint32 flags = 0) {
             background_colour = new Colour ();
 
-            render = Renderer.create (window.get_window (), -1, flags);
+            render = SDL.Video.Renderer.create (window.get_window (), -1, flags);
         }
 
-        public unowned Renderer get_renderer () {
+        public unowned SDL.Video.Renderer get_renderer () {
             return render;
         }
 
@@ -24,6 +23,16 @@ namespace Virgil {
 
         public void set_background_colour (Colour colour) {
             background_colour = colour;
+        }
+
+        public int set_target (Surface new_target) {
+            target = new_target;
+
+            return 0;
+        }
+
+        public Surface? get_target () {
+            return target;
         }
 
         public int clear () {
@@ -36,14 +45,8 @@ namespace Virgil {
             render.present ();
         }
 
-        public bool draw_sprite (Sprite sprite, int x, int y) {
-            if (sprite.is_valid) {
-                render.copy (sprite.texture, sprite.get_texture_rectangle (), sprite.get_output_rectangle (x, y));
-
-                return true;
-            } else {
-                return false;
-            }
+        public int draw_sprite (Sprite sprite, int x, int y) {
+            return render.copy (sprite.texture, sprite.get_texture_rectangle (), sprite.get_output_rectangle (x, y));
         }
 
         public void set_renderer_colour (Colour colour) {

@@ -4,7 +4,7 @@ using Virgil.Input;
 
 using SDL.Input;
 
-namespace Virgil {
+namespace Demo {
     public class Demo : Game {
         public Player player;
 
@@ -31,7 +31,7 @@ namespace Virgil {
     }
 
     public static int main (string[] args) {
-        var demo = new Virgil.Demo ();
+        var demo = new Demo ();
 
         return demo.run ();
     }

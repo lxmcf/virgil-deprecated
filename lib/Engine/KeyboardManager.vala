@@ -10,7 +10,7 @@ namespace Virgil {
         }
 
         public bool add_key (Keycode key) {
-            if (!key_exists (key)) {
+            if (!_key_exists (key)) {
                 key_list.append (new KeyItem (key));
 
                 return true;
@@ -22,7 +22,7 @@ namespace Virgil {
         public bool check_key (Keycode key) {
             bool key_down = false;
 
-            if (key_exists (key)) {
+            if (_key_exists (key)) {
                 foreach (KeyItem item in key_list) {
                     if (item.keycode == key) {
                         if (item.is_down) {
@@ -37,8 +37,26 @@ namespace Virgil {
             return key_down;
         }
 
+        public int check_key_raw (Keycode key) {
+            int key_state = KeyState.UP;
+
+            if (_key_exists (key)) {
+                foreach (KeyItem item in key_list) {
+                    if (item.keycode == key) {
+                        if (item.is_down) {
+                            key_state = KeyState.DOWN;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return key_state;
+        }
+
         public void update_key (Keycode key, bool down) {
-            if (key_exists (key)) {
+            if (_key_exists (key)) {
                 foreach (KeyItem item in key_list) {
                     if (item.keycode == key) {
                         item.is_down = down;
@@ -47,7 +65,7 @@ namespace Virgil {
             }
         }
 
-        private bool key_exists (Keycode key) {
+        private bool _key_exists (Keycode key) {
             bool found_key = false;
 
             foreach (KeyItem item in key_list) {

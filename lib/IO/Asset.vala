@@ -1,16 +1,17 @@
 using SDL;
 
 namespace Virgil.IO {
-    public class File {
+    public class Asset {
         public string filename;
-        public bool exists;
+        public bool valid;
 
         public uint8[] byte_data;
         public RWops rwops_data;
 
         public int length;
+        public AssetType type = AssetType.DATA;
 
-        public File (string file) {
+        public Asset (string file) {
             if (FileUtility.file_exists (file, false)) {
                 rwops_data = new RWops.from_file (file, "rb");
 
@@ -25,7 +26,7 @@ namespace Virgil.IO {
             }
         }
 
-        public File.from_gresource (string file) {
+        public Asset.from_gresource (string file) {
             try {
                 Bytes data_bytes = resources_lookup_data (file, ResourceLookupFlags.NONE);
 
@@ -36,10 +37,6 @@ namespace Virgil.IO {
             } catch (Error e) {
                 error (e.message);
             }
-        }
-
-        public File.from_bundle (Resource bundle, string file) {
-
         }
 
         public unowned uint8[] get_data () {

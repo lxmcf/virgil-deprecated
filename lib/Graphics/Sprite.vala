@@ -12,22 +12,16 @@ namespace Virgil.Graphics {
         public int? width;
         public int? height;
 
-        public bool is_valid;
-
-        public double scale_x = 1;
-        public double scale_y = 1;
+        public double scale_x = 1.0;
+        public double scale_y = 1.0;
 
         public Sprite (string? sprite_file = null) {
             unowned Renderer render = GameState.get_render_state ().get_renderer ();
 
-            IO.File file = new IO.File.from_gresource ("/com/github/lxmcf/virgil/image/default.png");
+            Asset file = new Asset.from_gresource ("/com/github/lxmcf/virgil/image/default.png");
 
             texture = load_texture_rw (render, file.get_rwops (), false);
             texture.query (null, null, out width, out height);
-
-            is_valid = true;
-
-            set_scale (1.0, 1.0);
 
             texture_rectangle = Rect () {
                 x = 0,
@@ -41,16 +35,14 @@ namespace Virgil.Graphics {
             if (FileUtility.file_exists (sprite)) {
                 unowned Renderer render = GameState.get_render_state ().get_renderer ();
 
-                IO.File file = new IO.File.from_gresource (sprite);
+                Asset file = new Asset.from_gresource (sprite);
 
                 texture = load_texture_rw (render, file.get_rwops (), false);
                 texture.query (null, null, out width, out height);
-
-                
             }
         }
 
-        public Sprite.from_file (string? sprite = null) {
+        public Sprite.from_asset (Asset? asset) {
 
         }
 
@@ -80,6 +72,7 @@ namespace Virgil.Graphics {
             return texture_rectangle;
         }
 
+        // TODO: Use once VVFS is implimented
         private void nullify () {
             texture = null;
             texture_rectangle = null;

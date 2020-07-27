@@ -4,7 +4,9 @@ using Virgil.Graphics;
 using SDL.Video;
 using SDL.Input;
 
-namespace Virgil {
+// FIXME: Migrate all mentions of SDL to Virgil equal
+
+namespace Demo {
     public class Player : GameObject {
         public Vector2i transform;
 
@@ -15,7 +17,7 @@ namespace Virgil {
         private unowned RenderManager render;
         private unowned FramerateManager frame;
 
-        public Player () { 
+        public Player () {
             transform = new Vector2i.zero ();
 
             sprite = new Sprite ("assets/default.png");
@@ -26,12 +28,10 @@ namespace Virgil {
         }
 
         public override void update () {
-            int xaxis = (int)keyboard.check_key (Keycode.d) - (int)keyboard.check_key (Keycode.a);
-            int yaxis = (int)keyboard.check_key (Keycode.s) - (int)keyboard.check_key (Keycode.w);
+            int xaxis = keyboard.check_key_raw (Keycode.d) - keyboard.check_key_raw (Keycode.a);
+            int yaxis = keyboard.check_key_raw (Keycode.s) - keyboard.check_key_raw (Keycode.w);
 
             transform.add (new Vector2i (xaxis, yaxis));
-
-            print (frame.delta_time.to_string () + "\n");
         }
 
         public override void draw () {
