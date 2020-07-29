@@ -13,6 +13,7 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 - `glib-2.0`
 - `libsdl2-dev`
 - `libsdl2-image-dev`
+- `vvfs`
 - `meson`
 
 > _**Note:** Virgil can run on Mac OS with the use of `brew` but is not officially supported._

@@ -17,10 +17,6 @@ libvirgil_sources = files (
 
     'Constants.vala',
 
-    'IO/Asset.vala',
-    'IO/FileUtility.vala',
-    'IO/AssetType.vala',
-
     'Math/Vector2f.vala',
     'Math/Vector2i.vala',
 

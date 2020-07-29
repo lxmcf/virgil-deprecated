@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/github/lxmcf/virgil/image">
+  <gresource prefix="/virgil/image">
     <file alias="default.png" compressed="true">image/default.png</file>
   </gresource>
 </gresources>

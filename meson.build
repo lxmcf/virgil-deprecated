@@ -18,14 +18,13 @@ gnome = import ('gnome')
 libvirgil_dependencies = [
     dependency ('glib-2.0'),
     dependency ('gio-2.0'),
+    dependency ('vvfs', fallback: ['libvvfs', 'libvvfs_dep']),
 
-    meson.get_compiler ('c').find_library ('SDL2'),
     meson.get_compiler ('c').find_library ('SDL2_image')
 ]
 
 # VAPI Dependencies
 libvirgil_vapi = [
-    meson.get_compiler ('vala').find_library ('sdl2', dirs: vapi_dir),
     meson.get_compiler ('vala').find_library ('sdl2-image', dirs: vapi_dir)
 ]
 

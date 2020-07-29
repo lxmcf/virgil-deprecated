@@ -1,5 +1,4 @@
 using Virgil;
-using Virgil.IO;
 
 using SDL.Video;
 using SDLImage;
@@ -15,35 +14,16 @@ namespace Virgil.Graphics {
         public double scale_x = 1.0;
         public double scale_y = 1.0;
 
-        public Sprite (string? sprite_file = null) {
-            unowned Renderer render = GameState.get_render_state ().get_renderer ();
+        public Sprite (string sprite_file = "") {
+            VVFS.File file = new VVFS.File (sprite_file);
 
-            Asset file = new Asset.from_gresource ("/com/github/lxmcf/virgil/image/default.png");
-
-            texture = load_texture_rw (render, file.get_rwops (), false);
-            texture.query (null, null, out width, out height);
-
-            texture_rectangle = Rect () {
-                x = 0,
-                y = 0,
-                w = width,
-                h = height
-            };
+            _initialise (file);
         }
 
-        public Sprite.from_gresource (string sprite = "/com/github/lxmcf/virgil/image/default.png") {
-            if (FileUtility.file_exists (sprite)) {
-                unowned Renderer render = GameState.get_render_state ().get_renderer ();
+        public Sprite.from_gresource (string sprite_file = "") {
+            VVFS.File file = new VVFS.File.from_gresource (sprite_file);
 
-                Asset file = new Asset.from_gresource (sprite);
-
-                texture = load_texture_rw (render, file.get_rwops (), false);
-                texture.query (null, null, out width, out height);
-            }
-        }
-
-        public Sprite.from_asset (Asset? asset) {
-
+            _initialise (file);
         }
 
         public int get_width () {
@@ -72,13 +52,27 @@ namespace Virgil.Graphics {
             return texture_rectangle;
         }
 
-        // TODO: Use once VVFS is implimented
-        private void nullify () {
+        private void _nullify () {
             texture = null;
             texture_rectangle = null;
 
             width = null;
             height = null;
+        }
+
+        private void _initialise (VVFS.File file) {
+            int file_size = file.get_size ();
+
+            if (file_size != 0) {
+                unowned Renderer render = GameState.get_render_state ().get_renderer ();
+
+                texture = load_texture_rw (render, file.get_rwops (), false);
+                texture.query (null, null, out width, out height);
+
+                texture_rectangle = Rect () { x = 0, y = 0, w = width, h = height };
+            } else {
+                _nullify ();
+            }
         }
     }
 }
