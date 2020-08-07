@@ -61,7 +61,7 @@ namespace Virgil.Graphics {
         }
 
         private void _initialise (VVFS.File file) {
-            int file_size = file.get_size ();
+            int file_size = file.size;
 
             if (file_size != 0) {
                 unowned Renderer render = GameState.get_render_state ().get_renderer ();

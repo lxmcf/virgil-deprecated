@@ -24,7 +24,8 @@ libvirgil_sources = files (
     'Input/Items/MouseItem.vala',
     'Input/MouseButton.vala',
     'Input/KeyState.vala',
-    'Input/Key.vala',
+    'Input/Input.vala',
+    # 'Input/Key.vala',
 
     'Graphics/Sprite.vala',
     'Graphics/Colour.vala',

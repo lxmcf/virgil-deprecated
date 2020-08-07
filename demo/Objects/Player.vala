@@ -15,16 +15,14 @@ namespace Demo {
         private unowned KeyboardManager keyboard;
         private unowned MouseManager mouse;
         private unowned RenderManager render;
-        private unowned FramerateManager frame;
 
         public Player () {
             transform = new Vector2i.zero ();
 
-            sprite = new Sprite ("assets/default.png");
+            sprite = new Sprite.from_gresource ("/virgil/image/default.png");
             keyboard = GameState.get_keyboard_state ();
             mouse = GameState.get_mouse_state ();
             render = GameState.get_render_state ();
-            frame = GameState.get_framerate_state ();
         }
 
         public override void update () {

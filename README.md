@@ -1,6 +1,6 @@
 <h1 align="center">Virgil</h1>
 
-Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
+Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php), [Vala](https://wiki.gnome.org/Projects/Vala) and [VVFS](https://github.com/lxmcf/vvfs); designed for Linux and directly built for [elementary OS](https://elementary.io)...
 
 ### What is Virgil?
 
@@ -11,7 +11,6 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 ### Dependencies
 
 - `glib-2.0`
-- `libsdl2-dev`
 - `libsdl2-image-dev`
 - `vvfs`
 - `meson`
