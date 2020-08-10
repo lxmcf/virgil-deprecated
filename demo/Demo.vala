@@ -4,7 +4,7 @@ using Virgil.Input;
 
 using SDL.Input;
 
-namespace Virgil {
+namespace Demo {
     public class Demo : Game {
         public Player player;
 
@@ -19,10 +19,15 @@ namespace Virgil {
             keyboard.add_key (Keycode.d);
 
             keyboard.add_key (Keycode.SPACE);
+            keyboard.add_key (Keycode.ESCAPE);
         }
 
         public override void update () {
             player.update ();
+
+            if (keyboard.check_key (Keycode.ESCAPE)) {
+                running = false;
+            }
         }
 
         public override void draw () {
@@ -31,7 +36,7 @@ namespace Virgil {
     }
 
     public static int main (string[] args) {
-        var demo = new Virgil.Demo ();
+        var demo = new Demo ();
 
         return demo.run ();
     }

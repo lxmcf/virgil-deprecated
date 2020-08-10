@@ -1,71 +1,84 @@
 using Virgil;
-using Virgil.IO;
 
 using SDL.Video;
 using SDLImage;
 
 namespace Virgil.Graphics {
     public class Sprite {
-        public Texture? texture;
-        public Rect texture_rectangle;
+        private Texture? _texture;
+        private Rect? _texture_rectangle;
 
-        public int width;
-        public int height;
+        private int? _width;
+        private int? _height;
 
-        public bool is_valid;
+        private double _scale_x = 1.0;
+        private double _scale_y = 1.0;
 
-        public double scale_x = 1;
-        public double scale_y = 1;
+        public Sprite (string sprite_file = "") {
+            VVFS.File file = new VVFS.File (sprite_file);
 
-        //private unowned Renderer renderer;
-
-        public Sprite (string? sprite_file = null) {
-
-            if (File.exists (sprite_file)) {
-                unowned Renderer render = GameState.get_render_state ().get_renderer ();
-
-                texture = load_texture (render, sprite_file);
-                texture.query (null, null, out width, out height);
-
-                is_valid = true;
-
-                set_scale (1, 1);
-
-                texture_rectangle = Rect () {
-                    x = 0,
-                    y = 0,
-                    w = width,
-                    h = height
-                };
-            } else {
-                is_valid = false;
-            }
+            _initialise (file);
         }
 
-        public int get_width () {
-            return width;
+        public Sprite.from_gresource (string sprite_file = "") {
+            VVFS.File file = new VVFS.File.from_gresource (sprite_file);
+
+            _initialise (file);
         }
 
-        public int get_height () {
-            return height;
+        public void get_size (out int? width, out int? height) {
+            width = _width;
+            height = _height;
         }
 
         public void set_scale (double scale_x, double scale_y) {
-            this.scale_x = scale_x;
-            this.scale_y = scale_y;
+            _scale_x = scale_x;
+            _scale_y = scale_y;
         }
 
         public Rect get_output_rectangle (int position_x, int position_y) {
             return Rect () {
                 x = position_x,
                 y = position_y,
-                w = (int)((double)width * scale_x),
-                h = (int)((double)height * scale_y)
+                w = (int)(_width * _scale_x),
+                h = (int)(_height * _scale_y)
             };
         }
 
         public Rect get_texture_rectangle () {
-            return texture_rectangle;
+            return _texture_rectangle;
+        }
+
+        public unowned Texture get_texture () {
+            return _texture;
+        }
+
+        private void _nullify () {
+            _texture = null;
+            _texture_rectangle = null;
+
+            _width = null;
+            _height = null;
+        }
+
+        private void _initialise (VVFS.File file) {
+            int file_size = file.size;
+
+            if (file_size != 0) {
+                unowned Renderer render = GameState.get_render_state ().get_renderer ();
+
+                _texture = load_texture_rw (render, file.get_rwops (), false);
+                _texture.query (null, null, out _width, out _height);
+
+                _texture_rectangle = Rect () {
+                    x = 0,
+                    y = 0,
+                    w = _width,
+                    h = _height
+                };
+            } else {
+                _nullify ();
+            }
         }
     }
 }

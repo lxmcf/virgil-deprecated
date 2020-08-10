@@ -1,5 +1,4 @@
 using SDL;
-using SDL.Video;
 
 using Virgil.Graphics;
 using Virgil.Input;
@@ -7,7 +6,8 @@ using Virgil.Input;
 namespace Virgil {
     public class Game {
         public bool running;
-
+        
+        // TODO: Remove GameState object and migrate to be within main game class
         public unowned WindowManager window;
         public unowned RenderManager render;
 
@@ -17,7 +17,7 @@ namespace Virgil {
         public unowned MouseManager mouse;
 
         public Game () {
-            SDL.init (SDL.InitFlag.EVERYTHING);
+            SDL.init (InitFlag.EVERYTHING);
 
             window = GameState.get_window_state ();
             render = GameState.get_render_state ();
@@ -53,7 +53,7 @@ namespace Virgil {
 
             SDL.quit ();
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         public virtual void start () { }
@@ -83,6 +83,10 @@ namespace Virgil {
 
             event.mouse_up_event.connect ((e, sdl_mouse) => {
                 mouse.update_button (sdl_mouse.button, false);
+            });
+
+            event.mouse_motion_event.connect ((e, sdl_mouse) => {
+                mouse.update_position (sdl_mouse);
             });
         }
     }

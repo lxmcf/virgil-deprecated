@@ -3,15 +3,15 @@ using Virgil.Input;
 
 namespace Virgil {
     public class KeyboardManager {
-        private GLib.List<Virgil.Input.KeyItem> key_list;
+        private List<KeyItem> _key_list;
 
         public KeyboardManager () {
-            key_list = new GLib.List<Virgil.Input.KeyItem> ();
+            _key_list = new List<KeyItem> ();
         }
 
         public bool add_key (Keycode key) {
-            if (!key_exists (key)) {
-                key_list.append (new KeyItem (key));
+            if (!_key_exists (key)) {
+                _key_list.append (new KeyItem (key));
 
                 return true;
             }
@@ -22,8 +22,8 @@ namespace Virgil {
         public bool check_key (Keycode key) {
             bool key_down = false;
 
-            if (key_exists (key)) {
-                foreach (Virgil.Input.KeyItem item in key_list) {
+            if (_key_exists (key)) {
+                foreach (KeyItem item in _key_list) {
                     if (item.keycode == key) {
                         if (item.is_down) {
                             key_down = true;
@@ -37,9 +37,27 @@ namespace Virgil {
             return key_down;
         }
 
+        public int check_key_raw (Keycode key) {
+            int key_state = KeyState.UP;
+
+            if (_key_exists (key)) {
+                foreach (KeyItem item in _key_list) {
+                    if (item.keycode == key) {
+                        if (item.is_down) {
+                            key_state = KeyState.DOWN;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return key_state;
+        }
+
         public void update_key (Keycode key, bool down) {
-            if (key_exists (key)) {
-                foreach (Virgil.Input.KeyItem item in key_list) {
+            if (_key_exists (key)) {
+                foreach (KeyItem item in _key_list) {
                     if (item.keycode == key) {
                         item.is_down = down;
                     }
@@ -47,10 +65,10 @@ namespace Virgil {
             }
         }
 
-        private bool key_exists (Keycode key) {
+        private bool _key_exists (Keycode key) {
             bool found_key = false;
 
-            foreach (Virgil.Input.KeyItem item in key_list) {
+            foreach (KeyItem item in _key_list) {
                 if (item.keycode == key) {
                     found_key = true;
 

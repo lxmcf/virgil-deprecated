@@ -4,11 +4,11 @@ using Virgil.Graphics;
 using SDL.Video;
 using SDL.Input;
 
-namespace Virgil {
+// FIXME: Migrate all mentions of SDL to Virgil equal
+
+namespace Demo {
     public class Player : GameObject {
         public Vector2i transform;
-        public int xaxis;
-        public int yaxis;
 
         public Sprite sprite;
 
@@ -17,27 +17,23 @@ namespace Virgil {
         private unowned RenderManager render;
 
         public Player () {
-            transform = new Vector2i (0, 0);
+            transform = new Vector2i.zero ();
 
-            sprite = new Sprite ("assets/default.png");
+            sprite = new Sprite.from_gresource ("/virgil/image/default.png");
             keyboard = GameState.get_keyboard_state ();
             mouse = GameState.get_mouse_state ();
             render = GameState.get_render_state ();
         }
 
         public override void update () {
-            xaxis = (int)keyboard.check_key (Keycode.d) - (int)keyboard.check_key (Keycode.a);
-            yaxis = (int)keyboard.check_key (Keycode.s) - (int)keyboard.check_key (Keycode.w);
+            int xaxis = keyboard.check_key_raw (Keycode.d) - keyboard.check_key_raw (Keycode.a);
+            int yaxis = keyboard.check_key_raw (Keycode.s) - keyboard.check_key_raw (Keycode.w);
 
             transform.add (new Vector2i (xaxis, yaxis));
-
-            if (mouse.check_button (Virgil.Input.MouseButton.LEFT)) {
-                print ("Left pressed!\n");
-            }
         }
 
         public override void draw () {
-            render.draw_sprite (sprite, transform.x, transform.y);
+            render.draw_sprite (sprite, (int)transform.x, (int)transform.y);
         }
     }
 }

@@ -1,5 +1,3 @@
-using SDL;
-
 namespace Virgil {
     public class FramerateManager {
         public uint32 frame_count { get; private set; }
@@ -11,11 +9,13 @@ namespace Virgil {
 
         public uint32 target_framerate;
 
-        public uint32 delta_time;
+        public double delta_time;
+        public bool capped;
 
-        public FramerateManager (uint32 framerate = 60) {
+        public FramerateManager (uint32 framerate = 60, bool is_capped = false) {
             frame_count = 0;
             target_framerate = framerate;
+            capped = is_capped;
 
             rate_ticks = 1000.0f / (float)target_framerate;
             base_ticks = get_ticks ();
@@ -33,13 +33,13 @@ namespace Virgil {
         }
 
         // TODO: Document this returns as ms, maybe look to convert to float
-        public uint32 update () {
+        public double update () {
             uint32 current_ticks = get_ticks ();
             uint32 target_ticks;
 
             frame_count++;
 
-            delta_time = current_ticks - last_ticks;
+            delta_time = ((double)current_ticks - (double)last_ticks) / 1000.0;
             last_ticks = current_ticks;
 
             target_ticks = base_ticks + (uint32)((float)frame_count * rate_ticks);

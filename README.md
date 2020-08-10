@@ -1,6 +1,6 @@
-# Virgil
+<h1 align="center">Virgil</h1>
 
-Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
+Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php), [Vala](https://wiki.gnome.org/Projects/Vala) and [VVFS](https://github.com/lxmcf/vvfs); designed for Linux and directly built for [elementary OS](https://elementary.io)...
 
 ### What is Virgil?
 
@@ -11,9 +11,8 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 ### Dependencies
 
 - `glib-2.0`
-- `gobject-2.0`
-- `libsdl2-dev`
 - `libsdl2-image-dev`
+- `vvfs`
 - `meson`
 
 > _**Note:** Virgil can run on Mac OS with the use of `brew` but is not officially supported._
@@ -22,9 +21,9 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 ### Compiling &amp; running
 
 ```sh
-meson build --prefix=/usr
+meson build
 cd build
-ninja install
+ninja
 
 # Demo app
 ./virgil-demo
@@ -41,6 +40,7 @@ If you are interested in using Virgil and want some help, the below table is an 
 | Linux | x86_64 | Full |
 | Linux | armhf | Full |
 | Linux | aarch64 | Full |
+| Linux | RISC-V | Planned |
 | MacOS | x86_64 | Partial |
 | MacOS | aarch64 | Partial |
 | BSD | x86_64 | Minimal |
