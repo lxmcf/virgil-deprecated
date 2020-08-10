@@ -6,7 +6,8 @@ using Virgil.Input;
 namespace Virgil {
     public class Game {
         public bool running;
-
+        
+        // TODO: Remove GameState object and migrate to be within main game class
         public unowned WindowManager window;
         public unowned RenderManager render;
 
@@ -82,6 +83,10 @@ namespace Virgil {
 
             event.mouse_up_event.connect ((e, sdl_mouse) => {
                 mouse.update_button (sdl_mouse.button, false);
+            });
+
+            event.mouse_motion_event.connect ((e, sdl_mouse) => {
+                mouse.update_position (sdl_mouse);
             });
         }
     }

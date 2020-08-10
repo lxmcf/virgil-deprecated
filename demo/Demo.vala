@@ -19,10 +19,15 @@ namespace Demo {
             keyboard.add_key (Keycode.d);
 
             keyboard.add_key (Keycode.SPACE);
+            keyboard.add_key (Keycode.ESCAPE);
         }
 
         public override void update () {
             player.update ();
+
+            if (keyboard.check_key (Keycode.ESCAPE)) {
+                running = false;
+            }
         }
 
         public override void draw () {
