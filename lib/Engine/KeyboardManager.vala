@@ -37,6 +37,23 @@ namespace Virgil {
             return key_down;
         }
 
+        public bool check_key_pressed (Keycode key) {
+            bool key_pressed = false;
+
+            if (_key_exists (key)) {
+                foreach (KeyItem item in _key_list) {
+                    if (item.keycode == key) {
+                        if (item.is_down && !item.is_pressed) {
+                            key_pressed = true;
+                            item.is_pressed = true;
+                        }
+                    }
+                }
+            }
+
+            return key_pressed;
+        }
+
         public int check_key_raw (Keycode key) {
             int key_state = KeyState.UP;
 
@@ -55,10 +72,16 @@ namespace Virgil {
             return key_state;
         }
 
+
+
         public void update_key (Keycode key, bool down) {
             if (_key_exists (key)) {
                 foreach (KeyItem item in _key_list) {
                     if (item.keycode == key) {
+                        //  if (!down && item.is_pressed) {
+                        //      item.is_pressed = false;
+                        //  }
+
                         item.is_down = down;
                     }
                 }

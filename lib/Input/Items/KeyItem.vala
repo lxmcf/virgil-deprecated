@@ -5,12 +5,14 @@ namespace Virgil.Input {
         public Keycode keycode;
         public bool is_down;
         public bool is_pressed;
+        public bool is_released;
 
         public KeyItem (Keycode keycode) {
             this.keycode = keycode;
 
             is_down = false;
             is_pressed = false;
+            is_released = false;
         }
     }
 }

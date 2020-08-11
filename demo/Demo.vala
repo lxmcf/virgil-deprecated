@@ -25,8 +25,12 @@ namespace Demo {
         public override void update () {
             player.update ();
 
-            if (keyboard.check_key (Keycode.ESCAPE)) {
+            if (keyboard.check_key_pressed (Keycode.ESCAPE)) {
                 running = false;
+            }
+            
+            if (mouse.check_button_pressed (Virgil.Input.MouseButton.LEFT)) {
+                print ("Mouse pressed\n");
             }
         }
 

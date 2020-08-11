@@ -27,7 +27,7 @@ namespace Virgil {
             keyboard = GameState.get_keyboard_state ();
             mouse = GameState.get_mouse_state ();
 
-            link_events ();
+            _link_events ();
 
             window.initialise ();
             render.initialise (window);
@@ -64,7 +64,7 @@ namespace Virgil {
             running = false;
         }
 
-        private void link_events () {
+        private void _link_events () {
             event.close_event.connect (() => {
                 quit ();
             });
