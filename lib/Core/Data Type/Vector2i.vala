@@ -1,9 +1,9 @@
 namespace Virgil {
     public class Vector2i {
-        public int x = 0;
-        public int y = 0;
+        public int x;
+        public int y;
 
-        public Vector2i (int destination_x = 0, int destination_y = 0) {
+        public Vector2i (int destination_x, int destination_y) {
             this.x = destination_x;
             this.y = destination_y;
         }
@@ -38,16 +38,6 @@ namespace Virgil {
         public void divide (Vector2i vector) {
             x /= vector.x;
             y /= vector.y;
-        }
-
-        public void set_value (int? destination_x, int? destination_y) {
-            if (destination_x != null) {
-                x = destination_x;
-            }
-
-            if (destination_y != null) {
-                y = destination_y;
-            }
         }
     }
 }

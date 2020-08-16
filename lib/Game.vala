@@ -2,11 +2,12 @@ using SDL;
 
 using Virgil.Graphics;
 using Virgil.Input;
+using Virgil.Core;
 
 namespace Virgil {
     public class Game {
         public bool running;
-        
+
         // TODO: Remove GameState object and migrate to be within main game class
         public unowned WindowManager window;
         public unowned RenderManager render;
@@ -17,7 +18,7 @@ namespace Virgil {
         public unowned MouseManager mouse;
 
         public Game () {
-            SDL.init (InitFlag.EVERYTHING);
+            SDL.init ();
 
             window = GameState.get_window_state ();
             render = GameState.get_render_state ();
@@ -27,12 +28,11 @@ namespace Virgil {
             keyboard = GameState.get_keyboard_state ();
             mouse = GameState.get_mouse_state ();
 
-            _link_events ();
-
             window.initialise ();
             render.initialise (window);
 
             running = true;
+            _link_events ();
         }
 
         public int run () {
@@ -69,23 +69,23 @@ namespace Virgil {
                 quit ();
             });
 
-            event.key_down_event.connect ((e, key) => {
+            event.key_down_event.connect (key => {
                 keyboard.update_key (key.keysym.sym, true);
             });
 
-            event.key_up_event.connect ((e, key) => {
+            event.key_up_event.connect (key => {
                 keyboard.update_key (key.keysym.sym, false);
             });
 
-            event.mouse_down_event.connect ((e, sdl_mouse) => {
+            event.mouse_down_event.connect (sdl_mouse => {
                 mouse.update_button (sdl_mouse.button, true);
             });
 
-            event.mouse_up_event.connect ((e, sdl_mouse) => {
+            event.mouse_up_event.connect (sdl_mouse => {
                 mouse.update_button (sdl_mouse.button, false);
             });
 
-            event.mouse_motion_event.connect ((e, sdl_mouse) => {
+            event.mouse_motion_event.connect (sdl_mouse => {
                 mouse.update_position (sdl_mouse);
             });
         }

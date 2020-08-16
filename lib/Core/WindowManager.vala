@@ -1,6 +1,6 @@
 using SDL.Video;
 
-namespace Virgil {
+namespace Virgil.Core {
     public class WindowManager {
         private Window? _window;
 
@@ -42,7 +42,7 @@ namespace Virgil {
         }
 
         public void set_window_size (int width, int height) {
-
+            _window.set_size (width, height);
         }
 
         public void set_title (string title) {

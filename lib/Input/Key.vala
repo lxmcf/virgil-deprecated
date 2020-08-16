@@ -110,7 +110,7 @@ namespace Virgil.Input {
         KP_4,
         KP_5,
         KP_6,
-        KP_7, 
+        KP_7,
         KP_8,
         KP_9,
         KP_0,

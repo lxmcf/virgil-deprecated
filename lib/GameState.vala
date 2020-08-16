@@ -1,3 +1,5 @@
+using Virgil.Core;
+
 namespace Virgil {
     public class GameState {
         public static Once<WindowManager> window;

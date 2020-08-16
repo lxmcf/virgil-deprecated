@@ -11,8 +11,8 @@ namespace Virgil.Graphics {
         private int? _width;
         private int? _height;
 
-        private double _scale_x = 1.0;
-        private double _scale_y = 1.0;
+        private double _scale_x;
+        private double _scale_y;
 
         public Sprite (string sprite_file = "") {
             VVFS.File file = new VVFS.File (sprite_file);
@@ -36,13 +36,10 @@ namespace Virgil.Graphics {
             _scale_y = scale_y;
         }
 
-        public Rect get_output_rectangle (int position_x, int position_y) {
-            return Rect () {
-                x = position_x,
-                y = position_y,
-                w = (int)(_width * _scale_x),
-                h = (int)(_height * _scale_y)
-            };
+        public Rect get_output_rectangle (int x, int y) {
+            Rectangle output = new Rectangle (x, y, (int)(_width * _scale_x), (int)(_height * _scale_y));
+
+            return output.get_rectangle ();
         }
 
         public Rect get_texture_rectangle () {
@@ -63,6 +60,9 @@ namespace Virgil.Graphics {
 
         private void _initialise (VVFS.File file) {
             int file_size = file.size;
+
+            _scale_x = 1.0;
+            _scale_y = 1.0;
 
             if (file_size != 0) {
                 unowned Renderer render = GameState.get_render_state ().get_renderer ();

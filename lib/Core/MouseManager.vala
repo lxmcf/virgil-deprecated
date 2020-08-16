@@ -1,6 +1,6 @@
 using Virgil.Input;
 
-namespace Virgil {
+namespace Virgil.Core {
     public class MouseManager {
         private List<MouseItem> _button_list;
 
@@ -48,7 +48,6 @@ namespace Virgil {
             return button_pressed;
         }
 
-    
         public void update_button (uint8 button, bool down) {
             foreach (MouseItem item in _button_list) {
                 if (item.button == button) {

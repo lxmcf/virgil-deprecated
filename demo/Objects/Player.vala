@@ -1,13 +1,13 @@
 using Virgil;
 using Virgil.Graphics;
+using Virgil.Core;
 
 using SDL.Video;
 using SDL.Input;
 
 // FIXME: Migrate all mentions of SDL to Virgil equal
-
 namespace Demo {
-    public class Player : GameObject {
+    public class Player : IGameObject {
         public Vector2i transform;
 
         public Sprite sprite;
@@ -25,14 +25,14 @@ namespace Demo {
             render = GameState.get_render_state ();
         }
 
-        public override void update () {
+        public void update () {
             int xaxis = keyboard.check_key_raw (Keycode.d) - keyboard.check_key_raw (Keycode.a);
             int yaxis = keyboard.check_key_raw (Keycode.s) - keyboard.check_key_raw (Keycode.w);
 
             transform.add (new Vector2i (xaxis, yaxis));
         }
 
-        public override void draw () {
+        public void draw () {
             render.draw_sprite (sprite, (int)transform.x, (int)transform.y);
         }
     }

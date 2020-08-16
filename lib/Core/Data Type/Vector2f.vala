@@ -1,9 +1,9 @@
 namespace Virgil {
     public class Vector2f {
-        public float x = 0.0f;
-        public float y = 0.0f;
+        public float x;
+        public float y;
 
-        public Vector2f (float destination_x = 0.0f, float destination_y = 0.0f) {
+        public Vector2f (float destination_x, float destination_y) {
             this.x = destination_x;
             this.y = destination_y;
         }
@@ -38,16 +38,6 @@ namespace Virgil {
         public void divide (Vector2f vector) {
             x /= vector.x;
             y /= vector.y;
-        }
-
-        public void set_value (float? destination_x, float? destination_y) {
-            if (destination_x != null) {
-                x = destination_x;
-            }
-
-            if (destination_y != null) {
-                y = destination_y;
-            }
         }
     }
 }

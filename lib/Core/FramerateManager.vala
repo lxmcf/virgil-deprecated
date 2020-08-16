@@ -1,4 +1,4 @@
-namespace Virgil {
+namespace Virgil.Core {
     public class FramerateManager {
         public uint32 frame_count { get; private set; }
 

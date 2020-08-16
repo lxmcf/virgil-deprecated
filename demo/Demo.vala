@@ -28,7 +28,7 @@ namespace Demo {
             if (keyboard.check_key_pressed (Keycode.ESCAPE)) {
                 running = false;
             }
-            
+
             if (mouse.check_button_pressed (Virgil.Input.MouseButton.LEFT)) {
                 print ("Mouse pressed\n");
             }

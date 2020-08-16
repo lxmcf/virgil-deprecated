@@ -1,7 +1,7 @@
 using SDL.Input;
 using Virgil.Input;
 
-namespace Virgil {
+namespace Virgil.Core {
     public class KeyboardManager {
         private List<KeyItem> _key_list;
 

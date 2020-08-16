@@ -12,13 +12,11 @@ config_header = configure_file (
 # Virgil library
 libvirgil_sources = files (
     'Game.vala',
-    'GameObject.vala',
     'GameState.vala',
 
     'Constants.vala',
 
-    'Math/Vector2f.vala',
-    'Math/Vector2i.vala',
+    'Interface/IGameObject.vala',
 
     'Input/Items/KeyItem.vala',
     'Input/Items/MouseItem.vala',
@@ -29,10 +27,16 @@ libvirgil_sources = files (
     'Graphics/Sprite.vala',
     'Graphics/Colour.vala',
 
-    'Engine/EventManager.vala',
-    'Engine/FramerateManager.vala',
-    'Engine/WindowManager.vala',
-    'Engine/KeyboardManager.vala',
-    'Engine/MouseManager.vala',
-    'Engine/RenderManager.vala'
+    'Core/EventManager.vala',
+    'Core/FramerateManager.vala',
+    'Core/WindowManager.vala',
+    'Core/KeyboardManager.vala',
+    'Core/MouseManager.vala',
+    'Core/RenderManager.vala',
+
+    'Core/Data Type/Vector2f.vala',
+    'Core/Data Type/Vector2i.vala',
+    'Core/Data Type/Vector3i.vala',
+    'Core/Data Type/Vector3f.vala',
+    'Core/Data Type/Rectangle.vala'
 )

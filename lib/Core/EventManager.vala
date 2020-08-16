@@ -1,6 +1,6 @@
 using SDL;
 
-namespace Virgil {
+namespace Virgil.Core {
     public class EventManager {
         private Event _event;
 

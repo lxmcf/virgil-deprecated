@@ -1,6 +1,6 @@
 using Virgil.Graphics;
 
-namespace Virgil {
+namespace Virgil.Core {
     public class RenderManager {
         private SDL.Video.Renderer? _render;
 
@@ -40,7 +40,11 @@ namespace Virgil {
         }
 
         public int draw_sprite (Sprite sprite, int x, int y) {
-            return _render.copy (sprite.get_texture (), sprite.get_texture_rectangle (), sprite.get_output_rectangle (x, y));
+            return _render.copy (
+                sprite.get_texture (),
+                sprite.get_texture_rectangle (),
+                sprite.get_output_rectangle (x, y)
+            );
         }
 
         public void set_renderer_colour (Colour colour) {
