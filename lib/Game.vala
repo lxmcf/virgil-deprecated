@@ -9,6 +9,7 @@ namespace Virgil {
 
         public static EventHandler event { get; private set; }
         public static KeyboardHandler keyboard { get; private set; }
+        public static MouseHandler mouse { get; private set; }
 
         public Game () {
             int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
@@ -22,6 +23,7 @@ namespace Virgil {
 
                 event = new EventHandler ();
                 keyboard = new KeyboardHandler ();
+                mouse = new MouseHandler ();
 
                 _link_events ();
 
@@ -67,6 +69,10 @@ namespace Virgil {
 
             event.on_key_update.connect ((key, is_down) => {
                 keyboard.update_key (key.keysym.sym, is_down);
+            });
+
+            event.on_mouse_update.connect ((button, is_down) => {
+                mouse.update_button (button, is_down);
             });
         }
     }

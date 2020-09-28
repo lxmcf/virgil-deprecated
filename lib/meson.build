@@ -22,11 +22,14 @@ libvirgil_sources = files (
     'Engine/GameRenderer.vala',
     'Engine/EventHandler.vala',
     'Engine/KeyboardHandler.vala',
+    'Engine/MouseHandler.vala',
 
     'FileSystem/Asset.vala',
 
     'Graphics/Sprite.vala',
 
     'Input/KeyState.vala',
-    'Input/Items/KeyItem.vala'
+    'Input/MouseButton.vala',
+    'Input/Items/KeyItem.vala',
+    'Input/Items/MouseItem.vala'
 )

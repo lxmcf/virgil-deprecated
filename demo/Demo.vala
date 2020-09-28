@@ -18,12 +18,12 @@ namespace Virgil {
                 quit ();
             }
 
-            if (keyboard.check_key_pressed (Keycode.ESCAPE)) {
-                print ("Escape pressed!\n");
+            if (mouse.check_button_pressed (Input.MouseButton.LEFT)) {
+                print ("Left pressed!\n");
             }
 
-            if (keyboard.check_key_released (Keycode.ESCAPE)) {
-                print ("Escape released!\n");
+            if (mouse.check_button_released (Input.MouseButton.LEFT)) {
+                print ("Left released!\n");
             }
         }
 

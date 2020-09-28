@@ -1,15 +1,12 @@
-using SDL.Input;
-
 namespace Virgil.Input {
-    public class KeyItem {
-        public Keycode key { get; private set; }
-
+    public class MouseItem {
+        public MouseButton button { get; private set; }
         public bool is_down;
         public bool is_pressed;
         public bool is_released;
 
-        public KeyItem (Keycode key) {
-            this.key = key;
+        public MouseItem (Virgil.Input.MouseButton button) {
+            this.button = button;
 
             is_down = false;
             is_pressed = false;
@@ -17,3 +14,4 @@ namespace Virgil.Input {
         }
     }
 }
+

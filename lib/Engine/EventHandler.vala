@@ -1,5 +1,7 @@
 using SDL;
 
+using Virgil.Input;
+
 namespace Virgil.Engine {
     public class EventHandler {
         private Event _event;
@@ -8,9 +10,7 @@ namespace Virgil.Engine {
 
         public signal void on_key_update (KeyboardEvent key, bool is_down);
 
-        public signal void on_mouse_down (MouseButtonEvent mouse);
-        public signal void on_mouse_up (MouseButtonEvent mouse);
-        public signal void on_mouse_move (MouseMotionEvent mouse);
+        public signal void on_mouse_update (MouseButton mouse, bool is_down);
 
         public void update () {
             while (Event.poll (out _event) == 1) {
@@ -26,15 +26,8 @@ namespace Virgil.Engine {
                     break;
 
                     case EventType.MOUSEBUTTONDOWN:
-                        on_mouse_down (_event.button);
-                    break;
-
                     case EventType.MOUSEBUTTONUP:
-                        on_mouse_up (_event.button);
-                    break;
-
-                    case EventType.MOUSEMOTION:
-                        on_mouse_move (_event.motion);
+                        on_mouse_update ((MouseButton)_event.button.button, (_event.type == EventType.MOUSEBUTTONDOWN) ? true : false);
                     break;
                 }
             }

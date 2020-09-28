@@ -4,6 +4,7 @@
 ---
 #### Added:
 - `check_key_pressed` & `check_key_released` methods in the KeyboardHandler
+- `check_button_pressed` & `check_button_released` methods in the MouseHandler
 - Vector2 & Vector3 data types
 - Rectangle data type
 - Colour can now be made from stanard `uint32` colour code
