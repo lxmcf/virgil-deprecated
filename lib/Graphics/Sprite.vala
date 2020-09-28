@@ -1,84 +1,44 @@
-using Virgil;
+using Virgil.FileSystem;
 
 using SDL.Video;
 using SDLImage;
 
 namespace Virgil.Graphics {
     public class Sprite {
-        private Texture? _texture;
-        private Rect? _texture_rectangle;
+        private Texture? _sdl_texture;
+        private Rectangle _rectangle;
 
-        private int? _width;
-        private int? _height;
+        private int _width;
+        private int _height;
 
-        private double _scale_x;
-        private double _scale_y;
+        public Sprite (Asset asset) {
+            _width = 0;
+            _height = 0;
 
-        public Sprite (string sprite_file = "") {
-            VVFS.File file = new VVFS.File (sprite_file);
-
-            _initialise (file);
-        }
-
-        public Sprite.from_gresource (string sprite_file = "") {
-            VVFS.File file = new VVFS.File.from_gresource (sprite_file);
-
-            _initialise (file);
-        }
-
-        public void get_size (out int? width, out int? height) {
-            width = _width;
-            height = _height;
-        }
-
-        public void set_scale (double scale_x, double scale_y) {
-            _scale_x = scale_x;
-            _scale_y = scale_y;
-        }
-
-        public Rect get_output_rectangle (int x, int y) {
-            Rectangle output = new Rectangle (x, y, (int)(_width * _scale_x), (int)(_height * _scale_y));
-
-            return output.get_rectangle ();
-        }
-
-        public Rect get_texture_rectangle () {
-            return _texture_rectangle;
-        }
-
-        public unowned Texture get_texture () {
-            return _texture;
-        }
-
-        private void _nullify () {
-            _texture = null;
-            _texture_rectangle = null;
-
-            _width = null;
-            _height = null;
-        }
-
-        private void _initialise (VVFS.File file) {
-            int file_size = file.size;
-
-            _scale_x = 1.0;
-            _scale_y = 1.0;
-
-            if (file_size != 0) {
-                unowned Renderer render = GameState.get_render_state ().get_renderer ();
-
-                _texture = load_texture_rw (render, file.get_rwops (), false);
-                _texture.query (null, null, out _width, out _height);
-
-                _texture_rectangle = Rect () {
-                    x = 0,
-                    y = 0,
-                    w = _width,
-                    h = _height
-                };
+            if (asset.length != 0) {
+                _sdl_texture = load_texture_rw (Game.renderer.to_sdl (), asset.rwops, false);
+                _sdl_texture.query (null, null, out _width, out _height);
             } else {
-                _nullify ();
+                _sdl_texture = null;
+                _rectangle = new Rectangle.empty ();
+
+                string file = asset.filename;
+
+                warning (@"The file ?$file? has a length of 0");
             }
+        }
+
+        public void get_size (out int width, out int height) {
+            width = this._width;
+            height = this._height;
+        }
+
+        public unowned Rectangle get_bounds () {
+            return _rectangle;
+        }
+
+        public unowned Texture? get_sdl_texture () {
+            return _sdl_texture;
         }
     }
 }

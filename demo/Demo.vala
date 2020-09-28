@@ -1,47 +1,40 @@
-using Virgil;
-using Virgil.Graphics;
-using Virgil.Input;
+using Virgil.Engine;
 
 using SDL.Input;
 
-namespace Demo {
+namespace Virgil {
     public class Demo : Game {
-        public Player player;
-
         public override void start () {
-            player = new Player ();
+            window.title = "Virgil Demo";
 
-            render.set_background_colour (new Colour (88, 151, 233));
+            keyboard.add_key (Keycode.LCTRL);
+            keyboard.add_key (Keycode.q);
 
-            keyboard.add_key (Keycode.w);
-            keyboard.add_key (Keycode.a);
-            keyboard.add_key (Keycode.s);
-            keyboard.add_key (Keycode.d);
-
-            keyboard.add_key (Keycode.SPACE);
             keyboard.add_key (Keycode.ESCAPE);
         }
 
         public override void update () {
-            player.update ();
-
-            if (keyboard.check_key_pressed (Keycode.ESCAPE)) {
-                running = false;
+            if (keyboard.check_key (Keycode.LCTRL) && keyboard.check_key_pressed (Keycode.q)) {
+                quit ();
             }
 
-            if (mouse.check_button_pressed (Virgil.Input.MouseButton.LEFT)) {
-                print ("Mouse pressed\n");
+            if (keyboard.check_key_pressed (Keycode.ESCAPE)) {
+                print ("Escape pressed!\n");
+            }
+
+            if (keyboard.check_key_released (Keycode.ESCAPE)) {
+                print ("Escape released!\n");
             }
         }
 
         public override void draw () {
-            player.draw ();
+            renderer.clear_colour (new Colour (88, 151, 233));
         }
     }
+}
 
-    public static int main (string[] args) {
-        var demo = new Demo ();
+public static int main (string[] args) {
+    Virgil.Demo demo = new Virgil.Demo ();
 
-        return demo.run ();
-    }
+    return demo.run ();
 }

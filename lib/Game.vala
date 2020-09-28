@@ -1,54 +1,49 @@
-using SDL;
-
-using Virgil.Graphics;
-using Virgil.Input;
-using Virgil.Core;
+using Virgil.Engine;
 
 namespace Virgil {
     public class Game {
-        public bool running;
+        public bool is_running;
 
-        // TODO: Remove GameState object and migrate to be within main game class
-        public unowned WindowManager window;
-        public unowned RenderManager render;
+        public static GameWindow window { get; private set; }
+        public static GameRenderer renderer { get; private set; }
 
-        public unowned EventManager event;
-        public unowned FramerateManager framerate;
-        public unowned KeyboardManager keyboard;
-        public unowned MouseManager mouse;
+        public static EventHandler event { get; private set; }
+        public static KeyboardHandler keyboard { get; private set; }
 
         public Game () {
-            SDL.init ();
+            int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
 
-            window = GameState.get_window_state ();
-            render = GameState.get_render_state ();
+            if (sdl_init == 0) {
+                window = new GameWindow () {
+                    title = @"$PROJECT_NAME v$PROJECT_VERSION"
+                };
 
-            event = GameState.get_event_state ();
-            framerate = GameState.get_framerate_state ();
-            keyboard = GameState.get_keyboard_state ();
-            mouse = GameState.get_mouse_state ();
+                renderer = new GameRenderer (window);
 
-            window.initialise ();
-            render.initialise (window);
+                event = new EventHandler ();
+                keyboard = new KeyboardHandler ();
 
-            running = true;
-            _link_events ();
+                _link_events ();
+
+                is_running = true;
+            } else {
+                error (SDL.get_error ());
+            }
         }
 
         public int run () {
             start ();
 
-            while (running) {
-                framerate.update ();
-
-                render.clear ();
+            while (is_running) {
+                renderer.clear ();
 
                 event.update ();
 
                 update ();
+
                 draw ();
 
-                render.present ();
+                renderer.present ();
             }
 
             SDL.quit ();
@@ -56,37 +51,22 @@ namespace Virgil {
             return EXIT_SUCCESS;
         }
 
+        // Default runtime methods
         public virtual void start () { }
         public virtual void update () { }
         public virtual void draw () { }
 
         public void quit () {
-            running = false;
+            is_running = false;
         }
 
         private void _link_events () {
-            event.close_event.connect (() => {
+            event.on_close.connect (() => {
                 quit ();
             });
 
-            event.key_down_event.connect (key => {
-                keyboard.update_key (key.keysym.sym, true);
-            });
-
-            event.key_up_event.connect (key => {
-                keyboard.update_key (key.keysym.sym, false);
-            });
-
-            event.mouse_down_event.connect (sdl_mouse => {
-                mouse.update_button (sdl_mouse.button, true);
-            });
-
-            event.mouse_up_event.connect (sdl_mouse => {
-                mouse.update_button (sdl_mouse.button, false);
-            });
-
-            event.mouse_motion_event.connect (sdl_mouse => {
-                mouse.update_position (sdl_mouse);
+            event.on_key_update.connect ((key, is_down) => {
+                keyboard.update_key (key.keysym.sym, is_down);
             });
         }
     }

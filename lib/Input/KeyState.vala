@@ -3,16 +3,16 @@ namespace Virgil.Input {
         UP = 0,
         DOWN = 1;
 
-        public string to_string () {
+        public bool to_bool () {
             switch (this) {
                 case UP:
-                    return "UP";
+                    return false;
 
                 case DOWN:
-                    return "DOWN";
+                    return true;
 
                 default:
-                    return "UNDEFINED";
+                    return false;
             }
         }
     }
