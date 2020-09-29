@@ -27,6 +27,9 @@ libvirgil_sources = files (
     'FileSystem/Asset.vala',
 
     'Graphics/Sprite.vala',
+    'Graphics/SpriteBatch.vala',
+    'Graphics/SpriteBatchMode.vala',
+    'Graphics/Items/SpriteBatchItem.vala',
 
     'Input/KeyState.vala',
     'Input/MouseButton.vala',

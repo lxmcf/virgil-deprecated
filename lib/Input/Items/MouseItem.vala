@@ -14,4 +14,3 @@ namespace Virgil.Input {
         }
     }
 }
-

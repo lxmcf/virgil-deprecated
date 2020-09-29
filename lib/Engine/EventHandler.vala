@@ -27,7 +27,10 @@ namespace Virgil.Engine {
 
                     case EventType.MOUSEBUTTONDOWN:
                     case EventType.MOUSEBUTTONUP:
-                        on_mouse_update ((MouseButton)_event.button.button, (_event.type == EventType.MOUSEBUTTONDOWN) ? true : false);
+                        on_mouse_update (
+                            (MouseButton)_event.button.button,
+                            (_event.type == EventType.MOUSEBUTTONDOWN) ? true : false
+                        );
                     break;
                 }
             }

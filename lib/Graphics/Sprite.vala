@@ -18,6 +18,8 @@ namespace Virgil.Graphics {
             if (asset.length != 0) {
                 _sdl_texture = load_texture_rw (Game.renderer.to_sdl (), asset.rwops, false);
                 _sdl_texture.query (null, null, out _width, out _height);
+
+                _rectangle = new Rectangle (0, 0, _width, _height);
             } else {
                 _sdl_texture = null;
                 _rectangle = new Rectangle.empty ();
