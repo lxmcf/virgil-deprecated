@@ -22,7 +22,7 @@ namespace Virgil {
         }
 
         public override void update () {
-
+            
         }
 
         public override void draw () {

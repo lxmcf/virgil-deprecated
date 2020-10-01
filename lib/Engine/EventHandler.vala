@@ -11,6 +11,7 @@ namespace Virgil.Engine {
         public signal void on_key_update (KeyboardEvent key, bool is_down);
 
         public signal void on_mouse_update (MouseButton mouse, bool is_down);
+        public signal void on_mouse_motion (MouseMotionEvent mouse);
 
         public void update () {
             while (Event.poll (out _event) == 1) {
@@ -31,6 +32,10 @@ namespace Virgil.Engine {
                             (MouseButton)_event.button.button,
                             (_event.type == EventType.MOUSEBUTTONDOWN) ? true : false
                         );
+                    break;
+
+                    case EventType.MOUSEMOTION:
+                        on_mouse_motion (_event.motion);
                     break;
                 }
             }

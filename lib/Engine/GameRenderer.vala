@@ -1,11 +1,15 @@
 using SDL.Video;
 
+using Virgil;
+
 namespace Virgil.Engine {
     public class GameRenderer {
         private Renderer? _sdl_renderer;
+        private Colour _colour;
 
         public GameRenderer (GameWindow window) {
             _sdl_renderer = Renderer.create (window.to_sdl (), -1, 0);
+            _colour = new Colour ();
         }
 
         public unowned Renderer to_sdl () {

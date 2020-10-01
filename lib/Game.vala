@@ -74,6 +74,10 @@ namespace Virgil {
             event.on_mouse_update.connect ((button, is_down) => {
                 mouse.update_button (button, is_down);
             });
+
+            event.on_mouse_motion.connect ((motion) => {
+                mouse.update_position (motion);
+            });
         }
     }
 }

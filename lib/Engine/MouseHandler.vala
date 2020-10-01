@@ -4,6 +4,9 @@ namespace Virgil {
     public class MouseHandler {
         private List<MouseItem> _button_list;
 
+        private int _x { get; private set; }
+        private int _y { get; private set; }
+
         public MouseHandler () {
             _button_list = new List<MouseItem> ();
 
@@ -61,6 +64,16 @@ namespace Virgil {
             }
 
             return false;
+        }
+
+        public void get_position (out int x, out int y) {
+            x = _x;
+            y = _y;
+        }
+
+        public void update_position (SDL.MouseMotionEvent mouse) {
+            _x = mouse.x;
+            _y = mouse.y;
         }
 
         public void update_button (MouseButton button, bool is_down) {
