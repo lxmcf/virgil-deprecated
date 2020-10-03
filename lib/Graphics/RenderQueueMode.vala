@@ -1,5 +1,5 @@
 namespace Virgil.Graphics {
-    public enum SpriteBatchMode {
+    public enum RenderQueueMode {
         DEFAULT = 0,
         REVERSED = 1,
         IMMEDIATE = 2

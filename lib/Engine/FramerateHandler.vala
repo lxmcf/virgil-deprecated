@@ -15,11 +15,11 @@ namespace Virgil.Engine {
             last_ticks = base_ticks;
         }
 
-        public uint32 update () {
+        public double update () {
             uint32 current_ticks;
             uint32 target_ticks;
             uint32 the_delay;
-            uint32 time_passed = 0;
+            double time_passed = 0;
 
             frame_count++;
 
@@ -35,7 +35,7 @@ namespace Virgil.Engine {
                 frame_count = 0;
                 base_ticks = _get_ticks ();
             }
-        
+
             return time_passed;
         }
 

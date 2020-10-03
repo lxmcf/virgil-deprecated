@@ -12,7 +12,7 @@ namespace Virgil {
         public static MouseHandler mouse { get; private set; }
         public static FramerateHandler framerate { get; private set; }
 
-        public uint32 delta_time;
+        public double delta_time;
 
         public Game () {
             int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
@@ -24,12 +24,14 @@ namespace Virgil {
                     title = @"$PROJECT_NAME v$PROJECT_VERSION"
                 };
 
+                window.center ();
+
                 renderer = new GameRenderer (window);
 
                 event = new EventHandler ();
                 keyboard = new KeyboardHandler ();
                 mouse = new MouseHandler ();
-                framerate = new FramerateHandler ();
+                framerate = new FramerateHandler (60);
 
                 _link_events ();
 

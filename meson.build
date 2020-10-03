@@ -18,12 +18,14 @@ libvirgil_dependencies = [
     dependency ('gio-2.0'),
 
     meson.get_compiler ('c').find_library ('SDL2'),
-    meson.get_compiler ('c').find_library ('SDL2_image')
+    meson.get_compiler ('c').find_library ('SDL2_image'),
+    meson.get_compiler ('c').find_library ('SDL2_ttf')
 ]
 
 libvirgil_vapi = [
     meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('SDL2_image', dirs: vapi_dir)
+    meson.get_compiler('vala').find_library('SDL2_image', dirs: vapi_dir),
+    meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir)
 ]
 
 # Vala lint
@@ -32,7 +34,7 @@ if vala_lint.found ()
     test (
         'Vala lint',
         vala_lint,
-        args: ['-d', source_dir]
+        args: [ '-d', source_dir ]
     )
 endif
 

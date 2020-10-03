@@ -94,6 +94,9 @@ namespace Virgil.Engine {
                 }
             }
 
+            _key_list.append (new KeyItem (key));
+
+            // Will always return null on first call
             return null;
         }
     }

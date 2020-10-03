@@ -3,12 +3,24 @@ using SDL.Video;
 namespace Virgil.Engine {
     public class GameWindow {
         private Window? _sdl_window;
+        private int _width;
+        private int _height;
 
         public const int CENTERED = Window.POS_CENTERED;
 
         public string title {
             get { return _sdl_window.title; }
             set { _sdl_window.title = value; }
+        }
+
+        public int width {
+            get { return _width; }
+            set { set_size (value, _height); }
+        }
+
+        public int height {
+            get { return _height; }
+            set { set_size (width, value); }
         }
 
         public GameWindow () {
@@ -34,6 +46,9 @@ namespace Virgil.Engine {
 
         public void set_size (int width, int height) {
             _sdl_window.set_size (width, height);
+
+            _width = width;
+            _height = height;
         }
 
         public void get_position (out int x, out int y) {
@@ -42,6 +57,10 @@ namespace Virgil.Engine {
 
         public void get_size (out int width, out int height) {
             _sdl_window.get_size (out width, out height);
+        }
+
+        public void center () {
+            set_position (CENTERED, CENTERED);
         }
 
         public bool destory () {
