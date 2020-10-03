@@ -10,9 +10,14 @@ namespace Virgil {
         public static EventHandler event { get; private set; }
         public static KeyboardHandler keyboard { get; private set; }
         public static MouseHandler mouse { get; private set; }
+        public static FramerateHandler framerate { get; private set; }
+
+        public uint32 delta_time;
 
         public Game () {
             int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
+
+            delta_time = 0;
 
             if (sdl_init == 0) {
                 window = new GameWindow () {
@@ -24,6 +29,7 @@ namespace Virgil {
                 event = new EventHandler ();
                 keyboard = new KeyboardHandler ();
                 mouse = new MouseHandler ();
+                framerate = new FramerateHandler ();
 
                 _link_events ();
 
@@ -37,6 +43,7 @@ namespace Virgil {
             start ();
 
             while (is_running) {
+                delta_time = framerate.update ();
                 renderer.clear ();
 
                 event.update ();

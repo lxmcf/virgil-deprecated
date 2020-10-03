@@ -4,8 +4,10 @@ using SDL.Video;
 
 namespace Virgil.Graphics {
     public class SpriteBatch {
+        public SpriteBatchMode sort_mode;
+
         private List<SpriteBatchItem> _item_list;
-        private SpriteBatchMode sort_mode;
+        private bool _has_reversed;
 
         private unowned Renderer renderer;
 
@@ -13,17 +15,21 @@ namespace Virgil.Graphics {
             _item_list = new List<SpriteBatchItem> ();
             sort_mode = SpriteBatchMode.DEFAULT;
 
+            _has_reversed = false;
+
             renderer = Game.renderer.to_sdl ();
         }
 
         public void begin (SpriteBatchMode mode = SpriteBatchMode.DEFAULT, bool free_list = true) {
             sort_mode = mode;
 
-            //  if (free_list) {
-            //      _item_list.foreach ((item) => {
-            //          _item_list.remove(item); 
-            //      });
-            //  }
+            if (free_list) {
+                _item_list.foreach ((item) => {
+                    _item_list.remove(item); 
+                });
+            }
+
+
         }
 
         public void draw (Sprite sprite, int x, int y) {
@@ -44,10 +50,15 @@ namespace Virgil.Graphics {
         }
 
         public void end () {
-            if (sort_mode == SpriteBatchMode.IMMEDIATE) return;
+            if (sort_mode == SpriteBatchMode.IMMEDIATE) {
+                _has_reversed = false;
+                return;
+            }
 
-            if (sort_mode == SpriteBatchMode.REVERSED) {
+            if (sort_mode == SpriteBatchMode.REVERSED && !_has_reversed) {
                 _item_list.reverse ();
+
+                _has_reversed = true;
             }
 
             foreach (SpriteBatchItem item in _item_list) {

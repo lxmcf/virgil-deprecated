@@ -1,5 +1,7 @@
 demo_sources = files (
-    'Demo.vala'
+    'Demo.vala',
+
+    'Objects/Player.vala'
 )
 
 executable (

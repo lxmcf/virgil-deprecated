@@ -6,30 +6,33 @@ using SDL.Input;
 
 namespace Virgil {
     public class Demo : Game {
-        public Sprite sprite;
+        public Player player;
         public SpriteBatch batch;
 
         public override void start () {
             window.title = "Virgil Demo";
 
-            keyboard.add_key (Keycode.LCTRL);
-            keyboard.add_key (Keycode.q);
+            keyboard.add_key (Keycode.w);
+            keyboard.add_key (Keycode.a);
+            keyboard.add_key (Keycode.s);
+            keyboard.add_key (Keycode.d);
 
-            keyboard.add_key (Keycode.ESCAPE);
+            player = new Player ();
 
-            sprite = new Sprite (new Asset.from_resource ("/virgil/image/default.png"));
             batch = new SpriteBatch ();
         }
 
         public override void update () {
-            
+            player.update (delta_time);
+
+            // print (((double)test_var / (double)10000).to_string () + "\n");
         }
 
         public override void draw () {
             renderer.clear_colour (new Colour (88, 151, 233));
 
             batch.begin ();
-            batch.draw (sprite, 128, 128);
+            batch.draw (player.sprite, (int)player.transform.x, (int)player.transform.y);
             batch.end ();
         }
     }
