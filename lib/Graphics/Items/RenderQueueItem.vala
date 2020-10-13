@@ -10,11 +10,11 @@ namespace Virgil.Graphics {
 
         public double output_angle;
 
-        public RenderQueueItem.from_sprite (Sprite sprite, int x, int y, double scale_x, double scale_y, double angle) {
+        public RenderQueueItem.from_texture (Texture2D texture, int x, int y, double scale_x, double scale_y, double angle) {
             output_angle = angle;
 
-            texture = sprite.get_sdl_texture ();
-            sprite_rectangle = sprite.get_bounds ().to_sdl ();
+            this.texture = texture.get_sdl_texture ();
+            sprite_rectangle = texture.get_bounds ().to_sdl ();
 
             double output_width = sprite_rectangle.w * scale_x;
             double output_height = sprite_rectangle.h * scale_y;
@@ -23,7 +23,7 @@ namespace Virgil.Graphics {
         }
 
         public RenderQueueItem.from_string (Font font, string text, int x, int y, Colour colour) {
-            
+
         }
     }
 }

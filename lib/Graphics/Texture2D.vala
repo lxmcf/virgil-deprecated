@@ -4,14 +4,14 @@ using SDL.Video;
 using SDLImage;
 
 namespace Virgil.Graphics {
-    public class Sprite {
+    public class Texture2D {
         private Texture? _sdl_texture;
         private Rectangle _rectangle;
 
-        private int _width;
-        private int _height;
+        public int width { get; private set; }
+        public int height { get; private set; }
 
-        public Sprite (Asset asset) {
+        public Texture2D (Asset asset) {
             _width = 0;
             _height = 0;
 

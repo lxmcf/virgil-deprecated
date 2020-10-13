@@ -7,12 +7,12 @@ using SDL.Input;
 namespace Virgil {
     public class Player {
         public Vector2 transform { get; private set; }
-        public Sprite sprite { get; private set; }
+        public Texture2D sprite { get; private set; }
 
         private double speed;
 
         public Player () {
-            sprite = new Sprite (
+            sprite = new Texture2D (
                 new Asset.from_resource ("/virgil/image/default.png")
             );
 

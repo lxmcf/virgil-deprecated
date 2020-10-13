@@ -1,5 +1,6 @@
 using SDL;
 
+// TODO Manual memory management
 namespace Virgil.FileSystem {
     public class Asset {
         public string filename { get; private set; }
@@ -10,6 +11,10 @@ namespace Virgil.FileSystem {
         public int length { get; private set; }
 
         private RWops? _rwops;
+
+        public Asset () {
+            length = 0;
+        }
 
         public Asset.from_file (string file) {
             filename = file;

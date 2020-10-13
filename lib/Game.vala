@@ -4,8 +4,8 @@ namespace Virgil {
     public class Game {
         public bool is_running;
 
-        public static GameWindow window { get; private set; }
-        public static GameRenderer renderer { get; private set; }
+        public static GameWindow? window { get; private set; }
+        public static GameRenderer? renderer { get; private set; }
 
         public static EventHandler event { get; private set; }
         public static KeyboardHandler keyboard { get; private set; }

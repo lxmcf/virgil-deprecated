@@ -31,14 +31,14 @@ namespace Virgil.Graphics {
         }
 
 
-        public void draw (Sprite sprite, Vector2 position) {
-            RenderQueueItem item = new RenderQueueItem.from_sprite (sprite, (int)position.x, (int)position.y, 1.0, 1.0, 0.0);
+        public void draw (Texture2D texture, Vector2 position) {
+            RenderQueueItem item = new RenderQueueItem.from_texture (texture, (int)position.x, (int)position.y, 1.0, 1.0, 0.0);
             _filter_item (item);
         }
 
-        public void draw_scale (Sprite sprite, Vector2 position, double scale_x, double scale_y) {
-            RenderQueueItem item = new RenderQueueItem.from_sprite (
-                sprite,
+        public void draw_scale (Texture2D texture, Vector2 position, double scale_x, double scale_y) {
+            RenderQueueItem item = new RenderQueueItem.from_texture (
+                texture,
                 (int)position.x,
                 (int)position.y,
                 scale_x, scale_y,
