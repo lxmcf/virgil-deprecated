@@ -1,46 +1,67 @@
 using Virgil.FileSystem;
 
 using SDL.Video;
-using SDLImage;
 
 namespace Virgil.Graphics {
     public class Texture2D {
-        private Texture? _sdl_texture;
-        private Rectangle _rectangle;
+        private Bytes _data;
 
         public int width { get; private set; }
         public int height { get; private set; }
 
-        public Texture2D (Asset asset) {
-            _width = 0;
-            _height = 0;
-
-            if (asset.length != 0) {
-                _sdl_texture = load_texture_rw (Game.renderer.to_sdl (), asset.rwops, false);
-                _sdl_texture.query (null, null, out _width, out _height);
-
-                _rectangle = new Rectangle (0, 0, _width, _height);
-            } else {
-                _sdl_texture = null;
-                _rectangle = new Rectangle.empty ();
-
-                string file = asset.filename;
-
-                warning (@"The file ?$file? has a length of 0");
+        public int length {
+            get {
+                return _data.length;
             }
         }
 
-        public void get_size (out int width, out int height) {
-            width = this._width;
-            height = this._height;
+        public Texture2D (int width, int height) {
+            set_size (width, height);
         }
 
-        public unowned Rectangle get_bounds () {
-            return _rectangle;
+        public Texture2D.from_rwops (int width, int height, SDL.RWops rwops, bool free_source = false) {
+            set_size (width, height);
+            
+            uint8[] rwops_data = new uint8[1];
+
+            for (int i = 0; i < rwops.size; i++) {
+                rwops_data += rwops.read_u8 ();
+            }
+
+            _data = new Bytes (rwops_data);
+
+            if (free_source) {
+                rwops.close ();
+            }
         }
 
-        public unowned Texture? get_sdl_texture () {
-            return _sdl_texture;
+        public Texture2D.from_data (int width, int height, uint8[] data) {
+            set_size (width, height);
+
+            _data = new Bytes (data);
+        }
+
+        public Texture2D.from_asset (int width, int height, Asset asset) {
+            set_size (width, height);
+
+            _data = new Bytes (asset.get_data ());
+        }
+
+        public void set_data (uint8[]? data) {
+            _data = new Bytes (data);
+        }
+
+        public void set_size (int width, int height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        public Rectangle get_bounds () {
+            return new Rectangle (0, 0, width, height);
+        }
+
+        public uint8[] get_data () {
+            return _data.get_data ();
         }
     }
 }

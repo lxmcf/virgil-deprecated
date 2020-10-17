@@ -32,12 +32,12 @@ namespace Virgil.Graphics {
 
 
         public void draw (Texture2D texture, Vector2 position) {
-            RenderQueueItem item = new RenderQueueItem.from_texture (texture, (int)position.x, (int)position.y, 1.0, 1.0, 0.0);
+            RenderQueueItem item = new RenderQueueItem (texture, (int)position.x, (int)position.y, 1.0, 1.0, 0.0);
             _filter_item (item);
         }
 
         public void draw_scale (Texture2D texture, Vector2 position, double scale_x, double scale_y) {
-            RenderQueueItem item = new RenderQueueItem.from_texture (
+            RenderQueueItem item = new RenderQueueItem (
                 texture,
                 (int)position.x,
                 (int)position.y,
@@ -73,7 +73,7 @@ namespace Virgil.Graphics {
 
         private void _render_item (RenderQueueItem item) {
             //renderer.copyex (item.texture, item.sprite_rectangle, item.output_rectangle, 0.0, null, RendererFlip.NONE);
-            renderer.copy (item.texture, item.sprite_rectangle, item.output_rectangle);
+            renderer.copy (item.output_texture, item.texture_rectangle, item.output_rectangle);
         }
 
         private void _filter_item (RenderQueueItem item) {
