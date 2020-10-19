@@ -27,5 +27,9 @@ namespace Virgil.Graphics {
 
             output_rectangle = new Rectangle (x, y, (int)output_width, (int)output_height).to_sdl ();
         }
+
+        public RenderQueueItem.from_string (Font font, string text, Colour colour) {
+
+        }
     }
 }

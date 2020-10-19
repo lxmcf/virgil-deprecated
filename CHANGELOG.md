@@ -7,11 +7,11 @@
 - `check_button_pressed` & `check_button_released` methods in the MouseHandler
 - Vector2 & Vector3 data types
 - Rectangle data type
-- Font data type
-- Colour can now be made from stanard `uint32` colour code
+- Texture2D data type
+- Colour can now be made from standard `uint32` colour code
 - `RenderQueue` is now used to draw sprites
 - `RenderQueue` can be used to draw strings
-- Changelog history
+- Changelog history (What you're reading)
 
 
 #### Changed:
@@ -22,6 +22,7 @@
 - VVFS (Replaced by `Virgil.FileSystem.Asset`)
 - Vector2f
 - Vector2i
+- Remove `Sprite` class
 
 
 
@@ -52,6 +53,7 @@
 - Migrated to a new project layout
 
 #### Removed:
+- N/A
 
 
 
