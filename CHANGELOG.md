@@ -8,6 +8,7 @@
 - Vector2 & Vector3 data types
 - Rectangle data type
 - Texture2D data type
+- Font data type
 - Colour can now be made from standard `uint32` colour code
 - `RenderQueue` is now used to draw sprites
 - `RenderQueue` can be used to draw strings

@@ -48,11 +48,11 @@ namespace Virgil.Graphics {
             _filter_item (item);
         }
 
-        // public void draw_string (Font font, string text, int x, int y, Colour colour) {
-        //     RenderQueueItem item = new RenderQueueItem.from_string (
-        //         font, text, x, y, colour
-        //     );
-        // }
+        public void draw_string (Font font, string text, int x, int y, Colour colour) {
+            RenderQueueItem item = new RenderQueueItem.from_string (font, text, x, y, colour);
+
+            //  _filter_item (item);
+        }
 
         public void end () {
             if (sort_mode == RenderQueueMode.IMMEDIATE) {

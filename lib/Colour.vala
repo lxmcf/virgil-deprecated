@@ -49,5 +49,14 @@ namespace Virgil {
 
             return colour;
         }
+
+        public SDL.Video.Color to_sdl () {
+            return SDL.Video.Color () {
+                r =  red,
+                g = green,
+                b = blue,
+                a = alpha
+            };
+        }
     }
 }

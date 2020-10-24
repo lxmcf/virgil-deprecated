@@ -19,7 +19,7 @@ namespace Virgil.Engine {
             uint32 current_ticks;
             uint32 target_ticks;
             uint32 the_delay;
-            double time_passed = 0;
+            double time_passed;
 
             frame_count++;
 

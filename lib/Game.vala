@@ -31,7 +31,7 @@ namespace Virgil {
                 event = new EventHandler ();
                 keyboard = new KeyboardHandler ();
                 mouse = new MouseHandler ();
-                framerate = new FramerateHandler (60);
+                framerate = new FramerateHandler ();
 
                 _link_events ();
 

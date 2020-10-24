@@ -1,8 +1,11 @@
+using Virgil.Engine;
 using Virgil.FileSystem;
 
 namespace Virgil.Graphics {
-    public class Font {
-        private SDLTTF.Font _sdl_font;
+    public class Font : BaseType {
+        private Bytes _data;
+
+        public int size;
 
         public FontStyle style {
             get {
@@ -11,7 +14,6 @@ namespace Virgil.Graphics {
 
             set {
                 style = value;
-                _sdl_font.font_style = value.to_sdl ();
             }
         }
 
@@ -22,7 +24,6 @@ namespace Virgil.Graphics {
 
             set {
                 hinting = value;
-                _sdl_font.hinting = value.to_sdl ();
             }
         }
 
@@ -33,15 +34,47 @@ namespace Virgil.Graphics {
 
             set {
                 outline_size = value;
-                _sdl_font.outline = value;
             }
         }
 
-        public bool size { get; private set; }
+        public Font (int size = 16) {
+            
+        }
 
-        public Font (Asset asset, int size) {
-            _sdl_font = new SDLTTF.Font.RW (asset.rwops, 0, size);
-            _sdl_font.outline = 1;
+        public Font.from_rwops (SDL.RWops rwops, int size = 16, bool free_source = false) {
+            base.from_rwops (rwops, free_source);
+
+            this.size = size;
+        }
+
+        public Font.from_data (uint8[]? data, int size = 16) {
+            base.from_data (data);
+
+            this.size = size;
+        }
+
+        public Font.from_asset (Asset asset, int size = 16) {
+            base.from_asset (asset);
+
+            _data = new Bytes (asset.get_data ());
+        }
+
+        public SDLTTF.Font? to_sdl () {
+            if (get_data () == null) {
+                return null;
+            }
+
+            //  SDLTTF.Font sdl_font = new SDLTTF.Font.RW (new SDL.RWops.from_mem (get_data (), length), 0, size) {
+            //      font_style = style.to_sdl (),
+            //      hinting = hinting.to_sdl (),
+            //      outline = outline_size
+            //  };
+
+            return new SDLTTF.Font.RW (new SDL.RWops.from_mem (get_data (), length), 0, size) {
+                font_style = style.to_sdl (),
+                hinting = hinting.to_sdl (),
+                outline = outline_size
+            };
         }
     }
 }

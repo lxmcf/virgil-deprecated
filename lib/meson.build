@@ -18,6 +18,7 @@ libvirgil_sources = files (
     'Vector2.vala',
     'Vector3.vala',
 
+    'Engine/BaseType.vala',
     'Engine/GameWindow.vala',
     'Engine/GameRenderer.vala',
     'Engine/EventHandler.vala',
