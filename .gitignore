@@ -1,7 +1,5 @@
 build/
 
-subprojects/libvvfs/
-
 *~
 
 .DS_Store

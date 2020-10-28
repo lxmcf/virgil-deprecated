@@ -9,16 +9,24 @@ The Vala Game Library (VGL), or formally known as 'Virgil' is my answer to 'if I
 
 Virgil is built from the ground up using Vala and the SDL2 library and it's sister libraries such as SDL2Image, this is my first major project as well as my first dip into 'proper development' using a new language.
 
-### Dependencies
+### Runtime Dependencies
 ---
 
+- `libsdl2-image-2.0-0`
+- `libsdl2-ttf-2.0-0`
+- `libsdl2-2.0-0`
+
+### Build Dependencies
+---
+
+- `valac`
 - `glib-2.0`
 - `libsdl2-image-dev`
+- `libsdl2-ttf-dev`
 - `libsdl2-dev`
 - `meson`
 
 > _**Note:** Virgil can run on Mac OS with the use of `brew` but is not 100% supported at this stage._
-
 
 ### Compiling &amp; running
 ---
@@ -47,6 +55,8 @@ If you are interested in using Virgil and want some help, the below table is an 
 | Linux | RISC-V | Planned |
 | MacOS | x86_64 | Partial |
 | MacOS | aarch64 | Partial |
+| Crostini | x86_64 | Minimal |
+| Crostini | aarch64 | Minimal |
 | BSD | x86_64 | Minimal |
 | Windows | x86_64 | None |
 | Windows | aarch64 | None |
@@ -58,7 +68,7 @@ If you are interested in using Virgil and want some help, the below table is an 
 
 **Q: Why is Windows not supported? Do you hate Windows?**
 
-A: I don't hate Windows at all, it is a great OS for what it does, however Virgil was a birthed from me not wanting switching to Linux a few years ago and not having access to my then preferred game engine ([GMS2](https://www.yoyogames.com/)) and the tools I found were not what I wanted, so Linux/UNIX is my target.
+A: I don't hate Windows at all, it is a great OS for what it does, however Virgil was a birthed from me switching to Linux a few years ago and not having access to my then preferred game engine ([GMS2](https://www.yoyogames.com/)) and the tools I found were not what I wanted, so Linux/UNIX is my target.
 
 **Q: Will Virgil ever officially support Windows?**
 
@@ -67,3 +77,7 @@ A: Nope, Virgil will always be officially exclusive to Linux and UNIX systems, h
 **Q: Will Virgil ever cost money?**
 
 A: Never, Virgil will remain a FOSS piece of software and I will NEVER charge for use of Virgil, however if enough interest is gathered, I may consider donations but have no plans at this stage!
+
+**Q: Do you know what you are doing with this?**
+
+A: No :-)
