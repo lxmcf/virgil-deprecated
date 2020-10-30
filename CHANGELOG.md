@@ -1,6 +1,16 @@
 <h1 align="center">Changelog</h1>
 
-### Version 0.0.4 `(Current)`
+### Version 0.0.5 `(Current)`
+---
+#### Added:
+
+#### Changed:
+
+#### Removed:
+
+
+
+### Version 0.0.4
 ---
 #### Added:
 - `check_key_pressed` & `check_key_released` methods in the KeyboardHandler
@@ -27,28 +37,27 @@
 ### Version 0.0.3
 ---
 #### Added:
-- Implemented VVFS to bridge between GResource
-- Implemented [vala lint](https://github.com/vala-lang/vala-lint)
+- Basic implimentation of sprite rendering
+- Skeleton framework for events
+- Basic framerate manager
 
 #### Changed:
-- Updated README
-- Updated code format
+- N/A
 
 #### Removed:
-- Removed File.vala in favour of VVFS
+- N/A
 
 
 
 ### Version 0.0.2
 ---
 #### Added:
-- New GameState class to allow easy access to all managers
-- New Keyboard and Mouse input managers
+- Basic implimentation of sprite rendering
+- Skeleton framework for events
+- Basic framerate manager
 
 #### Changed:
-- Code cleanup
-- Begun preparations for building VVFS
-- Migrated to a new project layout
+- N/A
 
 #### Removed:
 - N/A
