@@ -1,54 +1,60 @@
-using SDL;
-
-using Virgil.Graphics;
-using Virgil.Input;
+using Virgil.Engine;
 
 namespace Virgil {
     public class Game {
-        public bool running;
-        
-        // TODO: Remove GameState object and migrate to be within main game class
-        public unowned WindowManager window;
-        public unowned RenderManager render;
+        public bool is_running;
 
-        public unowned EventManager event;
-        public unowned FramerateManager framerate;
-        public unowned KeyboardManager keyboard;
-        public unowned MouseManager mouse;
+        public static GameWindow? window { get; private set; }
+        public static GameRenderer? renderer { get; private set; }
+
+        public static EventHandler event { get; private set; }
+        public static KeyboardHandler keyboard { get; private set; }
+        public static MouseHandler mouse { get; private set; }
+        public static FramerateHandler framerate { get; private set; }
+
+        public double delta_time;
 
         public Game () {
-            SDL.init (InitFlag.EVERYTHING);
+            int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
 
-            window = GameState.get_window_state ();
-            render = GameState.get_render_state ();
+            delta_time = 0;
 
-            event = GameState.get_event_state ();
-            framerate = GameState.get_framerate_state ();
-            keyboard = GameState.get_keyboard_state ();
-            mouse = GameState.get_mouse_state ();
+            if (sdl_init == 0) {
+                window = new GameWindow () {
+                    title = @"$PROJECT_NAME v$PROJECT_VERSION"
+                };
 
-            link_events ();
+                window.center ();
 
-            window.initialise ();
-            render.initialise (window);
+                renderer = new GameRenderer (window);
 
-            running = true;
+                event = new EventHandler ();
+                keyboard = new KeyboardHandler ();
+                mouse = new MouseHandler ();
+                framerate = new FramerateHandler ();
+
+                _link_events ();
+
+                is_running = true;
+            } else {
+                error (SDL.get_error ());
+            }
         }
 
         public int run () {
             start ();
 
-            while (running) {
-                framerate.update ();
-
-                render.clear ();
+            while (is_running) {
+                delta_time = framerate.update ();
+                renderer.clear ();
 
                 event.update ();
 
                 update ();
+
                 draw ();
 
-                render.present ();
+                renderer.present ();
             }
 
             SDL.quit ();
@@ -56,37 +62,30 @@ namespace Virgil {
             return EXIT_SUCCESS;
         }
 
+        // Default runtime methods
         public virtual void start () { }
         public virtual void update () { }
         public virtual void draw () { }
 
         public void quit () {
-            running = false;
+            is_running = false;
         }
 
-        private void link_events () {
-            event.close_event.connect (() => {
+        private void _link_events () {
+            event.on_close.connect (() => {
                 quit ();
             });
 
-            event.key_down_event.connect ((e, key) => {
-                keyboard.update_key (key.keysym.sym, true);
+            event.on_key_update.connect ((key, is_down) => {
+                keyboard.update_key (key.keysym.sym, is_down);
             });
 
-            event.key_up_event.connect ((e, key) => {
-                keyboard.update_key (key.keysym.sym, false);
+            event.on_mouse_update.connect ((button, is_down) => {
+                mouse.update_button (button, is_down);
             });
 
-            event.mouse_down_event.connect ((e, sdl_mouse) => {
-                mouse.update_button (sdl_mouse.button, true);
-            });
-
-            event.mouse_up_event.connect ((e, sdl_mouse) => {
-                mouse.update_button (sdl_mouse.button, false);
-            });
-
-            event.mouse_motion_event.connect ((e, sdl_mouse) => {
-                mouse.update_position (sdl_mouse);
+            event.on_mouse_motion.connect ((motion) => {
+                mouse.update_position (motion);
             });
         }
     }

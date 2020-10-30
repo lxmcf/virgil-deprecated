@@ -1,39 +1,35 @@
 using Virgil;
 using Virgil.Graphics;
+using Virgil.FileSystem;
 
-using SDL.Video;
 using SDL.Input;
 
-// FIXME: Migrate all mentions of SDL to Virgil equal
+namespace Virgil {
+    public class Player {
+        public Vector2 transform { get; private set; }
+        public Texture2D sprite { get; private set; }
 
-namespace Demo {
-    public class Player : GameObject {
-        public Vector2i transform;
-
-        public Sprite sprite;
-
-        private unowned KeyboardManager keyboard;
-        private unowned MouseManager mouse;
-        private unowned RenderManager render;
+        private double speed;
 
         public Player () {
-            transform = new Vector2i.zero ();
+            sprite = new Texture2D.from_asset (32, 32, new Asset.from_resource ("/virgil/image/default.png"));
 
-            sprite = new Sprite.from_gresource ("/virgil/image/default.png");
-            keyboard = GameState.get_keyboard_state ();
-            mouse = GameState.get_mouse_state ();
-            render = GameState.get_render_state ();
+            transform = new Vector2.zero ();
+            speed = 100.0;
         }
 
-        public override void update () {
-            int xaxis = keyboard.check_key_raw (Keycode.d) - keyboard.check_key_raw (Keycode.a);
-            int yaxis = keyboard.check_key_raw (Keycode.s) - keyboard.check_key_raw (Keycode.w);
+        public void update (double delta_time) {
+            var keyboard = Game.keyboard;
 
-            transform.add (new Vector2i (xaxis, yaxis));
-        }
+            double xaxis = (keyboard.check_key_raw (Keycode.d) - keyboard.check_key_raw (Keycode.a)) * speed;
+            double yaxis = (keyboard.check_key_raw (Keycode.s) - keyboard.check_key_raw (Keycode.w)) * speed;
 
-        public override void draw () {
-            render.draw_sprite (sprite, (int)transform.x, (int)transform.y);
+            double test = delta_time / 1000.0;
+
+            double move_x = xaxis * test;
+            double move_y = yaxis * test;
+
+            transform.add (new Vector2 ((float)move_x, (float)move_y));
         }
     }
 }

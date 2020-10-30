@@ -3,4 +3,8 @@
   <gresource prefix="/virgil/image/">
     <file alias="default.png" compressed="true">image/default.png</file>
   </gresource>
+
+  <gresource prefix="/virgil/fonts/">
+    <file alias="cc.ttf" compressed="true">fonts/cc.ttf</file>
+  </gresource>
 </gresources>

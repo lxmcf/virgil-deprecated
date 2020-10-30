@@ -1,43 +1,38 @@
-using Virgil;
+using Virgil.Engine;
 using Virgil.Graphics;
-using Virgil.Input;
+using Virgil.FileSystem;
 
 using SDL.Input;
 
-namespace Demo {
+namespace Virgil {
     public class Demo : Game {
         public Player player;
+        public RenderQueue queue;
 
         public override void start () {
+            window.title = "Virgil Demo";
+
             player = new Player ();
 
-            render.set_background_colour (new Colour (88, 151, 233));
-
-            keyboard.add_key (Keycode.w);
-            keyboard.add_key (Keycode.a);
-            keyboard.add_key (Keycode.s);
-            keyboard.add_key (Keycode.d);
-
-            keyboard.add_key (Keycode.SPACE);
-            keyboard.add_key (Keycode.ESCAPE);
+            queue = new RenderQueue ();
         }
 
         public override void update () {
-            player.update ();
-
-            if (keyboard.check_key (Keycode.ESCAPE)) {
-                running = false;
-            }
+            player.update (delta_time);
         }
 
         public override void draw () {
-            player.draw ();
+            renderer.clear_colour (new Colour (88, 151, 233));
+
+            queue.begin ();
+            queue.draw (player.sprite, player.transform);
+            queue.end ();
         }
     }
+}
 
-    public static int main (string[] args) {
-        var demo = new Demo ();
+public static int main (string[] args) {
+    Virgil.Demo demo = new Virgil.Demo ();
 
-        return demo.run ();
-    }
+    return demo.run ();
 }

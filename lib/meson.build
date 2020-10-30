@@ -9,30 +9,34 @@ config_header = configure_file (
     configuration: config_data
 )
 
-# Virgil library
+# Virgil Library Source Files
 libvirgil_sources = files (
     'Game.vala',
-    'GameObject.vala',
-    'GameState.vala',
-
     'Constants.vala',
+    'Colour.vala',
+    'Rectangle.vala',
+    'Vector2.vala',
+    'Vector3.vala',
 
-    'Math/Vector2f.vala',
-    'Math/Vector2i.vala',
+    'Engine/GameWindow.vala',
+    'Engine/GameRenderer.vala',
+    'Engine/EventHandler.vala',
+    'Engine/KeyboardHandler.vala',
+    'Engine/MouseHandler.vala',
+    'Engine/FramerateHandler.vala',
 
-    'Input/Items/KeyItem.vala',
-    'Input/Items/MouseItem.vala',
-    'Input/MouseButton.vala',
+    'FileSystem/Asset.vala',
+    'Graphics/Texture2D.vala',
+    'Graphics/TextureType.vala',
+    'Graphics/RenderQueue.vala',
+    'Graphics/RenderQueueMode.vala',
+    # 'Graphics/Font.vala',
+    # 'Graphics/FontStyle.vala',
+    # 'Graphics/FontHinting.vala',
+    'Graphics/Items/RenderQueueItem.vala',
+
     'Input/KeyState.vala',
-    # 'Input/Key.vala',
-
-    'Graphics/Sprite.vala',
-    'Graphics/Colour.vala',
-
-    'Engine/EventManager.vala',
-    'Engine/FramerateManager.vala',
-    'Engine/WindowManager.vala',
-    'Engine/KeyboardManager.vala',
-    'Engine/MouseManager.vala',
-    'Engine/RenderManager.vala'
+    'Input/MouseButton.vala',
+    'Input/Items/KeyItem.vala',
+    'Input/Items/MouseItem.vala'
 )
