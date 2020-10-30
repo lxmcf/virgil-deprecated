@@ -1,6 +1,5 @@
 using SDL;
 
-// TODO Manual memory management
 namespace Virgil.FileSystem {
     public class Asset {
         public string filename { get; private set; }

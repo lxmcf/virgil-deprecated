@@ -8,12 +8,9 @@
 - Vector2 & Vector3 data types
 - Rectangle data type
 - Texture2D data type
-- Font data type
-- Colour can now be made from standard `uint32` colour code
 - `RenderQueue` is now used to draw sprites
-- `RenderQueue` can be used to draw strings
 - Changelog history (What you're reading)
-
+- Beginnings of dynamic textures
 
 #### Changed:
 - Complete ground up code re-write
@@ -23,7 +20,7 @@
 - VVFS (Replaced by `Virgil.FileSystem.Asset`)
 - Vector2f
 - Vector2i
-- Remove `Sprite` class
+- `Sprite` class
 
 
 

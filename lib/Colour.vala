@@ -52,7 +52,7 @@ namespace Virgil {
 
         public SDL.Video.Color to_sdl () {
             return SDL.Video.Color () {
-                r =  red,
+                r = red,
                 g = green,
                 b = blue,
                 a = alpha

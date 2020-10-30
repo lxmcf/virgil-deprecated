@@ -26,8 +26,6 @@ namespace Virgil {
 
             return false;
         }
-
-        // FIXME Create ButtonState enum class
         public int check_button_raw (MouseButton button) {
             var item = _button_exists (button);
 

@@ -18,7 +18,6 @@ libvirgil_sources = files (
     'Vector2.vala',
     'Vector3.vala',
 
-    'Engine/BaseType.vala',
     'Engine/GameWindow.vala',
     'Engine/GameRenderer.vala',
     'Engine/EventHandler.vala',
@@ -27,13 +26,13 @@ libvirgil_sources = files (
     'Engine/FramerateHandler.vala',
 
     'FileSystem/Asset.vala',
-
     'Graphics/Texture2D.vala',
+    'Graphics/TextureType.vala',
     'Graphics/RenderQueue.vala',
     'Graphics/RenderQueueMode.vala',
-    'Graphics/Font.vala',
-    'Graphics/FontStyle.vala',
-    'Graphics/FontHinting.vala',
+    # 'Graphics/Font.vala',
+    # 'Graphics/FontStyle.vala',
+    # 'Graphics/FontHinting.vala',
     'Graphics/Items/RenderQueueItem.vala',
 
     'Input/KeyState.vala',

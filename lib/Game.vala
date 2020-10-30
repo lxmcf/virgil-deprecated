@@ -16,7 +16,6 @@ namespace Virgil {
 
         public Game () {
             int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
-            SDLTTF.init ();
 
             delta_time = 0;
 

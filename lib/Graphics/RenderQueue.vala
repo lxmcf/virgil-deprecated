@@ -25,7 +25,7 @@ namespace Virgil.Graphics {
 
             if (free_list) {
                 _item_list.foreach ((item) => {
-                    _item_list.remove(item);
+                    _item_list.remove (item);
                 });
             }
         }
@@ -48,12 +48,6 @@ namespace Virgil.Graphics {
             _filter_item (item);
         }
 
-        public void draw_string (Font font, string text, int x, int y, Colour colour) {
-            RenderQueueItem item = new RenderQueueItem.from_string (font, text, x, y, colour);
-
-            _filter_item (item);
-        }
-
         public void end () {
             if (sort_mode == RenderQueueMode.IMMEDIATE) {
                 _has_reversed = false;
@@ -72,7 +66,6 @@ namespace Virgil.Graphics {
         }
 
         private void _render_item (RenderQueueItem item) {
-            //renderer.copyex (item.texture, item.sprite_rectangle, item.output_rectangle, 0.0, null, RendererFlip.NONE);
             renderer.copy (item.output_texture, item.texture_rectangle, item.output_rectangle);
         }
 

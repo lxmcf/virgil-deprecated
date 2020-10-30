@@ -2,8 +2,8 @@ namespace Virgil.Engine {
     public class FramerateHandler {
         public uint32 frame_count;
         public uint32 base_ticks;
-		public uint32 last_ticks;
-		public uint32 rate;
+        public uint32 last_ticks;
+        public uint32 rate;
 
         public float rate_ticks;
 

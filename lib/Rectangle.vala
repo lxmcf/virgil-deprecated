@@ -45,6 +45,7 @@ namespace Virgil {
             return (within_x && within_y);
         }
 
+        [Version (experimental_until = "0.0.5")]
         public Rectangle? get_intersect_rectangle (Rectangle target) {
             if (target.is_empty ()) return null;
 
