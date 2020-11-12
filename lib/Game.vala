@@ -1,9 +1,11 @@
 using Virgil.Engine;
+using Virgil.Utility;
 
 namespace Virgil {
     public class Game {
         public bool is_running;
 
+        // TODO: Consider marking these as private and implementing an actual method to return an unowned reference
         public static GameWindow? window { get; private set; }
         public static GameRenderer? renderer { get; private set; }
 
@@ -12,14 +14,21 @@ namespace Virgil {
         public static MouseHandler mouse { get; private set; }
         public static FramerateHandler framerate { get; private set; }
 
+        public static Utility.Log log { get; private set; }
+
+        // FIXME: Work out a less scuffed implimentation of DT
         public double delta_time;
 
         public Game () {
-            int sdl_init = SDL.init (SDL.InitFlag.EVERYTHING);
+            int sdl_init = SDL.init ();
+
+            SDLTTF.init ();
 
             delta_time = 0;
 
             if (sdl_init == 0) {
+                log = new Utility.Log ();
+
                 window = new GameWindow () {
                     title = @"$PROJECT_NAME v$PROJECT_VERSION"
                 };
@@ -31,13 +40,13 @@ namespace Virgil {
                 event = new EventHandler ();
                 keyboard = new KeyboardHandler ();
                 mouse = new MouseHandler ();
-                framerate = new FramerateHandler ();
+                framerate = new FramerateHandler (165);
 
                 _link_events ();
 
                 is_running = true;
             } else {
-                error (SDL.get_error ());
+                log.error (SDL.get_error ());
             }
         }
 

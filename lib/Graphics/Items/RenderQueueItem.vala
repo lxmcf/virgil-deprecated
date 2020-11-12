@@ -16,12 +16,12 @@ namespace Virgil.Graphics {
             output_texture = texture.get_sdl_texture ();
 
             output_angle = angle;
-            texture_rectangle = texture.get_bounds ().to_sdl ();
+            texture_rectangle = texture.get_bounds ().get_sdl_rect ();
 
             double output_width = texture_rectangle.w * scale_x;
             double output_height = texture_rectangle.h * scale_y;
 
-            output_rectangle = new Rectangle (x, y, (int)output_width, (int)output_height).to_sdl ();
+            output_rectangle = new Rectangle (x, y, (int)output_width, (int)output_height).get_sdl_rect ();
         }
     }
 }

@@ -25,14 +25,20 @@ libvirgil_sources = files (
     'Engine/MouseHandler.vala',
     'Engine/FramerateHandler.vala',
 
+    'Utility/Log.vala',
+    'Utility/LogLevel.vala',
+
     'FileSystem/Asset.vala',
+    'FileSystem/ContentManager.vala',
+    'FileSystem/Items/ContentItem.vala',
+
     'Graphics/Texture2D.vala',
     'Graphics/TextureType.vala',
     'Graphics/RenderQueue.vala',
     'Graphics/RenderQueueMode.vala',
-    # 'Graphics/Font.vala',
-    # 'Graphics/FontStyle.vala',
-    # 'Graphics/FontHinting.vala',
+    'Graphics/Font.vala',
+    'Graphics/FontStyle.vala',
+    'Graphics/FontHinting.vala',
     'Graphics/Items/RenderQueueItem.vala',
 
     'Input/KeyState.vala',

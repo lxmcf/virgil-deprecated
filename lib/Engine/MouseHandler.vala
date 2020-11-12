@@ -1,6 +1,6 @@
 using Virgil.Input;
 
-namespace Virgil {
+namespace Virgil.Engine {
     public class MouseHandler {
         private List<MouseItem> _button_list;
 

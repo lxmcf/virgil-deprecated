@@ -2,8 +2,6 @@ using SDL.Video;
 
 namespace Virgil {
     public class Rectangle {
-        private Rect _sdl_rect;
-
         public int x;
         public int y;
         public int width;
@@ -15,8 +13,6 @@ namespace Virgil {
 
             this.width = width;
             this.height = height;
-
-            _sdl_rect = Rect () { x = x, y = y, w = width, h = height };
         }
 
         public Rectangle.empty () {
@@ -24,8 +20,6 @@ namespace Virgil {
             y = 0;
             width = 0;
             height = 0;
-
-            _sdl_rect = Rect () { x = 0, y = 0, w = 0, h = 0 };
         }
 
         public void get_size (out int width, out int height) {
@@ -56,12 +50,12 @@ namespace Virgil {
             } else return null;
         }
 
-        public Rect to_sdl () {
-            return _sdl_rect;
+        public Rect get_sdl_rect () {
+            return Rect () { x = x, y = y, w = width, h = height };
         }
 
         public bool is_empty () {
-            return _sdl_rect.is_empty ();
+            return (width <= 0 || height <= 0);
         }
 
         public bool is_equal (Rectangle rectangle) {

@@ -3,10 +3,17 @@
 ### Version 0.0.5 `(Current)`
 ---
 #### Added:
+- `Font` data type
+- `Texture2D` set_pixels
+- `Texture2D` texture streaming using `lock` and `unlock`
+- New Content manager
+- New Log class
 
 #### Changed:
+- N/A
 
 #### Removed:
+- `Texture2D.from_data`
 
 
 
