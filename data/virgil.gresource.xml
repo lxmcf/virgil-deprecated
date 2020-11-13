@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/virgil/image/">
     <file alias="default.png" compressed="true">image/default.png</file>
+    <file alias="vala.png" compressed="true">image/vala.png</file>
   </gresource>
 
   <gresource prefix="/virgil/fonts/">

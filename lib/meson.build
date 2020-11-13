@@ -13,6 +13,7 @@ config_header = configure_file (
 libvirgil_sources = files (
     'Game.vala',
     'Constants.vala',
+    'InitFlags.vala',
     'Colour.vala',
     'Rectangle.vala',
     'Vector2.vala',

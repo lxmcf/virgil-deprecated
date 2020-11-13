@@ -12,9 +12,9 @@ namespace Virgil {
         private double speed;
 
         public Player () {
-            sprite = new Texture2D.from_asset (32, 32, new Asset.from_resource ("/virgil/image/default.png"));
+            sprite = new Texture2D.from_asset (256, 256, new Asset.from_resource ("/virgil/image/vala.png"));
 
-            transform = new Vector2.zero ();
+            transform = new Vector2 (192f, 52f);
             speed = 100.0;
         }
 

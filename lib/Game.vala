@@ -3,7 +3,8 @@ using Virgil.Utility;
 
 namespace Virgil {
     public class Game {
-        public bool is_running;
+        private bool _running;
+        private InitFlags _initialised;
 
         // TODO: Consider marking these as private and implementing an actual method to return an unowned reference
         public static GameWindow? window { get; private set; }
@@ -20,14 +21,20 @@ namespace Virgil {
         public double delta_time;
 
         public Game () {
+            log = new Utility.Log ();
+
             int sdl_init = SDL.init ();
+            int sdl_ttf_init = SDLTTF.init ();
+            int sdl_image_init = SDLImage.init (SDLImage.InitFlags.ALL);
 
-            SDLTTF.init ();
+            if (sdl_init == 0) _initialised += InitFlags.SDL;
+            if (sdl_ttf_init == 0) _initialised += InitFlags.SDL_TTF;
+            if (sdl_image_init == SDLImage.InitFlags.ALL) _initialised += InitFlags.SDL_IMAGE;
 
-            delta_time = 0;
+            if (sdl_init == 0 && sdl_ttf_init == 0 && sdl_image_init == SDLImage.InitFlags.ALL) {
+                log.message ("SDL initialised successfully!");
 
-            if (sdl_init == 0) {
-                log = new Utility.Log ();
+                delta_time = 0;
 
                 window = new GameWindow () {
                     title = @"$PROJECT_NAME v$PROJECT_VERSION"
@@ -44,16 +51,22 @@ namespace Virgil {
 
                 _link_events ();
 
-                is_running = true;
+                _running = true;
             } else {
                 log.error (SDL.get_error ());
             }
         }
 
+        ~Game () {
+            if (InitFlags.SDL in _initialised) SDL.quit ();
+            if (InitFlags.SDL_TTF in _initialised) SDLTTF.quit ();
+            if (InitFlags.SDL_IMAGE in _initialised) SDLImage.quit ();
+        }
+
         public int run () {
             start ();
 
-            while (is_running) {
+            while (running ()) {
                 delta_time = framerate.update ();
                 renderer.clear ();
 
@@ -66,8 +79,6 @@ namespace Virgil {
                 renderer.present ();
             }
 
-            SDL.quit ();
-
             return EXIT_SUCCESS;
         }
 
@@ -76,8 +87,12 @@ namespace Virgil {
         public virtual void update () { }
         public virtual void draw () { }
 
+        public bool running () {
+            return _running;
+        }
+
         public void quit () {
-            is_running = false;
+            _running = false;
         }
 
         private void _link_events () {

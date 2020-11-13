@@ -11,12 +11,12 @@ namespace Virgil.Utility {
         }
 
         public void print (string text, string head = "*") {
-            GLib.print (@"[$head]:\t$text");
+            GLib.print (@"[$head]:\t$text\n");
         }
 
         public int message (string text) {
             if (_level <= LogLevel.MESSAGE) {
-                GLib.print (@"[MESSAGE]:\t$text \n");
+                print (text, "MESSAGE");
 
                 return 0;
             }
@@ -26,7 +26,7 @@ namespace Virgil.Utility {
 
         public int warning (string text) {
             if (_level <= LogLevel.WARNING) {
-                GLib.print (@"[WARNING]:\t$text \n");
+                print (text, "WARNING");
 
                 return 0;
             }
@@ -36,7 +36,7 @@ namespace Virgil.Utility {
 
         public int error (string text) {
             if (_level <= LogLevel.ERROR) {
-                GLib.print (@"[ERROR]:\t$text \n");
+                print (text, "ERROR");
 
                 return 0;
             }
