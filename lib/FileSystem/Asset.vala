@@ -29,7 +29,7 @@ namespace Virgil.FileSystem {
 
                 bytes = new Bytes (data);
             } else {
-                warning (@"The file at ?$file? does not exist");
+                Game.log.warning (@"The file at ?$file? does not exist");
             }
 
             length = bytes.length;
@@ -42,7 +42,7 @@ namespace Virgil.FileSystem {
                 bytes = GLib.resources_lookup_data (filename, ResourceLookupFlags.NONE);
                 _rwops = new RWops.from_mem (bytes.get_data (), bytes.length);
             } catch (Error e) {
-                warning (e.message);
+                Game.log.warning (e.message);
             }
 
             length = bytes.length;

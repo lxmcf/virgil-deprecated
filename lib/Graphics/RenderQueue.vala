@@ -30,7 +30,6 @@ namespace Virgil.Graphics {
             }
         }
 
-
         public void draw (Texture2D texture, Vector2 position) {
             RenderQueueItem item = new RenderQueueItem (texture, (int)position.x, (int)position.y, 1.0, 1.0, 0.0);
             _filter_item (item);
@@ -60,13 +59,13 @@ namespace Virgil.Graphics {
 
             Surface surf = sdl_font.render (text, colour.get_sdl_colour ());
 
-            Texture texture = Texture.create_from_surface(_renderer, surf);
+            Texture texture = Texture.create_from_surface (_renderer, surf);
 
             int width, height;
 
             texture.query (null, null, out width, out height);
 
-            print (width.to_string () + " \\ " + height.to_string () + "\n");
+            Game.log.print (width.to_string () + " \\ " + height.to_string (), "DEBUG");
 
             Rectangle source = new Rectangle (0, 0, width, height);
             Rectangle destination = new Rectangle (16, 16, width, height);

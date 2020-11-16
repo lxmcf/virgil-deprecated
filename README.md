@@ -1,11 +1,5 @@
 <h1 align="center">Virgil</h1>
 
-<div align="center">
-    <img src="assets/demo.png" alt="Demo image">
-</div>
-
----
-
 Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
 
 ### What is Virgil?

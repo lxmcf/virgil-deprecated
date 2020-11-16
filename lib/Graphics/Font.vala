@@ -47,7 +47,7 @@ namespace Virgil.Graphics {
             _font = new SDLTTF.Font (file, size);
 
             if (_font == null) {
-                error (@"Font creation with file ??$file?? failed!");
+                Game.log.error (@"Font creation with file ??$file?? failed!");
             }
         }
 
@@ -55,21 +55,21 @@ namespace Virgil.Graphics {
             _font = new SDLTTF.Font.RW (rwops, 0, size);
 
             if (_font == null) {
-                error (@"Font creation with rwops failed!");
+                Game.log.error ("Font creation with rwops failed!");
             }
         }
 
         public Font.from_asset (Asset asset, int size = 16) {
             uint8[] data = asset.get_data ();
 
-            message (data.length.to_string ());
+            Game.log.message (data.length.to_string ());
 
             SDL.RWops rwops = new SDL.RWops.from_mem (data, data.length);
 
             _font = new SDLTTF.Font.RW (rwops, 0, size);
 
             if (_font == null) {
-                error ("Font creation with asset ??" + asset.filename + "?? failed!");
+                Game.log.error ("Font creation with asset ??" + asset.filename + "?? failed!");
             }
         }
 
