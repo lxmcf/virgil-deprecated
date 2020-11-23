@@ -15,24 +15,12 @@ namespace Virgil {
         public static MouseHandler mouse { get; private set; }
         public static FramerateHandler framerate { get; private set; }
 
-        public static Utility.Log log { get; private set; }
-
         // FIXME: Work out a less scuffed implimentation of DT
         public double delta_time;
 
         public Game () {
-            log = new Utility.Log ();
-
-            int sdl_init = SDL.init ();
-            int sdl_ttf_init = SDLTTF.init ();
-            int sdl_image_init = SDLImage.init (SDLImage.InitFlags.ALL);
-
-            if (sdl_init == 0) _initialised += InitFlags.SDL;
-            if (sdl_ttf_init == 0) _initialised += InitFlags.SDL_TTF;
-            if (sdl_image_init == SDLImage.InitFlags.ALL) _initialised += InitFlags.SDL_IMAGE;
-
-            if (sdl_init == 0 && sdl_ttf_init == 0 && sdl_image_init == SDLImage.InitFlags.ALL) {
-                log.message ("SDL initialised successfully!");
+            if (_init ()) {
+                Utility.Log.message ("SDL initialised successfully!");
 
                 delta_time = 0;
 
@@ -53,7 +41,7 @@ namespace Virgil {
 
                 _running = true;
             } else {
-                log.error (SDL.get_error ());
+                Utility.Log.error (SDL.get_error ());
             }
         }
 
@@ -93,6 +81,20 @@ namespace Virgil {
 
         public void quit () {
             _running = false;
+        }
+
+        private bool _init () {
+            Utility.Log.init ();
+
+            int sdl_init = SDL.init ();
+            int sdl_ttf_init = SDLTTF.init ();
+            int sdl_image_init = SDLImage.init (SDLImage.InitFlags.ALL);
+
+            if (sdl_init == 0) _initialised += InitFlags.SDL;
+            if (sdl_ttf_init == 0) _initialised += InitFlags.SDL_TTF;
+            if (sdl_image_init == SDLImage.InitFlags.ALL) _initialised += InitFlags.SDL_IMAGE;
+
+            return (sdl_init == 0 && sdl_ttf_init == 0 && sdl_image_init == SDLImage.InitFlags.ALL);
         }
 
         private void _link_events () {

@@ -1,5 +1,4 @@
 using Virgil.Engine;
-using Virgil.FileSystem;
 
 using SDL;
 
@@ -7,8 +6,6 @@ namespace Virgil.Graphics {
 
     public class Font {
         private SDLTTF.Font _font;
-
-        public int size;
 
         public FontStyle style {
             get {
@@ -43,11 +40,28 @@ namespace Virgil.Graphics {
             }
         }
 
-        public Font (string file, int size = 16) {
-            _font = new SDLTTF.Font (file, size);
+        public Font.from_file (string filename, int size = 16) {
+            RWops rwops = new RWops.from_file (filename, "rb");
 
-            if (_font == null) {
-                Game.log.error (@"Font creation with file ??$file?? failed!");
+            if (rwops != null) {
+                _font = new SDLTTF.Font.RW (rwops, 1, size);
+
+                _set_font_defaults ();
+            } else {
+                Utility.Log.error (@"Failed to create Font from file \'$filename\'");
+            }
+        }
+
+        public Font.from_resource (string filename, int size = 16) {
+            try {
+                Bytes bytes = GLib.resources_lookup_data (filename, ResourceLookupFlags.NONE);
+                RWops rwops = new RWops.from_mem (bytes.get_data (), bytes.length);
+
+                _font = new SDLTTF.Font.RW (rwops, 1, size);
+            } catch (Error e) {
+                string code = e.code.to_string ();
+
+                Utility.Log.error (@"Failed to create Font from resource \'$filename\' with error code \'$code\'");
             }
         }
 
@@ -55,26 +69,18 @@ namespace Virgil.Graphics {
             _font = new SDLTTF.Font.RW (rwops, 0, size);
 
             if (_font == null) {
-                Game.log.error ("Font creation with rwops failed!");
-            }
-        }
-
-        public Font.from_asset (Asset asset, int size = 16) {
-            uint8[] data = asset.get_data ();
-
-            Game.log.message (data.length.to_string ());
-
-            SDL.RWops rwops = new SDL.RWops.from_mem (data, data.length);
-
-            _font = new SDLTTF.Font.RW (rwops, 0, size);
-
-            if (_font == null) {
-                Game.log.error ("Font creation with asset ??" + asset.filename + "?? failed!");
+                Utility.Log.error ("Font creation with rwops failed!");
             }
         }
 
         public unowned SDLTTF.Font? get_sdl_font () {
             return _font;
+        }
+
+        private void _set_font_defaults () {
+            style = FontStyle.NORMAL;
+            hinting = FontHinting.NORMAL;
+            outline_size = 0;
         }
     }
 }

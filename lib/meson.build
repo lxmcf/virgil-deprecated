@@ -29,10 +29,6 @@ libvirgil_sources = files (
     'Utility/Log.vala',
     'Utility/LogLevel.vala',
 
-    'FileSystem/Asset.vala',
-    'FileSystem/ContentManager.vala',
-    'FileSystem/Items/ContentItem.vala',
-
     'Graphics/Texture2D.vala',
     'Graphics/TextureType.vala',
     'Graphics/RenderQueue.vala',

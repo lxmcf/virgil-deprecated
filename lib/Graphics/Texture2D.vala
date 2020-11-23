@@ -1,5 +1,4 @@
 using Virgil.Engine;
-using Virgil.FileSystem;
 
 using SDL;
 using SDL.Video;
@@ -29,20 +28,38 @@ namespace Virgil.Graphics {
             _set_size (width, height);
         }
 
-        public Texture2D.from_rwops (int width, int height, SDL.RWops rwops, bool free_source = false) {
+        public Texture2D.from_file (string filename) {
+            RWops rwops = new RWops.from_file (filename, "rb");
 
-            _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, free_source);
-            is_locked = false;
+            if (rwops != null) {
+                _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, true);
+                is_locked = false;
 
-            _set_size (width, height);
+                _texture.query (null, null, out _width, out _height);
+            } else {
+                Utility.Log.error (@"Failed to create Texture2D from file \'$filename\'");
+            }
         }
 
-        public Texture2D.from_asset (int width, int height, Asset asset) {
-            uint8[] data = asset.get_data ();
+        public Texture2D.from_resource (string filename) {
+            try {
+                Bytes bytes = GLib.resources_lookup_data (filename, ResourceLookupFlags.NONE);
+                RWops rwops = new RWops.from_mem (bytes.get_data (), bytes.length);
 
-            SDL.RWops rwops = new SDL.RWops.from_mem (data, data.length);
+                _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, true);
+                is_locked = false;
 
-            _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, true);
+                _texture.query (null, null, out _width, out _height);
+            } catch (Error e) {
+                string code = e.code.to_string ();
+
+                Utility.Log.error (@"Failed to create Texture2D from resource \'$filename\' with error code \'$code\'");
+            }
+        }
+
+        // TODO: Remove width and height (Deprecated due to RenderQueue allowing scaling)
+        public Texture2D.from_rwops (SDL.RWops rwops, bool free_source = false) {
+            _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, free_source);
             is_locked = false;
 
             _set_size (width, height);
@@ -61,14 +78,14 @@ namespace Virgil.Graphics {
 
                 _texture.update (rectangle.get_sdl_rect (), pixels, pitch);
             } else {
-                warning ("set_pixels () can only be used on static textures");
+                Utility.Log.warning ("set_pixels () can only be used on static textures");
             }
         }
 
         [Version (experimental_until = "0.0.5")]
         public void @lock (Rectangle bounds, ref void* pixels, ref int pitch) {
             if (is_locked) {
-                warning ("Texture is already locked");
+                Utility.Log.warning ("Texture is already locked");
                 return;
             }
 
@@ -84,7 +101,7 @@ namespace Virgil.Graphics {
         [Version (experimental_until = "0.0.5")]
         public void @unlock () {
             if (!is_locked) {
-                warning ("Texture is already unlocked");
+                Utility.Log.warning ("Texture is already unlocked");
                 return;
             }
 
@@ -94,7 +111,7 @@ namespace Virgil.Graphics {
         }
 
         public Rectangle get_bounds () {
-            return new Rectangle (0, 0, width, height);
+            return new Rectangle (0, 0, _width, _height);
         }
 
         public unowned Texture? get_sdl_texture () {

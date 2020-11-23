@@ -1,6 +1,5 @@
 using Virgil.Engine;
 using Virgil.Graphics;
-using Virgil.FileSystem;
 
 using SDL.Input;
 
@@ -18,7 +17,7 @@ namespace Virgil {
         }
 
         public override void update () {
-            player.update (delta_time);
+            player.update (delta_time / 1000);
         }
 
         public override void draw () {

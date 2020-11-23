@@ -1,20 +1,24 @@
 namespace Virgil.Utility {
     public class Log {
-        private LogLevel _level;
+        private static LogLevel? _level;
 
-        public Log (LogLevel level = LogLevel.MESSAGE) {
+        public static int init (LogLevel level = LogLevel.MESSAGE) {
+            if (_level != null) return 1;
+
+            _level = level;
+
+            return 0;
+        }
+
+        public static void set_level (LogLevel level) {
             _level = level;
         }
 
-        public void set_level (LogLevel level) {
-            _level = level;
-        }
-
-        public void print (string text, string head = "*") {
+        public static void print (string text, string head = "*") {
             GLib.print (@"[$head]:\t$text\n");
         }
 
-        public int message (string text) {
+        public static int message (string text) {
             if (_level <= LogLevel.MESSAGE) {
                 print (text, "MESSAGE");
 
@@ -24,7 +28,7 @@ namespace Virgil.Utility {
             return 1;
         }
 
-        public int warning (string text) {
+        public static int warning (string text) {
             if (_level <= LogLevel.WARNING) {
                 print (text, "WARNING");
 
@@ -34,7 +38,7 @@ namespace Virgil.Utility {
             return 1;
         }
 
-        public int error (string text) {
+        public static int error (string text) {
             if (_level <= LogLevel.ERROR) {
                 print (text, "ERROR");
 

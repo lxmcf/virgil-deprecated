@@ -6,18 +6,17 @@
 - `Font` data type
 - `Texture2D` set_pixels
 - `Texture2D` texture streaming using `lock` and `unlock`
-- New Content manager
-- New Log class
+- New static Log class
 
 #### Changed:
-- N/A
+- `Vector2` and `Vector3` now use `double` rather than `float`
 
 #### Removed:
 - `Texture2D.from_data`
+- `Asset` (Replaced with `from_file` and `from_resource` creation methods)
 
 
-
-### Version 0.0.4
+ ### Version 0.0.4
 ---
 #### Added:
 - `check_key_pressed` & `check_key_released` methods in the KeyboardHandler

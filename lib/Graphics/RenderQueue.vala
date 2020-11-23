@@ -65,7 +65,7 @@ namespace Virgil.Graphics {
 
             texture.query (null, null, out width, out height);
 
-            Game.log.print (width.to_string () + " \\ " + height.to_string (), "DEBUG");
+            Utility.Log.print (width.to_string () + " \\ " + height.to_string (), "DEBUG");
 
             Rectangle source = new Rectangle (0, 0, width, height);
             Rectangle destination = new Rectangle (16, 16, width, height);
