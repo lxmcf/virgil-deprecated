@@ -4,9 +4,11 @@ using Virgil.Utility;
 namespace Virgil {
     public class Game {
         private bool _running;
-        private InitFlags _initialised;
+        private InitFlags _initialised_modules;
 
         // TODO: Consider marking these as private and implementing an actual method to return an unowned reference
+        // TODO: Decide what to actually do with the main game components
+        // TODO: Do something with my life
         public static GameWindow? window { get; private set; }
         public static GameRenderer? renderer { get; private set; }
 
@@ -46,9 +48,9 @@ namespace Virgil {
         }
 
         ~Game () {
-            if (InitFlags.SDL in _initialised) SDL.quit ();
-            if (InitFlags.SDL_TTF in _initialised) SDLTTF.quit ();
-            if (InitFlags.SDL_IMAGE in _initialised) SDLImage.quit ();
+            if (InitFlags.SDL in _initialised_modules) SDL.quit ();
+            if (InitFlags.SDL_TTF in _initialised_modules) SDLTTF.quit ();
+            if (InitFlags.SDL_IMAGE in _initialised_modules) SDLImage.quit ();
         }
 
         public int run () {
@@ -79,8 +81,16 @@ namespace Virgil {
             return _running;
         }
 
-        public void quit () {
-            _running = false;
+        public int quit () {
+            if (_running) {
+                _running = false;
+
+                return 0;
+            }
+
+            Utility.Log.warning ("Game has already been quit");
+
+            return 1;
         }
 
         private bool _init () {
@@ -90,9 +100,9 @@ namespace Virgil {
             int sdl_ttf_init = SDLTTF.init ();
             int sdl_image_init = SDLImage.init (SDLImage.InitFlags.ALL);
 
-            if (sdl_init == 0) _initialised += InitFlags.SDL;
-            if (sdl_ttf_init == 0) _initialised += InitFlags.SDL_TTF;
-            if (sdl_image_init == SDLImage.InitFlags.ALL) _initialised += InitFlags.SDL_IMAGE;
+            if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
+            if (sdl_ttf_init == 0) _initialised_modules += InitFlags.SDL_TTF;
+            if (sdl_image_init == SDLImage.InitFlags.ALL) _initialised_modules += InitFlags.SDL_IMAGE;
 
             return (sdl_init == 0 && sdl_ttf_init == 0 && sdl_image_init == SDLImage.InitFlags.ALL);
         }

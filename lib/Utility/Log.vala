@@ -1,3 +1,5 @@
+//TODO: Rename Log to something that doesn't conflict with GLib
+
 namespace Virgil.Utility {
     public class Log {
         private static LogLevel? _level;
@@ -12,6 +14,10 @@ namespace Virgil.Utility {
 
         public static void set_level (LogLevel level) {
             _level = level;
+        }
+
+        public LogLevel? get_level () {
+            return _level;
         }
 
         public static void print (string text, string head = "*") {
