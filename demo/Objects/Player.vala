@@ -27,6 +27,16 @@ namespace Virgil {
             double move_y = yaxis * delta_time;
 
             transform.add (new Vector2 (move_x, move_y));
+
+            wrap_position ();
+        }
+
+        private void wrap_position () {
+            if (transform.x > Game.window.width) transform.x = -32;
+            if (transform.y > Game.window.height) transform.y = -32;
+
+            if (transform.x < -32) transform.x = Game.window.width;
+            if (transform.y < -32) transform.y = Game.window.height;
         }
     }
 }

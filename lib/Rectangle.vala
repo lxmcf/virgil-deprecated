@@ -4,15 +4,23 @@ namespace Virgil {
     public class Rectangle {
         public int x;
         public int y;
-        public int width;
-        public int height;
+        public uint width;
+        public uint height;
 
-        public Rectangle (int x, int y, int width, int height) {
+        public Rectangle (int x, int y, uint width, uint height) {
             this.x = x;
             this.y = y;
 
             this.width = width;
             this.height = height;
+        }
+
+        public Rectangle.from_rect (Rect rectangle) {
+            x = rectangle.x;
+            y = rectangle.y;
+
+            width = rectangle.w;
+            height = rectangle.h;
         }
 
         public Rectangle.empty () {
@@ -22,7 +30,7 @@ namespace Virgil {
             height = 0;
         }
 
-        public void get_size (out int width, out int height) {
+        public void get_size (out uint width, out uint height) {
             width = this.width;
             height = this.height;
         }
@@ -39,15 +47,14 @@ namespace Virgil {
             return (within_x && within_y);
         }
 
-        [Version (experimental_until = "0.0.5")]
+        // TODO: Remove use of intersection_rect to stop double handling Rect data
         public Rectangle? get_intersect_rectangle (Rectangle target) {
-            if (target.is_empty ()) return null;
+            Rect self = get_sdl_rect ();
+            Rect result;
 
-            if (point_intersect (target.x, target.y)) {
-                //TODO: Work out rectangle math
+            self.intersection_rect (target.get_sdl_rect (), out result);
 
-                return null;
-            } else return null;
+            return new Rectangle.from_rect (result);
         }
 
         public Rect get_sdl_rect () {

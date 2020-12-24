@@ -6,6 +6,6 @@
   </gresource>
 
   <gresource prefix="/virgil/fonts/">
-    <file alias="cc.ttf" compressed="true">fonts/cc.ttf</file>
+    <file alias="cc.ttf" compressed="false">fonts/cc.ttf</file>
   </gresource>
 </gresources>

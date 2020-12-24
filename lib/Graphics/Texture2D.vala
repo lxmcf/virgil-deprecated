@@ -7,9 +7,6 @@ namespace Virgil.Graphics {
     public class Texture2D {
         private Texture _texture;
 
-        public int width { get; private set; }
-        public int height { get; private set; }
-
         public bool is_locked { get; private set; }
 
         public TextureType texture_type { get; private set; }
@@ -19,37 +16,37 @@ namespace Virgil.Graphics {
                 Game.renderer.to_sdl (),
                 PixelRAWFormat.RGBA8888,
                 type.to_sdl (),
-                width, height
+                width,
+                height
             );
 
             texture_type = type;
             is_locked = false;
-
-            _set_size (width, height);
         }
 
         public Texture2D.from_file (string filename) {
-            RWops rwops = new RWops.from_file (filename, "rb");
+            RWops* rwops = new RWops.from_file (filename, "rb");
 
             if (rwops != null) {
-                _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, true);
+                _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops);
                 is_locked = false;
-
-                _texture.query (null, null, out _width, out _height);
             } else {
                 Utility.Log.error (@"Failed to create Texture2D from file \'$filename\'");
             }
+
+            delete rwops;
         }
 
         public Texture2D.from_resource (string filename) {
             try {
-                Bytes bytes = GLib.resources_lookup_data (filename, ResourceLookupFlags.NONE);
-                RWops rwops = new RWops.from_mem (bytes.get_data (), bytes.length);
+                Bytes* bytes = GLib.resources_lookup_data (filename, ResourceLookupFlags.NONE);
+                RWops* rwops = new RWops.from_mem (bytes->get_data (), bytes->length);
 
-                _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, true);
+                _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops);
                 is_locked = false;
 
-                _texture.query (null, null, out _width, out _height);
+                delete bytes;
+                delete rwops;
             } catch (Error e) {
                 string code = e.code.to_string ();
 
@@ -57,18 +54,15 @@ namespace Virgil.Graphics {
             }
         }
 
-        // TODO: Remove width and height (Deprecated due to RenderQueue allowing scaling)
         public Texture2D.from_rwops (SDL.RWops rwops, bool free_source = false) {
             _texture = SDLImage.load_texture_rw (Game.renderer.to_sdl (), rwops, free_source);
             is_locked = false;
-
-            _set_size (width, height);
         }
 
-        [Version (experimental_until = "0.0.5")]
+        [Version (experimental_until = "0.0.6")]
         public void set_pixels (Rectangle rectangle, void* pixels, int? pitch = null) {
             if (texture_type == TextureType.STATIC) {
-                int width;
+                uint width;
 
                 if (pitch == null) {
                     width = rectangle.width * 4;
@@ -82,7 +76,7 @@ namespace Virgil.Graphics {
             }
         }
 
-        [Version (experimental_until = "0.0.5")]
+        [Version (experimental_until = "0.0.6")]
         public void @lock (Rectangle bounds, ref void* pixels, ref int pitch) {
             if (is_locked) {
                 Utility.Log.warning ("Texture is already locked");
@@ -98,29 +92,41 @@ namespace Virgil.Graphics {
             is_locked = true;
         }
 
-        [Version (experimental_until = "0.0.5")]
+        [Version (experimental_until = "0.0.6")]
         public void @unlock () {
             if (!is_locked) {
                 Utility.Log.warning ("Texture is already unlocked");
                 return;
             }
 
-            _texture.unlock ();
+            _texture.@unlock ();
 
             is_locked = false;
         }
 
         public Rectangle get_bounds () {
-            return new Rectangle (0, 0, _width, _height);
+            int width, height;
+
+            _texture.query (null, null, out width, out height);
+
+            return new Rectangle (0, 0, width, height);
+        }
+
+        public int get_size (out int width, out int height) {
+            if (_texture == null) {
+                width = 0;
+                height = 0;
+
+                return 1;
+            }
+
+            _texture.query (null, null, out width, out height);
+
+            return 0;
         }
 
         public unowned Texture? get_sdl_texture () {
             return _texture;
-        }
-
-        private void _set_size (int width, int height) {
-            this.width = width;
-            this.height = height;
         }
     }
 }

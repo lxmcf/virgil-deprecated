@@ -21,7 +21,15 @@ namespace Virgil.Graphics {
             double output_width = texture_rectangle.w * scale_x;
             double output_height = texture_rectangle.h * scale_y;
 
-            output_rectangle = new Rectangle (x, y, (int)output_width, (int)output_height).get_sdl_rect ();
+            output_rectangle = new Rectangle (x, y, (uint)output_width, (uint)output_height).get_sdl_rect ();
+        }
+
+        public RenderQueueItem.unowned () {
+
+        }
+
+        ~RenderQueueItem () {
+            Utility.Log.message ("Render queue item deleted.");
         }
     }
 }

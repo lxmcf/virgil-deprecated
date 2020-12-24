@@ -47,13 +47,8 @@ namespace Virgil.Graphics {
             _filter_item (item);
         }
 
-        /*
-        FIXME: This doesn't work, dont know why
-
-        Fails at line 61 due to segmentation fault despite sdl_font not returning null
-        */
         public void draw_string (Font font, string text, Vector2 position) {
-            unowned SDLTTF.Font sdl_font = font.get_sdl_font ();
+            unowned SDLTTF.Font? sdl_font = font._font;
 
             Colour colour = new Colour (255, 255, 255);
 
@@ -64,8 +59,6 @@ namespace Virgil.Graphics {
             int width, height;
 
             texture.query (null, null, out width, out height);
-
-            Utility.Log.print (width.to_string () + " \\ " + height.to_string (), "DEBUG");
 
             Rectangle source = new Rectangle (0, 0, width, height);
             Rectangle destination = new Rectangle (16, 16, width, height);

@@ -6,10 +6,13 @@
 - `Font` data type
 - `Texture2D` set_pixels
 - `Texture2D` texture streaming using `lock` and `unlock`
-- New static Log class
+- New static `Log` class
 
 #### Changed:
 - `Vector2` and `Vector3` now use `double` rather than `float`
+- `Rectangle` width and height are now uint as no need for negative sizes.
+- Updated `SDL2_ttf.vapi` to latest
+- `GameWindow` will now correctly update the width and height variables on creation
 
 #### Removed:
 - `Texture2D.from_data`

@@ -38,6 +38,7 @@ libvirgil_sources = files (
     'Graphics/FontStyle.vala',
     'Graphics/FontHinting.vala',
     'Graphics/Items/RenderQueueItem.vala',
+    'Graphics/Items/RenderQueueItemType.vala',
 
     'Input/KeyState.vala',
     'Input/MouseButton.vala',

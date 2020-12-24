@@ -7,6 +7,7 @@ namespace Virgil {
     public class Demo : Game {
         public Player player;
         public RenderQueue queue;
+        public Font font;
 
         public override void start () {
             window.title = "Virgil Demo";
@@ -14,6 +15,8 @@ namespace Virgil {
             player = new Player ();
 
             queue = new RenderQueue ();
+
+            font = new Font.from_file ("cc.ttf", 32);
         }
 
         public override void update () {
