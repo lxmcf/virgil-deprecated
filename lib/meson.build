@@ -11,6 +11,8 @@ config_header = configure_file (
 
 # Virgil Library Source Files
 libvirgil_sources = files (
+    'stb_image.c',
+
     'Game.vala',
     'Constants.vala',
     'InitFlags.vala',

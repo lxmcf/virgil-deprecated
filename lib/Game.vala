@@ -50,7 +50,6 @@ namespace Virgil {
         ~Game () {
             if (InitFlags.SDL in _initialised_modules) SDL.quit ();
             if (InitFlags.SDL_TTF in _initialised_modules) SDLTTF.quit ();
-            if (InitFlags.SDL_IMAGE in _initialised_modules) SDLImage.quit ();
         }
 
         public int run () {
@@ -98,13 +97,11 @@ namespace Virgil {
 
             int sdl_init = SDL.init ();
             int sdl_ttf_init = SDLTTF.init ();
-            int sdl_image_init = SDLImage.init (SDLImage.InitFlags.ALL);
 
             if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
             if (sdl_ttf_init == 0) _initialised_modules += InitFlags.SDL_TTF;
-            if (sdl_image_init == SDLImage.InitFlags.ALL) _initialised_modules += InitFlags.SDL_IMAGE;
 
-            return (sdl_init == 0 && sdl_ttf_init == 0 && sdl_image_init == SDLImage.InitFlags.ALL);
+            return (sdl_init == 0 && sdl_ttf_init == 0 );
         }
 
         private void _link_events () {

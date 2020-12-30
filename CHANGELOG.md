@@ -4,8 +4,7 @@
 ---
 #### Added:
 - `Font` data type
-- `Texture2D` set_pixels
-- `Texture2D` texture streaming using `lock` and `unlock`
+- `stb_image` to load images from memory and files
 - New static `Log` class
 
 #### Changed:
@@ -17,6 +16,7 @@
 #### Removed:
 - `Texture2D.from_data`
 - `Asset` (Replaced with `from_file` and `from_resource` creation methods)
+- Dependency on `SDL2_image`
 
 
  ### Version 0.0.4
