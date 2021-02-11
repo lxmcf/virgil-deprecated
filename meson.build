@@ -1,73 +1,81 @@
-project ('virgil', ['vala', 'c'], version: '0.0.4')
+project ('virgil', [ 'vala', 'c' ], version: '1.0')
 
 # Variables
-source_dir = meson.current_source_dir ()
-vapi_dir = join_paths (source_dir, 'vapi')
-data_dir = join_paths (source_dir, 'data')
-build_dir = join_paths (join_paths(source_dir, meson.current_build_dir ()))
+source_dir  = meson.current_source_dir ()
+vapi_dir    = join_paths (source_dir, 'vapi')
+data_dir    = join_paths (source_dir, 'data')
+build_dir   = join_paths (join_paths(source_dir, meson.current_build_dir ()))
 
-vala_version = meson.get_compiler('vala').version()
+# Compilers
+valac   = meson.get_compiler ('vala')
+cc      = meson.get_compiler ('c')
 
-if vala_version.version_compare ('<=0.43.90')
-    add_project_arguments (['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
-endif
+# Compiler arguments
+valac_arguments = [
+    '--vapidir', source_dir / 'vapi'
+]
 
-# Dependencies
-libvirgil_dependencies = [
+cc_arguments = [
+    '-DSTB_IMAGE_IMPLEMENTATION'
+]
+
+add_project_arguments (valac_arguments, language: 'vala')
+add_project_arguments (cc_arguments, language: 'c')
+
+# Dependencies and VAPI
+project_dependencies = [
     dependency ('glib-2.0'),
-    dependency ('gio-2.0'),
+    dependency ('gobject-2.0'),
+    dependency ('SDL2')
 
-    meson.get_compiler ('c').find_library ('SDL2'),
-    meson.get_compiler ('c').find_library ('SDL2_image'),
-    # meson.get_compiler ('c').find_library ('SDL2_ttf')
+    # meson.get_compiler ('c').find_library ('SDL2')
 ]
 
-libvirgil_vapi = [
-    meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('SDL2_image', dirs: vapi_dir),
-    # meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir)
+project_vapi = [
+    # valac.find_library ('sdl2', dirs: vapi_dir),
+    valac.find_library ('stb_image', dirs: vapi_dir)
 ]
+
+subdir ('src')
 
 # Vala lint
 vala_lint = find_program ('io.elementary.vala-lint', required : false)
 if vala_lint.found ()
-    test (
-        'Vala lint',
-        vala_lint,
-        args: [ '-d', source_dir ]
-    )
+    test ('Vala lint', vala_lint, args: [ '-d', source_dir ])
 endif
 
-subdir ('lib')
-subdir ('data')
-
-# Virgil Shared Library
-libvirgil = library (
+# Library
+project_library = static_library (
     meson.project_name (),
 
-    libvirgil_sources,
-    libvirgil_resources,
-    config_header,
+    project_sources,
 
     dependencies: [
-        libvirgil_dependencies,
-        libvirgil_vapi
+        project_dependencies,
+        project_vapi
+    ],
+
+    include_directories: [
+        include_directories ('include')
     ],
 
     vala_header: 'virgil.h',
     vala_vapi: 'virgil.vapi',
 
-    version: meson.project_version (),
-    install: false
+    install: true,
+    install_dir: [ true, true, true ]
 )
 
-libvirgil_dep = declare_dependency (
-    link_with: libvirgil,
+# virgil_shared = project_library.get_shared_lib ()
+# virgil_static = project_library.get_static_lib ()
+
+virgil_dep = declare_dependency (
+    link_with: project_library,
     version: meson.project_version (),
 
     dependencies: [
-        libvirgil_dependencies,
-        libvirgil_vapi
+        project_dependencies,
+        project_vapi
     ],
 
     include_directories: [
@@ -75,6 +83,6 @@ libvirgil_dep = declare_dependency (
     ]
 )
 
-if not meson.is_subproject ()
-    subdir ('demo')
-endif
+# if not meson.is_subproject ()
+#     subdir ('demo')
+# endif

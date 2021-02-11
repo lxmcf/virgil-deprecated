@@ -1,14 +1,5 @@
 demo_sources = files (
-    'Demo.vala',
-
-    'Objects/Player.vala'
+    'Main.vala'
 )
 
-executable (
-    'virgil-demo',
-    demo_sources,
-
-    dependencies: [
-        libvirgil_dep
-    ]
-)
+executable ('virgil-demo', demo_sources, dependencies: virgil_dep)

@@ -1,5 +1,13 @@
 <h1 align="center">Virgil</h1>
 
+<p align="center">
+    <a href="#what-is-virgil">Description</a> |
+    <a href="#runtime-dependencies">Dependencies</a> |
+    <a href="#compiling--running">Compiling & Running</a> |
+    <a href="#operating-system-support">OS Support</a> |
+    <a href="#faq">FAQ</a>
+</p>
+
 Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
 
 ### What is Virgil?
@@ -7,13 +15,11 @@ Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index
 
 The Vala Game Library (VGL), or formally known as 'Virgil' is my answer to 'if I can't find it, I'll make it'. I grew tired of installing Windows VM's to use common 2D game engines and having to run around in circles finding a Linux compatible engine I can use to fruitlessly make simple games.
 
-Virgil is built from the ground up using Vala and the SDL2 library and it's sister libraries such as SDL2Image, this is my first major project as well as my first dip into 'proper development' using a new language.
+Virgil is built from the ground up using Vala and the SDL2 library and it's sister libraries such as SDL2_ttf, this is my first major project as well as my first dip into 'proper development' using a new language.
 
 ### Runtime Dependencies
 ---
 
-- `libsdl2-image-2.0-0`
-- `libsdl2-ttf-2.0-0`
 - `libsdl2-2.0-0`
 
 ### Build Dependencies
@@ -21,8 +27,6 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 
 - `valac`
 - `glib-2.0`
-- `libsdl2-image-dev`
-- `libsdl2-ttf-dev`
 - `libsdl2-dev`
 - `meson`
 
@@ -34,10 +38,10 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 ```sh
 meson build
 cd build
-ninja
+ninja && cd demo
 
 # Demo app
-demo/virgil-demo
+./virgil-demo
 ```
 
 > _**Note:** Virgil is not affiliated with the [elementary OS](https://elementary.io) project, I just love what they are doing!_
