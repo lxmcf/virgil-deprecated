@@ -1,10 +1,10 @@
 namespace Virgil {
     public class Vector3 {
-        public float x;
-        public float y;
-        public float z;
+        public double x;
+        public double y;
+        public double z;
 
-        public Vector3 (float x, float y, float z) {
+        public Vector3 (double x, double y, double z) {
             this.x = x;
             this.y = y;
             this.z = z;
@@ -16,7 +16,7 @@ namespace Virgil {
             z = 0.0f;
         }
 
-        public void get_value (out float x, out float y, out float z) {
+        public void get_value (out double x, out double y, out double z) {
             x = this.x;
             y = this.y;
             z = this.z;

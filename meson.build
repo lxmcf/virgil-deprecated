@@ -18,14 +18,16 @@ libvirgil_dependencies = [
     dependency ('gio-2.0'),
 
     meson.get_compiler ('c').find_library ('SDL2'),
-    meson.get_compiler ('c').find_library ('SDL2_image'),
-    # meson.get_compiler ('c').find_library ('SDL2_ttf')
+    meson.get_compiler ('c').find_library ('SDL2_ttf'),
+
+    meson.get_compiler ('c').find_library ('m')
 ]
 
 libvirgil_vapi = [
     meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('SDL2_image', dirs: vapi_dir),
-    # meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir)
+    meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir),
+
+    meson.get_compiler('vala').find_library('stb_image', dirs: vapi_dir)
 ]
 
 # Vala lint
@@ -42,7 +44,7 @@ subdir ('lib')
 subdir ('data')
 
 # Virgil Shared Library
-libvirgil = library (
+libvirgil = shared_library (
     meson.project_name (),
 
     libvirgil_sources,
@@ -52,6 +54,10 @@ libvirgil = library (
     dependencies: [
         libvirgil_dependencies,
         libvirgil_vapi
+    ],
+
+    include_directories: [
+        include_directories ('include')
     ],
 
     vala_header: 'virgil.h',

@@ -1,6 +1,5 @@
 using Virgil;
 using Virgil.Graphics;
-using Virgil.FileSystem;
 
 using SDL.Input;
 
@@ -12,9 +11,9 @@ namespace Virgil {
         private double speed;
 
         public Player () {
-            sprite = new Texture2D.from_asset (32, 32, new Asset.from_resource ("/virgil/image/default.png"));
+            sprite = new Texture2D.from_resource ("/virgil/image/default.png");
 
-            transform = new Vector2.zero ();
+            transform = new Vector2 (32.0, 32.0);
             speed = 100.0;
         }
 
@@ -24,12 +23,20 @@ namespace Virgil {
             double xaxis = (keyboard.check_key_raw (Keycode.d) - keyboard.check_key_raw (Keycode.a)) * speed;
             double yaxis = (keyboard.check_key_raw (Keycode.s) - keyboard.check_key_raw (Keycode.w)) * speed;
 
-            double test = delta_time / 1000.0;
+            double move_x = xaxis * delta_time;
+            double move_y = yaxis * delta_time;
 
-            double move_x = xaxis * test;
-            double move_y = yaxis * test;
+            transform.add (new Vector2 (move_x, move_y));
 
-            transform.add (new Vector2 ((float)move_x, (float)move_y));
+            wrap_position ();
+        }
+
+        private void wrap_position () {
+            if (transform.x > Game.window.width) transform.x = -32;
+            if (transform.y > Game.window.height) transform.y = -32;
+
+            if (transform.x < -32) transform.x = Game.window.width;
+            if (transform.y < -32) transform.y = Game.window.height;
         }
     }
 }

@@ -1,9 +1,9 @@
 namespace Virgil {
     public class Vector2 {
-        public float x { get; set; }
-        public float y { get; set; }
+        public double x { get; set; }
+        public double y { get; set; }
 
-        public Vector2 (float x, float y) {
+        public Vector2 (double x, double y) {
             this.x = x;
             this.y = y;
         }
@@ -13,7 +13,7 @@ namespace Virgil {
             y = 0.0f;
         }
 
-        public void get_value (out float x, out float y) {
+        public void get_value (out double x, out double y) {
             x = this.x;
             y = this.y;
         }

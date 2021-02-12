@@ -21,5 +21,21 @@ namespace Virgil.Graphics {
                     return TextureAccess.STATIC;
             }
         }
+
+        public TextureType from_sdl (TextureAccess access) {
+            switch (access) {
+                case TextureAccess.STATIC:
+                    return TextureType.STATIC;
+
+                case TextureAccess.STREAMING:
+                    return TextureType.STREAM;
+
+                case TextureAccess.TARGET:
+                    return TextureType.TARGET;
+
+                default:
+                    return TextureType.STATIC;
+            }
+        }
     }
 }

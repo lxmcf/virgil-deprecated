@@ -1,6 +1,25 @@
 <h1 align="center">Changelog</h1>
 
-### Version 0.0.4 `(Current)`
+### Version 0.0.5 `(Current)`
+---
+#### Added:
+- `Font` data type
+- `stb_image` to load images from memory and files
+- New static `Log` class
+
+#### Changed:
+- `Vector2` and `Vector3` now use `double` rather than `float`
+- `Rectangle` width and height are now uint as no need for negative sizes.
+- Updated `SDL2_ttf.vapi` to latest
+- `GameWindow` will now correctly update the width and height variables on creation
+
+#### Removed:
+- `Texture2D.from_data`
+- `Asset` (Replaced with `from_file` and `from_resource` creation methods)
+- Dependency on `SDL2_image`
+
+
+ ### Version 0.0.4
 ---
 #### Added:
 - `check_key_pressed` & `check_key_released` methods in the KeyboardHandler
@@ -27,28 +46,27 @@
 ### Version 0.0.3
 ---
 #### Added:
-- Implemented VVFS to bridge between GResource
-- Implemented [vala lint](https://github.com/vala-lang/vala-lint)
+- Basic implimentation of sprite rendering
+- Skeleton framework for events
+- Basic framerate manager
 
 #### Changed:
-- Updated README
-- Updated code format
+- N/A
 
 #### Removed:
-- Removed File.vala in favour of VVFS
+- N/A
 
 
 
 ### Version 0.0.2
 ---
 #### Added:
-- New GameState class to allow easy access to all managers
-- New Keyboard and Mouse input managers
+- Basic implimentation of sprite rendering
+- Skeleton framework for events
+- Basic framerate manager
 
 #### Changed:
-- Code cleanup
-- Begun preparations for building VVFS
-- Migrated to a new project layout
+- N/A
 
 #### Removed:
 - N/A

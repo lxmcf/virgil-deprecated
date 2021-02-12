@@ -50,7 +50,7 @@ namespace Virgil {
             return colour;
         }
 
-        public SDL.Video.Color to_sdl () {
+        public SDL.Video.Color get_sdl_colour () {
             return SDL.Video.Color () {
                 r = red,
                 g = green,

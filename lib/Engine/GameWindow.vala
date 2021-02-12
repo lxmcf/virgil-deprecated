@@ -23,8 +23,10 @@ namespace Virgil.Engine {
             set { set_size (width, value); }
         }
 
-        public GameWindow () {
-            _sdl_window = new Window ("Virgil", CENTERED, CENTERED, 640, 360, 0);
+        public GameWindow (int width = 640, int height = 360) {
+            _sdl_window = new Window ("Virgil", CENTERED, CENTERED, width, height, 0);
+
+            set_size (width, height);
         }
 
         public unowned Window to_sdl () {
