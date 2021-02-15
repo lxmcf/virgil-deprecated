@@ -26,13 +26,12 @@ add_project_arguments (cc_arguments, language: 'c')
 project_dependencies = [
     dependency ('glib-2.0'),
     dependency ('gobject-2.0'),
-    dependency ('SDL2')
 
-    # meson.get_compiler ('c').find_library ('SDL2')
+    meson.get_compiler ('c').find_library ('SDL2')
 ]
 
 project_vapi = [
-    # valac.find_library ('sdl2', dirs: vapi_dir),
+    valac.find_library ('sdl2', dirs: vapi_dir),
     valac.find_library ('stb_image', dirs: vapi_dir)
 ]
 
@@ -66,9 +65,6 @@ project_library = static_library (
     install_dir: [ true, true, true ]
 )
 
-# virgil_shared = project_library.get_shared_lib ()
-# virgil_static = project_library.get_static_lib ()
-
 virgil_dep = declare_dependency (
     link_with: project_library,
     version: meson.project_version (),
@@ -82,7 +78,3 @@ virgil_dep = declare_dependency (
         include_directories ('.')
     ]
 )
-
-# if not meson.is_subproject ()
-#     subdir ('demo')
-# endif

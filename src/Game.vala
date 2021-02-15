@@ -5,25 +5,33 @@ namespace Virgil {
     public class Game {
         private bool _running;
 
-        private InitFlags _initialised_modules;
         private KeyboardState _keyboard_state;
+
+        private static GameState _game_state;
+
+        private InitFlags _initialised_modules;
         private GameWindow _window;
+        private GameRenderer _renderer;
 
         private EventHandler _event;
 
         public Game () {
             if (_init ()) {
                 _window = new GameWindow ();
+                _renderer = new GameRenderer (_window);
                 _event = new EventHandler ();
 
                 _keyboard_state = new KeyboardState ();
                 Keyboard.init (_keyboard_state);
 
-                _link_events ();
-
-
+                _game_state = new GameState () {
+                    window = _window,
+                    renderer = _renderer
+                };
 
                 _running = true;
+
+                _link_events ();
             } else {
                 // TODO: Create log systems
             }
@@ -37,10 +45,13 @@ namespace Virgil {
             start ();
 
             while (running ()) {
+                _renderer.clear ();
                 _event.update ();
 
                 update ();
+
                 draw ();
+                _renderer.present ();
             }
 
             return 0;
@@ -89,6 +100,10 @@ namespace Virgil {
             //  _event.on_mouse_motion.connect ((motion) => {
             //      mouse.update_position (motion);
             //  });
+        }
+
+        public static unowned GameState get_state () {
+            return _game_state;
         }
     }
 }

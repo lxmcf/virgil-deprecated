@@ -1,9 +1,9 @@
 namespace Virgil {
     public class Colour {
-        uint8 red;
-        uint8 green;
-        uint8 blue;
-        uint8 alpha;
+        public uint8 red;
+        public uint8 green;
+        public uint8 blue;
+        public uint8 alpha;
 
         public Colour (uint8 red = 0, uint8 green = 0, uint8 blue = 0, uint8 alpha = 255) {
             this.red = red;

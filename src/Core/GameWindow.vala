@@ -1,9 +1,13 @@
 using SDL;
 
-namespace Virgil {
+namespace Virgil.Core {
     public class GameWindow {
         private Video.Window _window;
-        private Video.Renderer _renderer;
+
+        public Video.Window sdl_window {
+            get { return _window; }
+        }
+
         private int _width;
         private int _height;
 
@@ -26,7 +30,6 @@ namespace Virgil {
 
         public GameWindow (int width = 640, int height = 360) {
             _window = new Video.Window ("Virgil", CENTERED, CENTERED, width, height, 0);
-            _renderer = Video.Renderer.create (_window, -1, 0);
 
             set_size (width, height);
         }
