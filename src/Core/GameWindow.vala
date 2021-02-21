@@ -38,5 +38,10 @@ namespace Virgil.Core {
             _window.set_size (width, height);
             _window.get_size (out _width, out _height);
         }
+
+        public void get_size (out int width, out int height) {
+            width = _width;
+            height = _height;
+        }
     }
 }

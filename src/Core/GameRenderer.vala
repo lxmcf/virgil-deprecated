@@ -1,6 +1,7 @@
 using SDL;
 
 using Virgil;
+using Virgil.Graphics;
 
 namespace Virgil.Core {
     public class GameRenderer {
@@ -19,14 +20,14 @@ namespace Virgil.Core {
         }
 
         public int clear_colour (Colour colour) {
-            Colour old_colour = new Colour ();
+            Colour old = new Colour ();
 
-            _renderer.get_draw_color (out old_colour.red, out old_colour.green, out old_colour.blue, out old_colour.alpha);
+            _renderer.get_draw_color (out old.red, out old.green, out old.blue, out old.alpha);
             _renderer.set_draw_color (colour.red, colour.green, colour.blue, colour.alpha);
 
             int clear_code = clear ();
 
-            _renderer.set_draw_color (old_colour.red, old_colour.green, old_colour.blue, old_colour.alpha);
+            _renderer.set_draw_color (old.red, old.green, old.blue, old.alpha);
 
             return clear_code;
         }
@@ -46,6 +47,24 @@ namespace Virgil.Core {
 
         public void present () {
             _renderer.present ();
+        }
+
+        public void render_texture (Texture2D texture, int x, int y) {
+            Rectangle quad = texture.get_bounds ();
+
+            _renderer.copy (
+                texture.sdl_texture,
+                null, { x, y, quad.width, quad.height }
+            );
+        }
+
+        public void render_texture_point (Texture2D texture, Point point) {
+            Rectangle quad = texture.get_bounds ();
+
+            _renderer.copy (
+                texture.sdl_texture,
+                null, { point.x, point.y, quad.width, quad.height }
+            );
         }
     }
 }

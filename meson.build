@@ -2,9 +2,7 @@ project ('virgil', [ 'vala', 'c' ], version: '1.0')
 
 # Variables
 source_dir  = meson.current_source_dir ()
-vapi_dir    = join_paths (source_dir, 'vapi')
-data_dir    = join_paths (source_dir, 'data')
-build_dir   = join_paths (join_paths(source_dir, meson.current_build_dir ()))
+vapi_dir    = source_dir /'vapi'
 
 # Compilers
 valac   = meson.get_compiler ('vala')
@@ -12,7 +10,7 @@ cc      = meson.get_compiler ('c')
 
 # Compiler arguments
 valac_arguments = [
-    '--vapidir', source_dir / 'vapi'
+    '--vapidir', vapi_dir
 ]
 
 cc_arguments = [
@@ -27,7 +25,8 @@ project_dependencies = [
     dependency ('glib-2.0'),
     dependency ('gobject-2.0'),
 
-    meson.get_compiler ('c').find_library ('SDL2')
+    cc.find_library ('SDL2'),
+    cc.find_library ('m')
 ]
 
 project_vapi = [

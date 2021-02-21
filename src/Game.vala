@@ -51,6 +51,7 @@ namespace Virgil {
                 update ();
 
                 draw ();
+
                 _renderer.present ();
             }
 

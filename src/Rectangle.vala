@@ -37,6 +37,13 @@ namespace Virgil {
             height = rectangle.height;
         }
 
+        public Rectangle.empty () {
+            x = 0;
+            y = 0;
+            width = 0;
+            height = 0;
+        }
+
         public bool is_intersecting (Rectangle rectangle) {
             bool within_x = (rectangle.x >= left) && (rectangle.x <= right);
             bool within_y = (rectangle.y >= right) && (rectangle.y <= bottom);

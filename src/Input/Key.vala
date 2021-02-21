@@ -15,5 +15,15 @@ namespace Virgil.Input {
             is_pressed = false;
             is_released = true;
         }
+
+        public string to_string () {
+            string string_keycode = key.get_name ();
+            string string_down = is_down.to_string ();
+            string string_pressed = is_pressed.to_string ();
+            string string_released = is_released.to_string ();
+
+            return @"{ keycode: $string_keycode, is_down: $string_down,
+                is_pressed: $string_pressed, is_released: $string_released }";
+        }
     }
 }
