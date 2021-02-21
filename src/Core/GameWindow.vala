@@ -11,7 +11,7 @@ namespace Virgil.Core {
         private int _width;
         private int _height;
 
-        public const int CENTERED = Video.Window.POS_CENTERED;
+        public const int CENTERED = (int)Video.Window.POS_CENTERED;
 
         public string title {
             get { return _window.title; }
