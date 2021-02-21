@@ -58,10 +58,7 @@ project_library = static_library (
     ],
 
     vala_header: 'virgil.h',
-    vala_vapi: 'virgil.vapi',
-
-    install: true,
-    install_dir: [ true, true, true ]
+    vala_vapi: 'virgil.vapi'
 )
 
 virgil_dep = declare_dependency (

@@ -7,7 +7,6 @@ namespace Virgil.Graphics {
         private Texture _texture;
         private int _channels;
 
-
         public Texture sdl_texture {
             get { return _texture; }
         }
@@ -52,14 +51,14 @@ namespace Virgil.Graphics {
         }
 
         public int set_pixels (Rectangle quad, void* pixels) {
-            int width;
+            int width, height;
 
-            _texture.query (null, null, out width, null);
+            _texture.query (null, null, out width, out height);
 
             print ("[WARNING]:\tConsider using DynamicTexture2D if you require multiple changes to Texture2D pixel data!\n");
 
             return _texture.update (
-                {  },
+                { 0, 0, (uint)width, (uint)height },
                 pixels,
                 width * _channels
             );

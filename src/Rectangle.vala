@@ -29,7 +29,7 @@ namespace Virgil {
             this.height = height;
         }
 
-        public Rectangle.copy (Rectangle rectangle) {
+        public Rectangle.from_rectangle (Rectangle rectangle) {
             x = rectangle.x;
             y = rectangle.y;
 
