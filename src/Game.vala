@@ -1,5 +1,6 @@
 using Virgil.Core;
 using Virgil.Input;
+using Virgil.Debug;
 
 namespace Virgil {
     public class Game {
@@ -14,26 +15,30 @@ namespace Virgil {
         private GameRenderer _renderer;
 
         private EventHandler _event;
+        private FramerateHandler _framerate;
 
         public Game () {
             if (_init ()) {
                 _window = new GameWindow ();
                 _renderer = new GameRenderer (_window);
+
                 _event = new EventHandler ();
+                _framerate = new FramerateHandler ();
 
                 _keyboard_state = new KeyboardState ();
                 Keyboard.init (_keyboard_state);
 
                 _game_state = new GameState () {
                     window = _window,
-                    renderer = _renderer
+                    renderer = _renderer,
+                    framerate = _framerate
                 };
 
                 _running = true;
 
                 _link_events ();
             } else {
-                // TODO: Create log systems
+                print_error ("SDL failed to initialise! { SDL_Error: " + SDL.get_error () + "}");
             }
         }
 
@@ -45,6 +50,8 @@ namespace Virgil {
             start ();
 
             while (running ()) {
+                _framerate.update ();
+
                 _renderer.clear ();
                 _event.update ();
 

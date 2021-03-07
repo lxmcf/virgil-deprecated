@@ -32,16 +32,13 @@ Virgil is built from the ground up using Vala and the SDL2 library and it's sist
 
 > _**Note:** Virgil can run on Mac OS with the use of `brew` but is not 100% supported at this stage._
 
-### Compiling &amp; running
+### Compiling
 ---
 
 ```sh
 meson build
 cd build
-ninja && cd demo
-
-# Demo app
-./virgil-demo
+ninja
 ```
 
 > _**Note:** Virgil is not affiliated with the [elementary OS](https://elementary.io) project, I just love what they are doing!_

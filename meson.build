@@ -1,4 +1,4 @@
-project ('virgil', 'vala', 'c', version: '1.0')
+project ('virgil', [ 'vala', 'c' ], version: '1.0')
 
 # Variables
 source_dir  = meson.current_source_dir ()
@@ -58,7 +58,10 @@ project_library = static_library (
     ],
 
     vala_header: 'virgil.h',
-    vala_vapi: 'virgil.vapi'
+    vala_vapi: 'virgil.vapi',
+
+    # install: true,
+    # install_dir: [ true, true, true]
 )
 
 virgil_dep = declare_dependency (

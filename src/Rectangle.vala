@@ -30,11 +30,7 @@ namespace Virgil {
         }
 
         public Rectangle.from_rectangle (Rectangle rectangle) {
-            x = rectangle.x;
-            y = rectangle.y;
-
-            width = rectangle.width;
-            height = rectangle.height;
+            copy (rectangle);
         }
 
         public Rectangle.empty () {
@@ -42,6 +38,35 @@ namespace Virgil {
             y = 0;
             width = 0;
             height = 0;
+        }
+
+        public void set_size (uint width, uint height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        public void set_position (int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public void set_position_point (Point point) {
+            x = point.x;
+            y = point.y;
+        }
+
+        public void get_size (out uint width, out uint height) {
+            width = this.width;
+            height = this.height;
+        }
+
+        public void get_position (int x, int y) {
+            x = this.x;
+            y = this.y;
+        }
+
+        public void get_position_point (out Point point) {
+            point = new Point (x, y);
         }
 
         public bool is_intersecting (Rectangle rectangle) {
@@ -58,8 +83,26 @@ namespace Virgil {
             return does_position && does_size;
         }
 
+        public int copy (Rectangle rectangle) {
+            if (rectangle.is_empty ()) {
+                return 1;
+            }
+
+            if (is_equal (rectangle)) {
+                return 2;
+            }
+
+            x = rectangle.x;
+            y = rectangle.y;
+
+            width = rectangle.width;
+            height = rectangle.height;
+
+            return 0;
+        }
+
         public bool is_empty () {
-            return (width <= 0 || height <= 0);
+            return (width == 0 || height == 0);
         }
 
         public string to_string () {

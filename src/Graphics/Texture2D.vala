@@ -1,27 +1,36 @@
 using Virgil;
+using Virgil.Debug;
 
 using SDL.Video;
 
 namespace Virgil.Graphics {
     public class Texture2D {
         private Texture _texture;
+        private string _texture_id;
         private int _channels;
 
         public Texture sdl_texture {
             get { return _texture; }
         }
 
-        public Texture2D (int width, int height) {
+        public string texture_id {
+            get { return _texture_id; }
+        }
+
+        public Texture2D (uint width, uint height, TextureAccess type) {
             GameState state = Game.get_state ();
 
             _texture = Texture.create (
-                state.renderer.sdl_renderer, PixelRAWFormat.ARGB8888, TextureAccess.STATIC, width, height
+                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, (int)width, (int)height
             );
 
+            _texture.set_blend_mode (BlendMode.BLEND);
+
             _channels = Stbi.Channels.RGB_ALPHA;
+            _texture_id = Uuid.string_random ();
         }
 
-        public Texture2D.from_file (string filename) {
+        public Texture2D.from_file (string filename, TextureAccess type) {
             bool file_exists = FileUtils.test (filename, GLib.FileTest.EXISTS);
             GameState state = Game.get_state ();
 
@@ -31,15 +40,18 @@ namespace Virgil.Graphics {
                 void* pixels = Stbi.load (filename, out width, out height, out channels);
 
                 _texture = Texture.create (
-                    state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, TextureAccess.STATIC, width, height
+                    state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, width, height
                 );
 
                 _texture.update (null, pixels, channels * width);
+                _texture.set_blend_mode (BlendMode.BLEND);
 
                 _channels = channels;
 
                 Stbi.image_free (pixels);
             }
+
+            _texture_id = Uuid.string_random ();
         }
 
         public Rectangle get_bounds () {
@@ -48,20 +60,6 @@ namespace Virgil.Graphics {
             _texture.query (null, null, out width, out height);
 
             return new Rectangle (0, 0, width, height);
-        }
-
-        public int set_pixels (Rectangle quad, void* pixels) {
-            int width, height;
-
-            _texture.query (null, null, out width, out height);
-
-            print ("[WARNING]:\tConsider using DynamicTexture2D if you require multiple changes to Texture2D pixel data!\n");
-
-            return _texture.update (
-                { 0, 0, (uint)width, (uint)height },
-                pixels,
-                width * _channels
-            );
         }
     }
 }

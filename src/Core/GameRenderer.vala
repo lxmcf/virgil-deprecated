@@ -6,6 +6,7 @@ using Virgil.Graphics;
 namespace Virgil.Core {
     public class GameRenderer {
         private Video.Renderer _renderer;
+        private Camera _target_camera;
 
         public Video.Renderer sdl_renderer {
             get { return _renderer; }

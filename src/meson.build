@@ -5,17 +5,20 @@ project_sources = files (
     'Vector2.vala',
     'Rectangle.vala',
     'Colour.vala',
+    'Camera.vala',
     'InitFlags.vala',
 
     'Core/EventHandler.vala',
     'Core/GameWindow.vala',
     'Core/GameRenderer.vala',
+    'Core/FramerateHandler.vala',
 
-    'Debug/Log.vala',
-    'Debug/LogLevel.vala',
+    'Debug/Print.vala',
+    'Debug/PrintLevel.vala',
 
     'Graphics/Texture2D.vala',
     'Graphics/DynamicTexture2D.vala',
+    'Graphics/StaticTexture2D.vala',
 
     'Input/Key.vala',
     'Input/KeyState.vala',
