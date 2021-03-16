@@ -19,9 +19,9 @@ project_sources = files (
     'Graphics/Texture2D.vala',
     'Graphics/DynamicTexture2D.vala',
     'Graphics/StaticTexture2D.vala',
+    'Graphics/TiledTexture2D.vala',
 
     'Input/Key.vala',
     'Input/KeyState.vala',
-    'Input/Keyboard.vala',
-    'Input/KeyboardState.vala',
+    'Input/Keyboard.vala'
 )

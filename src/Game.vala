@@ -6,8 +6,6 @@ namespace Virgil {
     public class Game {
         private bool _running;
 
-        private KeyboardState _keyboard_state;
-
         private static GameState _game_state;
 
         private InitFlags _initialised_modules;
@@ -25,8 +23,7 @@ namespace Virgil {
                 _event = new EventHandler ();
                 _framerate = new FramerateHandler ();
 
-                _keyboard_state = new KeyboardState ();
-                Keyboard.init (_keyboard_state);
+                Keyboard.init ();
 
                 _game_state = new GameState () {
                     window = _window,
@@ -98,7 +95,7 @@ namespace Virgil {
             });
 
             _event.on_key_update.connect ((key, is_down) => {
-                _keyboard_state.update_key (key.keysym.sym, is_down);
+                Keyboard.update_key (key.keysym.sym, is_down);
             });
 
             //  _event.on_mouse_update.connect ((button, is_down) => {
