@@ -2,11 +2,11 @@ using SDL;
 
 using Virgil;
 using Virgil.Graphics;
+using Virgil.Debug;
 
 namespace Virgil.Core {
     public class GameRenderer {
         private Video.Renderer _renderer;
-        private Camera _target_camera;
 
         public Video.Renderer sdl_renderer {
             get { return _renderer; }
@@ -34,14 +34,14 @@ namespace Virgil.Core {
         }
 
         public int clear_colour_rgb (uint8 red, uint8 green, uint8 blue) {
-            uint8 r, g, b;
+            uint8 current_red, current_green, current_blue;
 
-            _renderer.get_draw_color (out r, out g, out b, null);
+            _renderer.get_draw_color (out current_red, out current_green, out current_blue, null);
             _renderer.set_draw_color (red, green, blue, uint8.MAX);
 
             int clear_code = _renderer.clear ();
 
-            _renderer.set_draw_color (r, g, b, uint8.MAX);
+            _renderer.set_draw_color (current_red, current_green, current_blue, uint8.MAX);
 
             return clear_code;
         }
@@ -66,6 +66,22 @@ namespace Virgil.Core {
                 texture.sdl_texture,
                 null, { point.x, point.y, quad.width, quad.height }
             );
+        }
+
+        //  public void render_texture_rotate (Texture2D texture) {
+        //      _renderer.copyex (texture, null, )
+        //  }
+
+        public int set_render_colour (Colour colour) {
+            return _renderer.set_draw_color (colour.red, colour.green, colour.blue, colour.alpha);
+        }
+
+        public Colour get_render_colour () {
+            uint8 red, green, blue, alpha;
+
+            _renderer.get_draw_color (out red, out green, out blue, out alpha);
+
+            return new Colour (red, green, blue, alpha);
         }
     }
 }

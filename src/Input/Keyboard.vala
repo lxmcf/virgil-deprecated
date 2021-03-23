@@ -24,7 +24,7 @@ namespace Virgil.Input {
             if (item == null) {
                 _key_list.append (new Key (keycode));
             } else {
-                warning ("Attempted to add already monitored key");
+                print_warning ("Attempted to add already monitored key");
             }
         }
 

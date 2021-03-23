@@ -5,7 +5,6 @@ project_sources = files (
     'Vector2.vala',
     'Rectangle.vala',
     'Colour.vala',
-    'Camera.vala',
     'InitFlags.vala',
 
     'Core/EventHandler.vala',
@@ -20,6 +19,10 @@ project_sources = files (
     'Graphics/DynamicTexture2D.vala',
     'Graphics/StaticTexture2D.vala',
     'Graphics/TiledTexture2D.vala',
+    'Graphics/TextureRaw.vala',
+    'Graphics/RenderQueue.vala',
+    'Graphics/RenderQueueCall.vala',
+    'Graphics/BlendMode.vala',
 
     'Input/Key.vala',
     'Input/KeyState.vala',

@@ -1,4 +1,4 @@
-// BUG: Everything here is scuffed
+// BUG: Everything here is scuffed, maybe?
 
 using Virgil;
 using Virgil.Debug;
@@ -12,7 +12,7 @@ namespace Virgil.Graphics {
         public DynamicTexture2D (uint width, uint height) {
             base (width, height, TextureAccess.STREAMING);
 
-            print_error ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
+            print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
 
             _locked = false;
         }
@@ -20,7 +20,7 @@ namespace Virgil.Graphics {
         public DynamicTexture2D.from_file (string filename) {
             base.from_file (filename, TextureAccess.STREAMING);
 
-            print_error ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
+            print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
 
             _locked = false;
         }

@@ -16,7 +16,7 @@ namespace Virgil.Graphics {
             base.from_file (filename, TextureAccess.STATIC);
         }
 
-        public int set_pixels (Rectangle quad, void* pixels) {
+        public int set_pixels (void* pixels) {
             int width, height;
 
             _texture.query (null, null, out width, out height);
