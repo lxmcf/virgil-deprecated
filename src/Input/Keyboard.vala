@@ -18,7 +18,7 @@ namespace Virgil.Input {
             }
         }
 
-        public static void add_key (Keycode keycode) {
+        public static void add_key (string keycode) {
             var item = key_exists (keycode);
 
             if (item == null) {
@@ -28,7 +28,7 @@ namespace Virgil.Input {
             }
         }
 
-        public static bool check_key (Keycode keycode) {
+        public static bool check_key (string keycode) {
             var item = key_exists (keycode);
 
             if (item != null) {
@@ -38,7 +38,7 @@ namespace Virgil.Input {
             return false;
         }
 
-        public static int check_key_raw (Keycode keycode) {
+        public static int check_key_raw (string keycode) {
             var item = key_exists (keycode);
 
             if (item != null) {
@@ -50,7 +50,7 @@ namespace Virgil.Input {
             return KeyState.UP;
         }
 
-        public static bool check_key_pressed (Keycode keycode) {
+        public static bool check_key_pressed (string keycode) {
             var item = key_exists (keycode);
 
             if (item != null) {
@@ -64,7 +64,7 @@ namespace Virgil.Input {
             return false;
         }
 
-        public static bool check_key_released (Keycode keycode) {
+        public static bool check_key_released (string keycode) {
             var item = key_exists (keycode);
 
             if (item != null) {
@@ -78,7 +78,7 @@ namespace Virgil.Input {
             return false;
         }
 
-        public static void update_key (Keycode keycode, bool is_down) {
+        public static void update_key (string keycode, bool is_down) {
             var item = key_exists (keycode);
 
             if (item != null) {
@@ -94,16 +94,20 @@ namespace Virgil.Input {
             }
         }
 
-        private static unowned Key? key_exists (Keycode keycode) {
-            for (int i = 0; i < _key_list.length (); i++) {
-                Key item = _key_list.nth_data (i);
+        private static unowned Key? key_exists (string keycode) {
+            Keycode key = Keycode.from_name (keycode);
 
-                if (item.key == keycode) {
-                    return _key_list.nth_data (i);
+            if (key != Keycode.UNKNOWN) {
+                for (int i = 0; i < _key_list.length (); i++) {
+                    Key item = _key_list.nth_data (i);
+
+                    if (item.key == keycode) {
+                        return _key_list.nth_data (i);
+                    }
                 }
-            }
 
-            _key_list.append (new Key (keycode));
+                _key_list.append (new Key (keycode));
+            }
 
             // Will always return null on first call
             return null;

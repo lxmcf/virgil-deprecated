@@ -4,7 +4,7 @@ namespace Virgil.Core {
     public class GameWindow {
         private Video.Window _window;
 
-        public Video.Window sdl_window {
+        internal Video.Window sdl_window {
             get { return _window; }
         }
 
@@ -29,7 +29,7 @@ namespace Virgil.Core {
         }
 
         public GameWindow (int width = 640, int height = 360) {
-            _window = new Video.Window ("Virgil", CENTERED, CENTERED, width, height, 0);
+            _window = new Video.Window (@"$(Constants.PROJECT_NAME) {$(Constants.PROJECT_TYPE)}", CENTERED, CENTERED, width, height, 0);
 
             set_size (width, height);
         }

@@ -1,9 +1,11 @@
 // TODO: Impliment per pixel modification
 
+using Virgil.Debug;
+using Virgil.Stb;
 
 namespace Virgil.Graphics {
     public class TextureRaw {
-        private uint8* _pixels;
+        private uchar* _pixels;
 
         private uint _width;
         private uint _height;
@@ -41,7 +43,7 @@ namespace Virgil.Graphics {
         }
 
         public TextureRaw.from_file (string filename) {
-            _pixels = Stbi.load (filename, out _width, out _height, out _channels);
+            _pixels = Image.load (filename, out _width, out _height, out _channels);
         }
 
         ~TextureRaw () {
@@ -57,7 +59,7 @@ namespace Virgil.Graphics {
             return 0;
         }
 
-        public uint8* get_pixels () {
+        public uchar* get_pixels () {
             return _pixels;
         }
 

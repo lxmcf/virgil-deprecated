@@ -95,7 +95,7 @@ namespace Virgil {
             });
 
             _event.on_key_update.connect ((key, is_down) => {
-                Keyboard.update_key (key.keysym.sym, is_down);
+                Keyboard.update_key (key, is_down);
             });
 
             //  _event.on_mouse_update.connect ((button, is_down) => {

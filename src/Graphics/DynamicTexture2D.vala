@@ -10,7 +10,7 @@ namespace Virgil.Graphics {
         private bool _locked;
 
         public DynamicTexture2D (uint width, uint height) {
-            base (width, height, TextureAccess.STREAMING);
+            base (width, height, TextureType.STREAMING);
 
             print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
 
@@ -18,7 +18,7 @@ namespace Virgil.Graphics {
         }
 
         public DynamicTexture2D.from_file (string filename) {
-            base.from_file (filename, TextureAccess.STREAMING);
+            base.from_file (filename, TextureType.STREAMING);
 
             print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
 
@@ -26,6 +26,8 @@ namespace Virgil.Graphics {
         }
 
         // NOTE: Experimental, unsure if function will work as expected
+        // TODO: Tidy up method as this is quite messy
+        // TODO (IDEA): Impliment a dedicated pixel update method to avoid EU needing to use memset
         public int @lock (Rectangle rect, out void* pixels, out int pitch) {
             pitch = 0;
             pixels = null;

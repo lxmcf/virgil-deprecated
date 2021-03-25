@@ -6,12 +6,18 @@
         {
             "label": "Compile Project",
             "type": "shell",
-            "command": "meson build && ninja -C build",
+            "command": "meson build --default-library=static && ninja -C build",
             "problemMatcher": "$valac",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Compile & Install Project",
+            "type": "shell",
+            "command": "meson build --default-library=static && sudo ninja install -C build",
+            "problemMatcher": "$valac",
         },
         {
             "label": "Clean Build Environment",

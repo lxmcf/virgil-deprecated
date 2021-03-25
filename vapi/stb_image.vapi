@@ -48,7 +48,7 @@ namespace Stbi {
      * @return uchar* Pointer to image pixel data
      */
     [CCode (cname = "stbi_load")]
-    public static uchar* load (string file, out int width, out int height, out int channels, int desired_channels = 4);
+    public static uchar* __load (string file, out int width, out int height, out int channels, int desired_channels = 4);
 
     /**
      * Loads an image filestream and returns a generic pointer.
@@ -66,7 +66,7 @@ namespace Stbi {
      * @return uchar* Pointer to image pixel data
      */
     [CCode (cname = "stbi_load_from_file")]
-    public static uchar* load_from_filestream (GLib.FileStream file, out int width, out int height, out int channels, int desired_channels = 4);
+    public static uchar* __load_from_filestream (GLib.FileStream file, out int width, out int height, out int channels, int desired_channels = 4);
 
     /**
      * Loads an image buffer and returns a generic pointer.
@@ -84,7 +84,7 @@ namespace Stbi {
      * @return Generic pointer to image pixel data
      */
     [CCode (cname = "stbi_load_from_memory")]
-    public static uchar* load_from_memory (void* mem, int length, out int width, out int height, out int bpp, int desired_channels = 4);
+    public static uchar* __load_from_memory (void* mem, int length, out int width, out int height, out int bpp, int desired_channels = 4);
 
     ////////////////////////////////////
     //
@@ -119,7 +119,7 @@ namespace Stbi {
      * @return uchar* Pointer to image pixel data
      */
     [CCode (cname = "stbi_load_16")]
-    public static uchar* load_16 (string file, out int width, out int height, out int channels, int desired_channels = 4);
+    public static uchar* __load_16 (string file, out int width, out int height, out int channels, int desired_channels = 4);
 
      /**
       * Loads an image filestream and returns a generic pointer.
@@ -137,7 +137,7 @@ namespace Stbi {
       * @return uchar* Pointer to image pixel data
       */
     [CCode (cname = "stbi_load_from_file_16")]
-    public static uchar* load_16_from_filestream (GLib.FileStream file, out int width, out int height, out int channels, int desired_channels = 4);
+    public static uchar* __load_16_from_filestream (GLib.FileStream file, out int width, out int height, out int channels, int desired_channels = 4);
 
      /**
       * Loads an image buffer and returns a generic pointer.
@@ -155,7 +155,7 @@ namespace Stbi {
       * @return uchar* Pointer to image pixel data
       */
      [CCode (cname = "stbi_load_16_from_memory")]
-     public static uchar* load_16_from_memory (void* mem, int length, out int width, out int height, out int bpp, int desired_channels = 4);
+     public static uchar* __load_16_from_memory (void* mem, int length, out int width, out int height, out int bpp, int desired_channels = 4);
 
     ////////////////////////////////////
     //
@@ -176,7 +176,7 @@ namespace Stbi {
      * @@return int Returns an integer based on file load
      */
     [CCode (cname = "stbi_info")]
-    public static int load_info (string file, out int width, out int height, out int channels);
+    public static int __load_info (string file, out int width, out int height, out int channels);
 
     /*
      * Loads file info from given filestream.
@@ -192,7 +192,7 @@ namespace Stbi {
      * @return int Returns an integer based on file load
      */
     [CCode (cname = "stbi_info_from_file")]
-    public static int load_info_from_filestream (GLib.FileStream file, out int width, out int height, out int channels);
+    public static int __load_info_from_filestream (GLib.FileStream file, out int width, out int height, out int channels);
 
     ///////////////////////////////////
     //
@@ -206,7 +206,7 @@ namespace Stbi {
      * @param float The desired gamma level
      */
     [CCode (cname = "stbi_hdr_to_ldr_gamma")]
-    public static void set_hdr_to_ldr_gamma (float gamma);
+    public static void __set_hdr_to_ldr_gamma (float gamma);
 
     /**
      * Sets the HDR to LDR scale used when loading HDR images with Stbi.load ();
@@ -214,7 +214,7 @@ namespace Stbi {
      * @param float The desired scale
      */
     [CCode (cname = "stbi_hdr_to_ldr_scale")]
-    public static void set_hdr_to_ldr_scale (float scale);
+    public static void __set_hdr_to_ldr_scale (float scale);
 
     /**
      * Sets the LDR to HDR gamma used when loading LDR images with Stbi.load ();
@@ -222,7 +222,7 @@ namespace Stbi {
      * @param float The desired gamma level
      */
     [CCode (cname = "stbi_ldr_to_hdr_gamma")]
-    public static void set_ldr_to_hdr_gamma (float gamma);
+    public static void __set_ldr_to_hdr_gamma (float gamma);
 
     /**
      * Sets the LDR to HDR scale used when loading LDR images with Stbi.load ();
@@ -230,7 +230,7 @@ namespace Stbi {
      * @param float The desired gamma level
      */
     [CCode (cname = "stbi_ldr_to_hdr_scale")]
-    public static void set_ldr_to_hdr_scale (float scale);
+    public static void __set_ldr_to_hdr_scale (float scale);
 
     /**
      * Indicates whether any given files should be flipped when loading.
@@ -241,7 +241,7 @@ namespace Stbi {
      * @param bool Whether to flip
      */
     [CCode (cname = "stbi_set_flip_vertically_on_load")]
-    public static void set_flip_vertically_on_load (bool flip);
+    public static void __set_flip_vertically_on_load (bool flip);
 
     /**
      * Indicates whether to force a divide per pixel to remove any premultiplied alpha.
@@ -249,7 +249,7 @@ namespace Stbi {
      * @param bool Whether to unpremultiply
      */
     [CCode (cname = "stbi_set_unpremultiply_on_load")]
-    public static void set_unpremultiply_on_load (bool unpremultiply);
+    public static void __set_unpremultiply_on_load (bool unpremultiply);
 
     /**
      * Indicates whether to process iPhone images bac to normal RGB
@@ -257,7 +257,7 @@ namespace Stbi {
      * @param bool Whether to process image
      */
     [CCode (cname = "stbi_convert_iphone_png_to_rgb")]
-    public static void set_convert_iphone_png_to_rgb (bool convert);
+    public static void __set_convert_iphone_png_to_rgb (bool convert);
 
     /**
      * Returns whether the provided file is HDR or not.
@@ -266,7 +266,7 @@ namespace Stbi {
      * @return bool If file is HDR
      */
     [CCode (cname = "stbi_is_hdr")]
-    public static bool is_file_hdr (string file);
+    public static bool __is_file_hdr (string file);
 
     /**
      * Returns whether the provided file stream is HDR or not.
@@ -275,7 +275,7 @@ namespace Stbi {
      * @return bool If file is HDR
      */
     [CCode (cname = "stbi_is_hdr_from_file")]
-    public static bool is_file_hdr_from_filestream (GLib.FileStream file);
+    public static bool __is_file_hdr_from_filestream (GLib.FileStream file);
 
     /**
      * Returns whether the provided memory is HDR or not.
@@ -284,7 +284,7 @@ namespace Stbi {
      * @return bool If file is HDR
      */
     [CCode (cname = "stbi_is_hdr_from_memory")]
-    public static bool is_file_hdr_from_memory (void* mem, int length);
+    public static bool __is_file_hdr_from_memory (void* mem, int length);
 
     /**
      * Returns whether the provided file is 16 bit or not.
@@ -293,7 +293,7 @@ namespace Stbi {
      * @return bool If file is 16 bit
      */
     [CCode (cname = "stbi_is_16_bit")]
-    public static bool is_file_16_bit (string file);
+    public static bool __is_file_16_bit (string file);
 
     /**
      * Returns whether the provided file is 16 bit or not.
@@ -302,7 +302,7 @@ namespace Stbi {
      * @return bool If file is 16 bit
      */
     [CCode (cname = "stbi_is_16_bit_from_file")]
-    public static bool is_file_16_bit_from_filestream (GLib.FileStream file);
+    public static bool __is_file_16_bit_from_filestream (GLib.FileStream file);
 
     /**
      * Returns whether the provided file is 16 bit or not.
@@ -311,7 +311,7 @@ namespace Stbi {
      * @return bool If file is 16 bit
      */
     [CCode (cname = "stbi_is_16_bit_from_memory")]
-    public static bool is_file_16_bit_from_memory (void* mem, int length);
+    public static bool __is_file_16_bit_from_memory (void* mem, int length);
 
     /**
      * Free's memory returned from file loading functions.
@@ -321,5 +321,5 @@ namespace Stbi {
      * @param void* Memory to free
      */
     [CCode (cname = "stbi_image_free")]
-    public static void image_free (void* mem);
+    public static void __image_free (void* mem);
 }

@@ -8,7 +8,7 @@ namespace Virgil.Core {
     public class GameRenderer {
         private Video.Renderer _renderer;
 
-        public Video.Renderer sdl_renderer {
+        internal Video.Renderer sdl_renderer {
             get { return _renderer; }
         }
 

@@ -7,7 +7,7 @@ namespace Virgil.Graphics {
         ADDITIVE,
         MODULATE;
 
-        public Video.BlendMode to_sdl () {
+        internal Video.BlendMode to_sdl () {
             switch (this) {
                 case NONE:
                     return Video.BlendMode.NONE;

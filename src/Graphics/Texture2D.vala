@@ -1,5 +1,6 @@
 using Virgil;
 using Virgil.Debug;
+using Virgil.Stb;
 
 using SDL.Video;
 
@@ -9,7 +10,7 @@ namespace Virgil.Graphics {
         private string _texture_id;
         private int _channels;
 
-        public Texture sdl_texture {
+        internal Texture sdl_texture {
             get { return _texture; }
         }
 
@@ -17,7 +18,11 @@ namespace Virgil.Graphics {
             get { return _texture_id; }
         }
 
-        public Texture2D (uint width, uint height, TextureAccess type) {
+        public int channels {
+            get { return _channels; }
+        }
+
+        public Texture2D (uint width, uint height, TextureType type) {
             GameState state = Game.get_state ();
 
             _texture = Texture.create (
@@ -26,18 +31,18 @@ namespace Virgil.Graphics {
 
             _texture.set_blend_mode (BlendMode.BLEND.to_sdl ());
 
-            _channels = Stbi.Channels.RGB_ALPHA;
+            _channels = Image.Channels.RGB_ALPHA;
             _texture_id = Uuid.string_random ();
         }
 
-        public Texture2D.from_file (string filename, TextureAccess type) {
+        public Texture2D.from_file (string filename, TextureType type) {
             bool file_exists = FileUtils.test (filename, GLib.FileTest.EXISTS);
             GameState state = Game.get_state ();
 
             if (file_exists) {
                 int width, height, channels;
 
-                uchar* pixels = Stbi.load (filename, out width, out height, out channels);
+                uchar* pixels = Image.load (filename, out width, out height, out channels);
 
                 _texture = Texture.create (
                     state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, width, height
@@ -48,13 +53,13 @@ namespace Virgil.Graphics {
 
                 _channels = channels;
 
-                Stbi.image_free (pixels);
+                delete pixels;
             }
 
             _texture_id = Uuid.string_random ();
         }
 
-        public Texture2D.from_texture_raw (TextureRaw raw, TextureAccess type) {
+        public Texture2D.from_texture_raw (TextureRaw raw, TextureType type) {
             GameState state = Game.get_state ();
 
             _channels = (int)raw.channels;
