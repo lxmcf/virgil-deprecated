@@ -12,6 +12,13 @@ namespace Virgil {
             this.alpha = alpha;
         }
 
+        public Colour.float (float red = 0.0f, float green = 0.0f, float blue = 0.0f, float alpha = 1.0f) {
+            this.red = (uint8)(red * 255.999f);
+            this.green = (uint8)(green * 255.999f);
+            this.blue = (uint8)(blue * 255.999f);
+            this.alpha = (uint8)(alpha * 255.999f);
+        }
+
         public Colour.from_colour (Colour colour) {
             red = colour.red;
             green = colour.green;
@@ -34,7 +41,7 @@ namespace Virgil {
             string string_blue = blue.to_string ();
             string string_alpha = alpha.to_string ();
 
-            return @"{ red: $string_red, green: $string_green, blue: $string_blue, alpha: $string_alpha }";
+            return @"{ red: $(string_red), green: $(string_green), blue: $(string_blue), alpha: $(string_alpha) }";
         }
     }
 }

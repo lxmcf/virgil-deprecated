@@ -13,6 +13,10 @@ namespace Virgil.Graphics {
             base.from_file (filename, TextureType.STATIC);
         }
 
+        public StaticTexture2D.from_texture_raw (TextureRaw raw) {
+            base.from_texture_raw (raw, TextureType.STATIC);
+        }
+
         public int set_pixels (uchar* pixels) {
             int width, height;
 

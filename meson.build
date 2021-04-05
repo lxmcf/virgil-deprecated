@@ -1,10 +1,10 @@
-project ('virgil', [ 'vala', 'c' ], version: '1.0')
+project ('virgil', [ 'vala', 'c' ], version: '0.5')
 
 # Variables
 source_dir = meson.current_source_dir ()
-vapi_dir = source_dir /'vapi'
+vapi_dir = source_dir / 'vapi'
 is_subproject = meson.is_subproject ()
-build_type = get_option ('build_type')
+build_type = get_option ('build-type')
 profile = get_option ('profile')
 
 # Compilers
@@ -12,14 +12,18 @@ valac = meson.get_compiler ('vala')
 cc = meson.get_compiler ('c')
 
 # Programs
-pkgconfig = import ('pkgconfig')
-# gir_compiler = find_program ('g-ir-compiler', required: false)
 vala_lint = find_program ('io.elementary.vala-lint', required : false)
 
 # Compiler arguments
 valac_arguments = [
     '--vapidir', vapi_dir
 ]
+
+if build_type == 'development'
+    valac_arguments += [ '-D', 'DEVELOPMENT' ]
+else
+    valac_arguments += [ '-D', 'RELEASE' ]
+endif
 
 cc_arguments = [
     '-DSTB_IMAGE_IMPLEMENTATION'
@@ -32,7 +36,6 @@ add_project_arguments (cc_arguments, language: 'c')
 dependencies = [
     dependency ('glib-2.0'),
     dependency ('gobject-2.0'),
-    dependency ('SDL2')
 ]
 
 dependencies_external = [
@@ -42,6 +45,15 @@ dependencies_external = [
 dependencies_vapi = [
     valac.find_library ('stb_image', dirs: vapi_dir)
 ]
+
+if is_subproject
+    dependencies_external += [ meson.get_compiler ('c').find_library ('SDL2') ]
+    dependencies_vapi += [ meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir) ]
+
+    libvirgil_dep_dependencies = [ dependencies, dependencies_external, dependencies_vapi ]
+else
+    dependencies += [ dependency ('SDL2') ]
+endif
 
 subdir ('src')
 
@@ -67,12 +79,11 @@ libvirgil = library (
         include_directories ('include')
     ],
 
-    # BUG: This sets the vapi header to GameState.h?
-    # vala_header: 'virgil.h',
-    # vala_vapi: 'virgil.vapi',
+    vala_header: 'virgil.h',
+    vala_vapi: 'virgil.vapi',
 
     install: true,
-    install_dir: [ true, true, true]
+    install_dir: [ true, true, true ]
 )
 
 libvirgil_dep = declare_dependency (
@@ -88,12 +99,16 @@ libvirgil_dep = declare_dependency (
     ]
 )
 
-virgil_pkg = pkgconfig.generate(
-    libvirgil,
-    name: 'virgil',
-    requires: dependencies,
-    # subdirs: [ 'virgil' ],
-    description: 'elementary\'s Application Framework',
-    version: meson.project_version(),
-    url: 'https://github.com/elementary/granite',
+if not is_subproject
+    pkgconfig = import ('pkgconfig')
+
+    virgil_pkg = pkgconfig.generate(
+        libvirgil,
+        name: 'virgil',
+        requires: dependencies,
+        # subdirs: [ 'virgil' ],
+        description: 'elementary\'s Application Framework',
+        version: meson.project_version(),
+        url: 'https://github.com/elementary/granite',
 )
+endif

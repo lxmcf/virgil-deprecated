@@ -2,10 +2,10 @@ using SDL;
 
 namespace Virgil.Graphics {
     public enum BlendMode {
-        NONE,
-        BLEND,
-        ADDITIVE,
-        MODULATE;
+        NONE = 0,
+        BLEND = 1,
+        ADDITIVE = 2,
+        MODULATE = 3;
 
         internal Video.BlendMode to_sdl () {
             switch (this) {

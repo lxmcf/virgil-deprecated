@@ -9,6 +9,7 @@ namespace Virgil.Graphics {
         private Texture _texture;
         private string _texture_id;
         private int _channels;
+        private TextureType _texture_type;
 
         internal Texture sdl_texture {
             get { return _texture; }
@@ -22,6 +23,10 @@ namespace Virgil.Graphics {
             get { return _channels; }
         }
 
+        public TextureType texture_type {
+            get { return _texture_type; }
+        }
+
         public Texture2D (uint width, uint height, TextureType type) {
             GameState state = Game.get_state ();
 
@@ -33,6 +38,7 @@ namespace Virgil.Graphics {
 
             _channels = Image.Channels.RGB_ALPHA;
             _texture_id = Uuid.string_random ();
+            _texture_type = type;
         }
 
         public Texture2D.from_file (string filename, TextureType type) {
@@ -57,6 +63,7 @@ namespace Virgil.Graphics {
             }
 
             _texture_id = Uuid.string_random ();
+            _texture_type = type;
         }
 
         public Texture2D.from_texture_raw (TextureRaw raw, TextureType type) {
@@ -72,6 +79,7 @@ namespace Virgil.Graphics {
             _texture.set_blend_mode (BlendMode.BLEND.to_sdl ());
 
             _texture_id = Uuid.string_random ();
+            _texture_type = type;
         }
 
         public int set_colour (Colour colour) {
@@ -93,6 +101,24 @@ namespace Virgil.Graphics {
             _texture.query (null, null, out width, out height);
 
             return new Rectangle (0, 0, width, height);
+        }
+
+        public void get_size (out int width, out int height) {
+            _texture.query (null, null, out width, out height);
+        }
+
+        public string to_string () {
+            int _width, _height;
+
+            _texture.query (null, null, out _width, out _height);
+
+            string id = _texture_id;
+            string width = _width.to_string ();
+            string height = _height.to_string ();
+            string channels = _channels.to_string ();
+            string type = texture_type.to_string ();
+
+            return @"{ id: $(id), width: $(width), height: $(height), channels: $(channels), type: $(type) }";
         }
     }
 }

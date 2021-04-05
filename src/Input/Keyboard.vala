@@ -3,12 +3,12 @@ using Virgil.Debug;
 
 namespace Virgil.Input {
     public class Keyboard {
-        private static List<Key> _key_list;
+        private static List<KeyboardKey> _key_list;
         private static bool _is_initialised;
 
         public static int init () {
             if (!_is_initialised) {
-                _key_list = new List<Key> ();
+                _key_list = new List<KeyboardKey> ();
 
                 return 0;
             } else {
@@ -22,7 +22,7 @@ namespace Virgil.Input {
             var item = key_exists (keycode);
 
             if (item == null) {
-                _key_list.append (new Key (keycode));
+                _key_list.append (new KeyboardKey (keycode));
             } else {
                 print_warning ("Attempted to add already monitored key");
             }
@@ -94,23 +94,41 @@ namespace Virgil.Input {
             }
         }
 
-        private static unowned Key? key_exists (string keycode) {
+        private static unowned KeyboardKey? key_exists (string keycode) {
             Keycode key = Keycode.from_name (keycode);
 
             if (key != Keycode.UNKNOWN) {
                 for (int i = 0; i < _key_list.length (); i++) {
-                    Key item = _key_list.nth_data (i);
+                    KeyboardKey item = _key_list.nth_data (i);
 
                     if (item.key == keycode) {
                         return _key_list.nth_data (i);
                     }
                 }
 
-                _key_list.append (new Key (keycode));
+                _key_list.append (new KeyboardKey (keycode));
             }
 
             // Will always return null on first call
             return null;
+        }
+
+        public static int print_keys () {
+            if (_key_list.length () == 0) {
+                return 1;
+            }
+
+            print_message ("=== BEGIN KEY PRINT ===");
+
+            for (int i = 0; i < _key_list.length (); i++) {
+                KeyboardKey item = _key_list.nth_data (i);
+
+                print_message (item.to_string ());
+            }
+
+            print_message ("==== END KEY PRINT ====");
+
+            return 0;
         }
     }
 }

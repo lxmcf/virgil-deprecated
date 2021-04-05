@@ -3,6 +3,22 @@ namespace Virgil.Graphics {
     public enum TextureType {
         STATIC,
         STREAMING,
-        TARGET
+        TARGET;
+
+        public string to_string () {
+            switch (this) {
+                case STATIC:
+                    return "STATIC";
+
+                case STREAMING:
+                    return "STREAMING";
+
+                case TARGET:
+                    return "TARGET";
+
+                default:
+                    return "UNKOWN";
+            }
+        }
     }
 }

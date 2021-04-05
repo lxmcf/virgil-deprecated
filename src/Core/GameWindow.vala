@@ -29,7 +29,8 @@ namespace Virgil.Core {
         }
 
         public GameWindow (int width = 640, int height = 360) {
-            _window = new Video.Window (@"$(Constants.PROJECT_NAME) {$(Constants.PROJECT_TYPE)}", CENTERED, CENTERED, width, height, 0);
+            _window = new Video.Window ("", CENTERED, CENTERED, width, height, 0);
+            title = @"$(Constants.PROJECT_NAME) - $(Constants.PROJECT_TYPE)";
 
             set_size (width, height);
         }

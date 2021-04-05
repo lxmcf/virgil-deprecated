@@ -1,4 +1,4 @@
-// NOTE: Work out some way to not require this
+// TODO: Work out some way to not require this
 
 namespace Virgil.Stb.Image {
     enum Channels {

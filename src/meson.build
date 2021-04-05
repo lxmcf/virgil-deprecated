@@ -40,7 +40,15 @@ project_sources = files (
 
     'Stb/Image.vala',
 
-    'Input/Key.vala',
+    'Filesystem/Filesystem.vala',
+
+    'Math/Perlin.vala',
+
+    'Input/KeyboardKey.vala',
     'Input/KeyState.vala',
-    'Input/Keyboard.vala'
+    'Input/Keyboard.vala',
+
+    'Input/Button.vala',
+    'Input/MouseButton.vala',
+    'Input/Mouse.vala'
 )

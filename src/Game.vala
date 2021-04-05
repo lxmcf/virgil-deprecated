@@ -24,6 +24,7 @@ namespace Virgil {
                 _framerate = new FramerateHandler ();
 
                 Keyboard.init ();
+                Mouse.init ();
 
                 _game_state = new GameState () {
                     window = _window,
@@ -31,11 +32,14 @@ namespace Virgil {
                     framerate = _framerate
                 };
 
+                //  Type type = typeof (Game);
+                //  print_warning (type.name ());
+
                 _running = true;
 
                 _link_events ();
             } else {
-                print_error ("SDL failed to initialise! { SDL_Error: " + SDL.get_error () + "}");
+                print_error ("{ SDL_Error: " + SDL.get_error () + "}");
             }
         }
 
@@ -71,14 +75,6 @@ namespace Virgil {
             return _running;
         }
 
-        private bool _init () {
-            int sdl_init = SDL.init ();
-
-            if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
-
-            return (sdl_init == 0);
-        }
-
         public int quit () {
             if (_running) {
                 _running = false;
@@ -87,6 +83,14 @@ namespace Virgil {
             }
 
             return 1;
+        }
+
+        private bool _init () {
+            int sdl_init = SDL.init ();
+
+            if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
+
+            return (sdl_init == 0);
         }
 
         private void _link_events () {
@@ -98,13 +102,13 @@ namespace Virgil {
                 Keyboard.update_key (key, is_down);
             });
 
-            //  _event.on_mouse_update.connect ((button, is_down) => {
-            //      mouse.update_button (button, is_down);
-            //  });
+            _event.on_mouse_update.connect ((button, is_down) => {
+                Mouse.update_button (button, is_down);
+            });
 
-            //  _event.on_mouse_motion.connect ((motion) => {
-            //      mouse.update_position (motion);
-            //  });
+            _event.on_mouse_motion.connect ((x, y, relative_x, relative_y) => {
+                Mouse.set_position (x, y);
+            });
         }
 
         public static unowned GameState get_state () {
