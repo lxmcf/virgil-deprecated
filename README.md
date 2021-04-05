@@ -14,7 +14,7 @@ Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index
 
 ---
 
-The Vala Game Library (VGL), or formally known as 'Virgil' is my answer to 'if I can't find it, I'll make it'. I grew tired of installing Windows VM's to use common 2D game engines and having to run around in circles finding a Linux compatible engine I can use to fruitlessly make simple games.
+The Vala Game Library (VGL), or formally known as 'Virgil' is my answer to 'if I can't find it, I'll make it'. I grew tired of installing Windows VM's to use common 2D game engines and having to run around in circles finding a Linux compatible engine I can use to fruitlessly make simple games, a basic demo can be found at [the following repo](https://github.com/lxmcf/virgil-demo).
 
 Virgil is built from the ground up using Vala and the SDL2 library, this is my first major project as well as my first dip into 'proper development' using a new language.
 

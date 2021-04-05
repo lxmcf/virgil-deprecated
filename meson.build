@@ -1,4 +1,4 @@
-project ('virgil', [ 'vala', 'c' ], version: '0.5')
+project ('virgil', [ 'vala', 'c' ], version: '0.1.0')
 
 # Variables
 source_dir = meson.current_source_dir ()
@@ -107,8 +107,8 @@ if not is_subproject
         name: 'virgil',
         requires: dependencies,
         # subdirs: [ 'virgil' ],
-        description: 'elementary\'s Application Framework',
+        description: 'A basic game engine!',
         version: meson.project_version(),
-        url: 'https://github.com/elementary/granite',
+        url: 'https://github.com/lxmcf/virgil',
 )
 endif
