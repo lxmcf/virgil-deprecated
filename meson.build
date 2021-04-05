@@ -1,59 +1,78 @@
-project ('virgil', ['vala', 'c'], version: '0.0.4')
+project ('virgil', [ 'vala', 'c' ], version: '0.5')
 
 # Variables
 source_dir = meson.current_source_dir ()
-vapi_dir = join_paths (source_dir, 'vapi')
-data_dir = join_paths (source_dir, 'data')
-build_dir = join_paths (join_paths(source_dir, meson.current_build_dir ()))
+vapi_dir = source_dir / 'vapi'
+is_subproject = meson.is_subproject ()
+build_type = get_option ('build-type')
+profile = get_option ('profile')
 
-vala_version = meson.get_compiler('vala').version()
+# Compilers
+valac = meson.get_compiler ('vala')
+cc = meson.get_compiler ('c')
 
-if vala_version.version_compare ('<=0.43.90')
-    add_project_arguments (['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
+# Programs
+vala_lint = find_program ('io.elementary.vala-lint', required : false)
+
+# Compiler arguments
+valac_arguments = [
+    '--vapidir', vapi_dir
+]
+
+if build_type == 'development'
+    valac_arguments += [ '-D', 'DEVELOPMENT' ]
+else
+    valac_arguments += [ '-D', 'RELEASE' ]
 endif
 
-# Dependencies
-libvirgil_dependencies = [
+cc_arguments = [
+    '-DSTB_IMAGE_IMPLEMENTATION'
+]
+
+add_project_arguments (valac_arguments, language: 'vala')
+add_project_arguments (cc_arguments, language: 'c')
+
+# Dependencies and VAPI
+dependencies = [
     dependency ('glib-2.0'),
-    dependency ('gio-2.0'),
-
-    meson.get_compiler ('c').find_library ('SDL2'),
-    meson.get_compiler ('c').find_library ('SDL2_ttf'),
-
-    meson.get_compiler ('c').find_library ('m')
+    dependency ('gobject-2.0'),
 ]
 
-libvirgil_vapi = [
-    meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
-    meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir),
-
-    meson.get_compiler('vala').find_library('stb_image', dirs: vapi_dir)
+dependencies_external = [
+    cc.find_library ('m')
 ]
+
+dependencies_vapi = [
+    valac.find_library ('stb_image', dirs: vapi_dir)
+]
+
+if is_subproject
+    dependencies_external += [ meson.get_compiler ('c').find_library ('SDL2') ]
+    dependencies_vapi += [ meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir) ]
+
+    libvirgil_dep_dependencies = [ dependencies, dependencies_external, dependencies_vapi ]
+else
+    dependencies += [ dependency ('SDL2') ]
+endif
+
+subdir ('src')
 
 # Vala lint
-vala_lint = find_program ('io.elementary.vala-lint', required : false)
 if vala_lint.found ()
-    test (
-        'Vala lint',
-        vala_lint,
-        args: [ '-d', source_dir ]
-    )
+    test ('Vala lint', vala_lint, args: [ '-d', source_dir ])
 endif
 
-subdir ('lib')
-subdir ('data')
-
-# Virgil Shared Library
-libvirgil = shared_library (
+# Library
+libvirgil = library (
     meson.project_name (),
 
-    libvirgil_sources,
-    libvirgil_resources,
+    project_sources,
     config_header,
 
     dependencies: [
-        libvirgil_dependencies,
-        libvirgil_vapi
+        dependencies,
+        dependencies_vapi,
+        dependencies_external
     ],
 
     include_directories: [
@@ -63,8 +82,8 @@ libvirgil = shared_library (
     vala_header: 'virgil.h',
     vala_vapi: 'virgil.vapi',
 
-    version: meson.project_version (),
-    install: false
+    install: true,
+    install_dir: [ true, true, true ]
 )
 
 libvirgil_dep = declare_dependency (
@@ -72,8 +91,7 @@ libvirgil_dep = declare_dependency (
     version: meson.project_version (),
 
     dependencies: [
-        libvirgil_dependencies,
-        libvirgil_vapi
+        dependencies
     ],
 
     include_directories: [
@@ -81,6 +99,16 @@ libvirgil_dep = declare_dependency (
     ]
 )
 
-if not meson.is_subproject ()
-    subdir ('demo')
+if not is_subproject
+    pkgconfig = import ('pkgconfig')
+
+    virgil_pkg = pkgconfig.generate(
+        libvirgil,
+        name: 'virgil',
+        requires: dependencies,
+        # subdirs: [ 'virgil' ],
+        description: 'elementary\'s Application Framework',
+        version: meson.project_version(),
+        url: 'https://github.com/elementary/granite',
+)
 endif

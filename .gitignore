@@ -1,5 +1,7 @@
 build/
+subprojects/
 
 *~
 
 .DS_Store
+mst
