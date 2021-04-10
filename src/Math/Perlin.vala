@@ -2,32 +2,29 @@ using Virgil.Debug;
 
 namespace Virgil.Math {
     public class Perlin {
-        // TODO: Rewrite to use float rather than double
         // TODO: Clean everything up... This is a mess... The dev who did this should give up
         private static bool _is_initialised;
 
-        private static int[] _hash;
+        private static int[] _hash_table;
         private static int _seed;
 
         public static void randomise () {
             _seed = Random.int_range (0, int32.MAX);
-
-            print_message ("Seed: " + _seed.to_string ());
         }
 
-        public static double get_noise_2D (double x, double y, double frequency, int depth) {
+        public static float get_noise_2D (float x, float y, float frequency, int depth) {
             _init ();
 
-            double xa = x * frequency;
-            double ya = y * frequency;
+            float xa = x * frequency;
+            float ya = y * frequency;
 
-            double amp = 1.0;
-            double fin = 0;
-            double div = 0.0;
+            float amp = 1.0f;
+            float fin = 0;
+            float div = 0.0f;
 
             for (int i = 0; i < depth; i++) {
                 div += 256 * amp;
-                fin += _noise_2D (xa, ya) * amp;
+                fin += _get_noise_2D (xa, ya) * amp;
                 amp /= 2;
 
                 xa *= 2;
@@ -37,60 +34,54 @@ namespace Virgil.Math {
             return fin / div;
         }
 
-        private static double _lerp (double x, double y, double value) {
-            return x + value * (y - x);
+        private static float _lerp_smooth (float x, float y, float value) {
+            float new_value = value * value * (3 - 2 * value);
+
+            return flerp (x, y, new_value);
         }
 
-        private static double _lerp_smooth (double x, double y, double value) {
-            double new_value = value * value * (3 - 2 * value);
-
-            return _lerp (x, y, new_value);
-        }
-
-        private static int _noise_2 (int x, int y) {
+        private static int _get_hash_2D (int x, int y) {
             int index_y = (y + _seed) % 256;
 
             if (index_y < 0) {
                 index_y += 256;
             }
 
-            int index_x = (_hash[index_y] + x) % 256;
+            int index_x = (_hash_table[index_y] + x) % 256;
 
             if (index_x < 0) {
                 index_x += 256;
             }
 
-            return _hash[index_x];
+            return _hash_table[index_x];
         }
 
-        private static double _noise_2D (double x, double y) {
-            int position_x = (int)x;
-            int position_y = (int)y;
+        private static float _get_noise_2D (float x, float y) {
+            int int_x = (int)x;
+            int int_y = (int)y;
 
-            double fractal_x = x - position_x;
-            double fractal_y = y - position_y;
+            float remain_x = x - int_x;
+            float remain_y = y - int_y;
 
-            int s = _noise_2 (position_x, position_y);
-            int t = _noise_2 (position_x + 1, position_y);
-            int u = _noise_2 (position_x, position_y + 1);
-            int v = _noise_2 (position_x + 1, position_y + 1);
+            int top_left = _get_hash_2D (int_x, int_y);
+            int top_right = _get_hash_2D (int_x + 1, int_y);
+            int bottom_left = _get_hash_2D (int_x, int_y + 1);
+            int bottom_right = _get_hash_2D (int_x + 1, int_y + 1);
 
-            double low = _lerp_smooth (s, t, fractal_x);
-            double high = _lerp_smooth (u, v, fractal_x);
+            float low = _lerp_smooth (top_left, top_right, remain_x);
+            float high = _lerp_smooth (bottom_left, bottom_right, remain_x);
 
-            return _lerp_smooth (low, high, fractal_y);
+            return _lerp_smooth (low, high, remain_y);
         }
 
         private static int _init () {
             if (_is_initialised) {
-                return 1;
+                return EXIT_FAIL;
             }
 
-            // Testing for now
-            _seed = Random.int_range (0, 2048);
+            randomise ();
 
-            // Still just testing
-            _hash = new int[256] {
+            _hash_table = new int[256] {
                 208,34,231,213,32,248,233,56,161,78,24,140,71,48,140,254,245,255,247,247,40,
                 185,248,251,245,28,124,204,204,76,36,1,107,28,234,163,202,224,245,128,167,204,
                 9,92,217,54,239,174,173,102,193,189,190,121,100,108,167,44,43,77,180,204,8,81,
@@ -107,7 +98,7 @@ namespace Virgil.Math {
 
             _is_initialised = true;
 
-            return 0;
+            return EXIT_SUCCESS;
         }
     }
 }

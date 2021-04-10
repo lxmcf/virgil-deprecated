@@ -131,7 +131,7 @@ namespace Virgil.Input {
 
         public static int print_buttons () {
             if (_button_list.length () == 0) {
-                return 1;
+                return EXIT_FAIL;
             }
 
             print_message ("=== BEGIN BUTTON PRINT ===");
@@ -144,7 +144,7 @@ namespace Virgil.Input {
 
             print_message ("==== END BUTTON PRINT ====");
 
-            return 0;
+            return EXIT_SUCCESS;
         }
     }
 }

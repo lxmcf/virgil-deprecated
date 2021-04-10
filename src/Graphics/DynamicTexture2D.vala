@@ -40,7 +40,7 @@ namespace Virgil.Graphics {
             if (_locked) {
                 print_error (@"DynamicTexture2D { $texture_id } already locked!");
 
-                return 1;
+                return EXIT_FAIL;
             }
 
             sdl_texture.do_lock (
@@ -51,7 +51,7 @@ namespace Virgil.Graphics {
 
             _locked = true;
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         public int @unlock () {
@@ -62,7 +62,7 @@ namespace Virgil.Graphics {
             sdl_texture.unlock ();
             _locked = false;
 
-            return 0;
+            return EXIT_SUCCESS;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Virgil {
                 _renderer.present ();
             }
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         // Default runtime methods
@@ -79,10 +79,10 @@ namespace Virgil {
             if (_running) {
                 _running = false;
 
-                return 0;
+                return EXIT_SUCCESS;
             }
 
-            return 1;
+            return EXIT_FAIL;
         }
 
         private bool _init () {

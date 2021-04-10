@@ -58,11 +58,7 @@ namespace Virgil.Core {
         private uint32 _get_ticks () {
             uint32 ticks = SDL.Timer.get_ticks ();
 
-            if (ticks == 0) {
-                return 1;
-            } else {
-                return ticks;
-            }
+            return ticks;
         }
     }
 }

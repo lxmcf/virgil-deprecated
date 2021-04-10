@@ -13,12 +13,12 @@ namespace Virgil.Filesystem {
         if (!_is_initialised) {
             print_error ("Virgil filesystem is not initialised!");
 
-            return 1;
+            return EXIT_FAIL;
         }
 
         _global_directory = directory;
 
-        return 0;
+        return EXIT_SUCCESS;
     }
 
     public static string get_global_directory () {

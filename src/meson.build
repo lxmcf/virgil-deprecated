@@ -18,6 +18,7 @@ project_sources = files (
     'Rectangle.vala',
     'Colour.vala',
     'InitFlags.vala',
+    'Constants.vala',
 
     'Core/EventHandler.vala',
     'Core/GameWindow.vala',
@@ -43,6 +44,7 @@ project_sources = files (
     'Filesystem/Filesystem.vala',
 
     'Math/Perlin.vala',
+    'Math/Math.vala',
 
     'Input/KeyboardKey.vala',
     'Input/KeyState.vala',

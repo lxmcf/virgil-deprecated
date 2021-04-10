@@ -18,12 +18,27 @@
             "type": "shell",
             "command": "meson build --default-library=static && sudo ninja install -C build",
             "problemMatcher": "$valac",
+            "presentation": {
+                "focus": true,
+            }
+        },
+        {
+            "label": "Uninstall Project",
+            "type": "shell",
+            "command": "sudo ninja uninstall -C build",
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+            }
         },
         {
             "label": "Clean Build Environment",
             "type": "shell",
-            "command": "rm -r build",
-            "problemMatcher": []
+            "command": "sudo rm -r build",
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+            }
         }
     ]
 }

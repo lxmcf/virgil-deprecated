@@ -115,7 +115,7 @@ namespace Virgil.Input {
 
         public static int print_keys () {
             if (_key_list.length () == 0) {
-                return 1;
+                return EXIT_FAIL;
             }
 
             print_message ("=== BEGIN KEY PRINT ===");
@@ -128,7 +128,7 @@ namespace Virgil.Input {
 
             print_message ("==== END KEY PRINT ====");
 
-            return 0;
+            return EXIT_SUCCESS;
         }
     }
 }

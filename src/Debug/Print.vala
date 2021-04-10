@@ -27,10 +27,10 @@ namespace Virgil.Debug {
         if (_level <= PrintLevel.MESSAGE) {
             _print (text, "\033[1mMESSAGE\033[0m");
 
-            return 0;
+            return Virgil.EXIT_SUCCESS;
         }
 
-        return 1;
+        return EXIT_FAIL;
     }
 
     public static int print_warning (string text) {
@@ -39,10 +39,10 @@ namespace Virgil.Debug {
         if (_level <= PrintLevel.WARNING) {
             _print (text, "\033[93;1mWARNING\033[0m");
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
-        return 1;
+        return EXIT_FAIL;
     }
 
     public static int print_error (string text) {
@@ -51,9 +51,9 @@ namespace Virgil.Debug {
         if (_level <= PrintLevel.ERROR) {
             _print (text, "\033[91;1mERROR\033[0m");
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
-        return 1;
+        return EXIT_FAIL;
     }
 }

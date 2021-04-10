@@ -74,7 +74,7 @@ namespace Virgil.Graphics {
             uint pixel = _channels * (y * width + x);
 
             if (pixel + (_channels - 1) > length) {
-                return 1;
+                return EXIT_FAIL;
             }
 
             _pixels[pixel + 0] = red;
@@ -82,7 +82,11 @@ namespace Virgil.Graphics {
             _pixels[pixel + 2] = blue;
             _pixels[pixel + 3] = alpha;
 
-            return 0;
+            return EXIT_SUCCESS;
+        }
+
+        public int set_pixel_colour (int x, int y, Colour colour) {
+            return set_pixel (x, y, colour.red, colour.green, colour.blue, colour.alpha);
         }
 
         public uchar* get_pixels () {
@@ -103,7 +107,7 @@ namespace Virgil.Graphics {
             alpha = 0;
 
             if (pixel + (_channels - 1) > length) {
-                return 1;
+                return EXIT_FAIL;
             }
 
             red = _pixels[pixel];
@@ -111,7 +115,7 @@ namespace Virgil.Graphics {
             blue = _pixels[pixel + 2];
             alpha = _pixels[pixel + 3];
 
-            return 1;
+            return EXIT_SUCCESS;
         }
 
         public void clear () {

@@ -85,11 +85,11 @@ namespace Virgil {
 
         public int copy (Rectangle rectangle) {
             if (rectangle.is_empty ()) {
-                return 1;
+                return EXIT_FAIL;
             }
 
             if (is_equal (rectangle)) {
-                return 2;
+                return EXIT_FAIL_DUPLICATE;
             }
 
             x = rectangle.x;
@@ -98,7 +98,7 @@ namespace Virgil {
             width = rectangle.width;
             height = rectangle.height;
 
-            return 0;
+            return EXIT_SUCCESS;
         }
 
         public bool is_empty () {
