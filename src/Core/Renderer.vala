@@ -5,14 +5,14 @@ using Virgil.Graphics;
 using Virgil.Debug;
 
 namespace Virgil.Core {
-    public class GameRenderer {
+    public class Renderer {
         private Video.Renderer _renderer;
 
         internal Video.Renderer sdl_renderer {
             get { return _renderer; }
         }
 
-        public GameRenderer (GameWindow window) {
+        public Renderer (Window window) {
             _renderer = Video.Renderer.create (window.sdl_window, -1, 0);
         }
 

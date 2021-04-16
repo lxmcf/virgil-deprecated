@@ -21,8 +21,8 @@ project_sources = files (
     'Constants.vala',
 
     'Core/EventHandler.vala',
-    'Core/GameWindow.vala',
-    'Core/GameRenderer.vala',
+    'Core/Window.vala',
+    'Core/Renderer.vala',
     'Core/FramerateHandler.vala',
 
     'Debug/Print.vala',
@@ -35,6 +35,7 @@ project_sources = files (
     'Graphics/TextureRaw.vala',
     'Graphics/RenderQueue.vala',
     'Graphics/RenderQueueCall.vala',
+    'Graphics/RenderSortMode.vala',
 
     'Graphics/BlendMode.vala',
     'Graphics/TextureType.vala',

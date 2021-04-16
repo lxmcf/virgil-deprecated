@@ -1,4 +1,5 @@
 // TODO: Work out some way to not require this
+using Stbi;
 
 namespace Virgil.Stb.Image {
     enum Channels {
@@ -10,10 +11,10 @@ namespace Virgil.Stb.Image {
     }
 
     public static uchar* load (string file, out int width, out int height, out int channels, int desired_channels = 4) {
-        return Stbi.__load (file, out width, out height, out channels, desired_channels);
+        return __load (file, out width, out height, out channels, desired_channels);
     }
 
     public static int load_info (string file, out int width, out int height, out int channels) {
-        return Stbi.__load_info (file, out width, out height, out channels);
+        return __load_info (file, out width, out height, out channels);
     }
 }

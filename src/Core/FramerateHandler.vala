@@ -40,6 +40,7 @@ namespace Virgil.Core {
 
             if (current_ticks <= target_ticks) {
                 the_delay = target_ticks - current_ticks;
+
                 SDL.Timer.delay (the_delay);
             } else {
                 _frame_count = 0;
@@ -49,7 +50,7 @@ namespace Virgil.Core {
             _delta_time = time_passed;
         }
 
-        public void set_framerate (int framerate) {
+        public void set_framerate (int? framerate) {
             _frame_count = 0;
             _rate = framerate;
             _rate_ticks = (1000.0f / (float)framerate);

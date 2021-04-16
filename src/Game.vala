@@ -9,16 +9,16 @@ namespace Virgil {
         private static GameState _game_state;
 
         private InitFlags _initialised_modules;
-        private GameWindow _window;
-        private GameRenderer _renderer;
+        private Window _window;
+        private Renderer _renderer;
 
         private EventHandler _event;
         private FramerateHandler _framerate;
 
         public Game () {
             if (_init ()) {
-                _window = new GameWindow ();
-                _renderer = new GameRenderer (_window);
+                _window = new Window ();
+                _renderer = new Renderer (_window);
 
                 _event = new EventHandler ();
                 _framerate = new FramerateHandler ();

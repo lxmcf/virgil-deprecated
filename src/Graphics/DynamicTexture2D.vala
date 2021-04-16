@@ -33,9 +33,10 @@ namespace Virgil.Graphics {
 
         // NOTE: Experimental, unsure if function will work as expected
         // IDEA: Impliment a dedicated pixel update method to avoid EU needing to use memset
-        public int @lock (Rectangle rect, out void* pixels, out int pitch) {
+        public int @lock (Rectangle? rect, out void* pixels, out int pitch) {
             pitch = 0;
             pixels = null;
+            Rect? quad;
 
             if (_locked) {
                 print_error (@"DynamicTexture2D { $texture_id } already locked!");
@@ -43,8 +44,14 @@ namespace Virgil.Graphics {
                 return EXIT_FAIL;
             }
 
+            if (rect == null) {
+                quad = null;
+            } else {
+                quad = { rect.x, rect.y, rect.width, rect.height };
+            }
+
             sdl_texture.do_lock (
-                { rect.x, rect.y, rect.width, rect.height },
+                quad,
                 out pixels,
                 out pitch
             );

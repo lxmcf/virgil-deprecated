@@ -1,7 +1,7 @@
 using SDL;
 
 namespace Virgil.Core {
-    public class GameWindow {
+    public class Window {
         private Video.Window _window;
 
         internal Video.Window sdl_window {
@@ -28,7 +28,7 @@ namespace Virgil.Core {
             set { set_size (width, value); }
         }
 
-        public GameWindow (int width = 640, int height = 360) {
+        public Window (int width = 640, int height = 360) {
             _window = new Video.Window ("", CENTERED, CENTERED, width, height, 0);
             title = @"$(Constants.PROJECT_NAME) - $(Constants.PROJECT_TYPE)";
 
