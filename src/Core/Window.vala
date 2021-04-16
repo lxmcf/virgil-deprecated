@@ -30,7 +30,7 @@ namespace Virgil.Core {
 
         public Window (int width = 640, int height = 360) {
             _window = new Video.Window ("", CENTERED, CENTERED, width, height, 0);
-            title = @"$(Constants.PROJECT_NAME) - $(Constants.PROJECT_TYPE)";
+            title = @"$(PROJECT_NAME) - $(PROJECT_TYPE)";
 
             set_size (width, height);
         }

@@ -1,6 +1,6 @@
 namespace Virgil.Graphics {
     public class RenderQueueCall {
-        private Texture2D* _texture;
+        private unowned Texture2D _texture;
         private Point _point;
 
         private bool _free_texture;

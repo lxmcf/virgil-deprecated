@@ -10,6 +10,7 @@ namespace Virgil.Graphics {
         private string _texture_id;
         private int _channels;
         private TextureType _texture_type;
+        private BlendMode _blend_mode;
 
         internal Texture sdl_texture {
             get { return _texture; }
@@ -29,12 +30,13 @@ namespace Virgil.Graphics {
 
         public Texture2D (uint width, uint height, TextureType type) {
             GameState state = Game.get_state ();
+            _blend_mode = BlendMode.BLEND;
 
             _texture = Texture.create (
                 state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, (int)width, (int)height
             );
 
-            _texture.set_blend_mode (BlendMode.BLEND.to_sdl ());
+            _texture.set_blend_mode (_blend_mode.to_sdl ());
 
             _channels = Image.Channels.RGB_ALPHA;
             _texture_id = Uuid.string_random ();
@@ -44,6 +46,7 @@ namespace Virgil.Graphics {
         public Texture2D.from_file (string filename, TextureType type) {
             bool file_exists = FileUtils.test (filename, GLib.FileTest.EXISTS);
             GameState state = Game.get_state ();
+            _blend_mode = BlendMode.BLEND;
 
             if (file_exists) {
                 int width, height, channels;
@@ -55,7 +58,7 @@ namespace Virgil.Graphics {
                 );
 
                 _texture.update (null, pixels, channels * width);
-                _texture.set_blend_mode (BlendMode.BLEND.to_sdl ());
+                _texture.set_blend_mode (_blend_mode.to_sdl ());
 
                 _channels = channels;
 
@@ -68,6 +71,7 @@ namespace Virgil.Graphics {
 
         public Texture2D.from_texture_raw (TextureRaw raw, TextureType type) {
             GameState state = Game.get_state ();
+            _blend_mode = BlendMode.BLEND;
 
             _channels = (int)raw.channels;
 
@@ -76,7 +80,7 @@ namespace Virgil.Graphics {
             );
 
             _texture.update (null, raw.get_pixels (), (int)raw.pitch);
-            _texture.set_blend_mode (BlendMode.BLEND.to_sdl ());
+            _texture.set_blend_mode (_blend_mode.to_sdl ());
 
             _texture_id = Uuid.string_random ();
             _texture_type = type;
@@ -86,6 +90,12 @@ namespace Virgil.Graphics {
             return _texture.set_color_mod (colour.red, colour.green, colour.blue);
         }
 
+        public void set_blend_mode (BlendMode mode) {
+            _blend_mode = mode;
+
+            _texture.set_blend_mode (mode.to_sdl ());
+        }
+
         public Colour get_colour () {
             uint8 red, green, blue, alpha;
 
@@ -93,6 +103,10 @@ namespace Virgil.Graphics {
             _texture.get_alpha_mod (out alpha);
 
             return new Colour (red, green, blue, alpha);
+        }
+
+        public BlendMode get_blend_mode () {
+            return _blend_mode;
         }
 
         public Rectangle get_bounds () {

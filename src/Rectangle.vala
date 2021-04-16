@@ -1,3 +1,5 @@
+using Virgil.Core;
+
 namespace Virgil {
     public class Rectangle {
         public int x;
@@ -112,7 +114,7 @@ namespace Virgil {
             string string_width = width.to_string ();
             string string_height = height.to_string ();
 
-            return @"{ x: $string_x, y: $string_y, width: $string_width, height: $string_height }";
+            return @"{ x: $(string_x), y: $(string_y), width: $(string_width), height: $(string_height) }";
         }
     }
 }

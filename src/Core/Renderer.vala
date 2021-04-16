@@ -50,27 +50,26 @@ namespace Virgil.Core {
             _renderer.present ();
         }
 
-        public void render_texture (Texture2D texture, int x, int y) {
+        public int render_texture (Texture2D texture, int x, int y) {
             Rectangle quad = texture.get_bounds ();
 
-            _renderer.copy (
+            return _renderer.copy (
                 texture.sdl_texture,
                 null, { x, y, quad.width, quad.height }
             );
         }
 
-        public void render_texture_point (Texture2D texture, Point point) {
-            Rectangle quad = texture.get_bounds ();
-
-            _renderer.copy (
-                texture.sdl_texture,
-                null, { point.x, point.y, quad.width, quad.height }
-            );
+        public int render_texture_point (Texture2D texture, Point point) {
+            return render_texture (texture, point.x, point.y);
         }
 
-        //  public void render_texture_rotate (Texture2D texture) {
-        //      _renderer.copyex (texture, null, )
-        //  }
+        public void reset_target () {
+            _renderer.render_target = null;
+        }
+
+        public void set_target (TargetTexture2D texture) {
+            _renderer.render_target = texture.sdl_texture;
+        }
 
         public int set_render_colour (Colour colour) {
             return _renderer.set_draw_color (colour.red, colour.green, colour.blue, colour.alpha);

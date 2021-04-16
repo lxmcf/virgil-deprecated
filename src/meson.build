@@ -36,6 +36,7 @@ project_sources = files (
     'Graphics/RenderQueue.vala',
     'Graphics/RenderQueueCall.vala',
     'Graphics/RenderSortMode.vala',
+    'Graphics/TargetTexture2D.vala',
 
     'Graphics/BlendMode.vala',
     'Graphics/TextureType.vala',

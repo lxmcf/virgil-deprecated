@@ -2,7 +2,6 @@ using Virgil.Debug;
 
 namespace Virgil.Math {
     public class Perlin {
-        // TODO: Clean everything up... This is a mess... The dev who did this should give up
         private static bool _is_initialised;
 
         private static int[] _hash_table;

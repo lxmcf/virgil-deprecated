@@ -6,7 +6,7 @@
         {
             "label": "Compile Project",
             "type": "shell",
-            "command": "meson build --default-library=static && ninja -C build",
+            "command": "meson build --default-library=${input:libtype} && ninja -C build",
             "problemMatcher": "$valac",
             "group": {
                 "kind": "build",
@@ -16,7 +16,7 @@
         {
             "label": "Compile & Install Project",
             "type": "shell",
-            "command": "meson build --default-library=static && sudo ninja install -C build",
+            "command": "meson build --default-library=${input:libtype} && sudo ninja install -C build",
             "problemMatcher": "$valac",
             "presentation": {
                 "focus": true,
@@ -39,6 +39,19 @@
             "presentation": {
                 "focus": true,
             }
+        }
+    ],
+
+    "inputs": [
+        {
+            "id": "libtype",
+            "type": "pickString",
+            "options": [
+                "static",
+                "shared"
+            ],
+            "description": "Whether to build Virgil as a static or shared library",
+            "default": "static"
         }
     ]
 }

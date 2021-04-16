@@ -1,7 +1,7 @@
 namespace Virgil.Debug {
     private static PrintLevel? _level;
 
-    private void _init () {
+    private static void _init () {
         if (_level == null) {
             _level = PrintLevel.MESSAGE;
         }
@@ -25,7 +25,19 @@ namespace Virgil.Debug {
         _init ();
 
         if (_level <= PrintLevel.MESSAGE) {
-            _print (text, "\033[1mMESSAGE\033[0m");
+            _print (text, "\033[39;1mMESSAGE\033[0m");
+
+            return Virgil.EXIT_SUCCESS;
+        }
+
+        return EXIT_FAIL;
+    }
+
+    public static int print_debug (string text) {
+        _init ();
+
+        if (_level <= PrintLevel.MESSAGE) {
+            _print (text, "\033[90;1mDEBUG\033[0m");
 
             return Virgil.EXIT_SUCCESS;
         }
