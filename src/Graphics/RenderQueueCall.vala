@@ -5,6 +5,7 @@ namespace Virgil.Graphics {
 
         private bool _free_texture;
         private int _depth;
+        private double _angle;
 
         public Texture2D* texture {
             get { return _texture; }
@@ -22,12 +23,18 @@ namespace Virgil.Graphics {
             get { return _depth; }
         }
 
-        public RenderQueueCall (Texture2D* texture, int x, int y, int depth = -1, bool free_texture = false) {
+        public double angle {
+            get { return _angle; }
+        }
+
+        public RenderQueueCall (Texture2D* texture, int x, int y, int depth, bool free_texture, double angle) {
             _point = new Point (x, y);
             _texture = texture;
 
             _depth = depth;
             _free_texture = free_texture;
+
+            _angle = angle;
         }
     }
 }

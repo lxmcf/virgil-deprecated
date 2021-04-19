@@ -33,7 +33,7 @@ namespace Virgil.Graphics {
                 return EXIT_FAIL_UNSUPPORTED_TYPE;
             }
 
-            _queue.push_tail (new RenderQueueCall (texture, x, y));
+            _queue.push_tail (new RenderQueueCall (texture, x, y, 0, false, 90.0));
 
             return EXIT_SUCCESS;
         }
@@ -50,6 +50,8 @@ namespace Virgil.Graphics {
             }
 
             // Future proofing for when multithreading is implimented
+            // Will prevent memory leaks if we add new queue calls from another thread
+            // mid way through final render phase
             if (clear && (_queue.get_length () > 0)) {
                 _queue.clear ();
             }

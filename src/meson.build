@@ -31,7 +31,6 @@ project_sources = files (
     'Graphics/Texture2D.vala',
     'Graphics/DynamicTexture2D.vala',
     'Graphics/StaticTexture2D.vala',
-    'Graphics/TiledTexture2D.vala',
     'Graphics/TextureRaw.vala',
     'Graphics/RenderQueue.vala',
     'Graphics/RenderQueueCall.vala',
@@ -45,7 +44,7 @@ project_sources = files (
 
     'Filesystem/Filesystem.vala',
 
-    'Math/Perlin.vala',
+    'Math/PerlinGenerator.vala',
     'Math/Math.vala',
 
     'Input/KeyboardKey.vala',

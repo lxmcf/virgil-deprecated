@@ -1,17 +1,29 @@
 using Virgil.Debug;
 
 namespace Virgil.Math {
-    public class Perlin {
-        private static bool _is_initialised;
+    public class PerlinGenerator {
+        private uint8[] _hash;
+        private int _seed;
 
-        private static int[] _hash_table;
-        private static int _seed;
+        public PerlinGenerator () {
+            _generate_hash ();
 
-        public static void randomise () {
+            randomise ();
+        }
+
+        public void randomise () {
             _seed = Random.int_range (0, int32.MAX);
         }
 
-        public static float get_noise_2D (float x, float y, float frequency, int depth) {  // vala-lint=naming-convention
+        public void set_seed (int seed) {
+            _seed = seed;
+        }
+
+        public int get_seed () {
+            return _seed;
+        }
+
+        public float get_noise_2D (float x, float y, float frequency, int depth) {  // vala-lint=naming-convention
             _init ();
 
             float xa = x * frequency;
@@ -33,29 +45,29 @@ namespace Virgil.Math {
             return fin / div;
         }
 
-        private static float _lerp_smooth (float x, float y, float value) {
+        private float _lerp_smooth (float x, float y, float value) {
             float new_value = value * value * (3 - 2 * value);
 
             return flerp (x, y, new_value);
         }
 
-        private static int _get_hash_2D (int x, int y) {  // vala-lint=naming-convention
+        private int _get_hash_2D (int x, int y) {  // vala-lint=naming-convention
             int index_y = (y + _seed) % 256;
 
             if (index_y < 0) {
                 index_y += 256;
             }
 
-            int index_x = (_hash_table[index_y] + x) % 256;
+            int index_x = (_hash[index_y] + x) % 256;
 
             if (index_x < 0) {
                 index_x += 256;
             }
 
-            return _hash_table[index_x];
+            return _hash[index_x];
         }
 
-        private static float _get_noise_2D (float x, float y) { // vala-lint=naming-convention
+        private float _get_noise_2D (float x, float y) { // vala-lint=naming-convention
             int int_x = (int)x;
             int int_y = (int)y;
 
@@ -73,14 +85,8 @@ namespace Virgil.Math {
             return _lerp_smooth (low, high, remain_y);
         }
 
-        private static int _init () {
-            if (_is_initialised) {
-                return EXIT_FAIL;
-            }
-
-            randomise ();
-
-            _hash_table = new int[256] {
+        private void _generate_hash () {
+            _hash = new uint8[256] {
                 208, 34, 231, 213, 32, 248, 233, 56, 161, 78, 24, 140, 71, 48, 140, 254, 245, 255, 247, 247, 40,
                 185, 248, 251, 245, 28, 124, 204, 204, 76, 36, 1, 107, 28, 234, 163, 202, 224, 245, 128, 167, 204,
                 9, 92, 217, 54, 239, 174, 173, 102, 193, 189, 190, 121, 100, 108, 167, 44, 43, 77, 180, 204, 8, 81,
@@ -94,10 +100,6 @@ namespace Virgil.Math {
                 135, 176, 183, 191, 253, 115, 184, 21, 233, 58, 129, 233, 142, 39, 128, 211, 118, 137, 139, 255,
                 114, 20, 218, 113, 154, 27, 127, 246, 250, 1, 8, 198, 250, 209, 92, 222, 173, 21, 88, 102, 219
             };
-
-            _is_initialised = true;
-
-            return EXIT_SUCCESS;
         }
     }
 }
