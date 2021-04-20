@@ -21,14 +21,14 @@ namespace Virgil.Core {
         }
 
         public int clear_colour (Colour colour) {
-            Colour old = new Colour ();
-
-            _renderer.get_draw_color (out old.red, out old.green, out old.blue, out old.alpha);
-            _renderer.set_draw_color (colour.red, colour.green, colour.blue, colour.alpha);
+            Colour* old = get_render_colour ();
+            set_render_colour (colour);
 
             int clear_code = clear ();
 
-            _renderer.set_draw_color (old.red, old.green, old.blue, old.alpha);
+            set_render_colour (old);
+
+            delete old;
 
             return clear_code;
         }
@@ -63,12 +63,14 @@ namespace Virgil.Core {
             return render_texture (texture, point.x, point.y);
         }
 
+        // TODO: Impliment primitives
+
         public void reset_target () {
             _renderer.render_target = null;
         }
 
-        public void set_target (TargetTexture2D texture) {
-            _renderer.render_target = texture.sdl_texture;
+        public void set_target (Surface surface) {
+            _renderer.render_target = surface.sdl_texture;
         }
 
         public int set_render_colour (Colour colour) {

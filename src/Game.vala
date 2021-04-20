@@ -38,6 +38,7 @@ namespace Virgil {
                 _running = true;
 
                 _link_events ();
+
             } else {
                 print_error ("{ SDL_Error: " + SDL.get_error () + "}");
             }
@@ -86,7 +87,11 @@ namespace Virgil {
         }
 
         private bool _init () {
+            // SDL and external modules
             int sdl_init = SDL.init ();
+
+            // Internal modules
+            set_print_level (PrintLevel.MESSAGE);
 
             if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
 

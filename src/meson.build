@@ -27,6 +27,7 @@ project_sources = files (
 
     'Debug/Print.vala',
     'Debug/PrintLevel.vala',
+    'Debug/BlockTimer.vala',
 
     'Graphics/Texture2D.vala',
     'Graphics/DynamicTexture2D.vala',
@@ -35,7 +36,7 @@ project_sources = files (
     'Graphics/RenderQueue.vala',
     'Graphics/RenderQueueCall.vala',
     'Graphics/RenderSortMode.vala',
-    'Graphics/TargetTexture2D.vala',
+    'Graphics/Surface.vala',
 
     'Graphics/BlendMode.vala',
     'Graphics/TextureType.vala',

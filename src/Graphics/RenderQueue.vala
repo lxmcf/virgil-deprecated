@@ -5,7 +5,7 @@ namespace Virgil.Graphics {
     public class RenderQueue {
         public Queue<RenderQueueCall> _queue;
 
-        private TargetTexture2D _texture;
+        private Surface _surface;
 
         // TODO: Impliment texture caching to allow text rendering (That isn't totally [ADVERTISER FRIENDLY WORDING])
         private Texture2D[] _texture_cache;
@@ -22,8 +22,8 @@ namespace Virgil.Graphics {
             GameState state = Game.get_state ();
             state.window.get_size (out width, out height);
 
-            _texture = new TargetTexture2D (width, height);
-            _texture.set_blend_mode (_blend_mode);
+            _surface = new Surface (width, height);
+            _surface.set_blend_mode (_blend_mode);
         }
 
         public int render_texture (Texture2D texture, int x, int y) {
@@ -43,7 +43,7 @@ namespace Virgil.Graphics {
 
             RenderQueueCall? queue_call = null;
 
-            state.renderer.set_target (_texture);
+            state.renderer.set_target (_surface);
 
             while ((queue_call = _queue.pop_head ()) != null) {
                 state.renderer.render_texture_point (queue_call.texture, queue_call.point);

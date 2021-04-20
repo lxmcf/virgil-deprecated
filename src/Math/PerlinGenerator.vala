@@ -24,8 +24,6 @@ namespace Virgil.Math {
         }
 
         public float get_noise_2D (float x, float y, float frequency, int depth) {  // vala-lint=naming-convention
-            _init ();
-
             float xa = x * frequency;
             float ya = y * frequency;
 

@@ -1,4 +1,5 @@
 // TODO: Refactor, a lot of data is reused and/or redundant
+// TODO: Move to using GLib timer's, should allow for uncapped framerates with accurate delta time
 namespace Virgil.Core {
     public class FramerateHandler {
         public uint32 _frame_count;
