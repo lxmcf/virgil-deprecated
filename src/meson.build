@@ -54,5 +54,8 @@ project_sources = files (
 
     'Input/Button.vala',
     'Input/MouseButton.vala',
-    'Input/Mouse.vala'
+    'Input/Mouse.vala',
+
+    'Input/Controller.vala',
+    'Input/Gamepad.vala'
 )
