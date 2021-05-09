@@ -17,6 +17,7 @@ project_sources = files (
     'Vector2.vala',
     'Rectangle.vala',
     'Colour.vala',
+    'Grid.vala',
     'InitFlags.vala',
     'Constants.vala',
 
