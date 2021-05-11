@@ -31,6 +31,10 @@ namespace Virgil {
             fill (value);
         }
 
+        public Grid.from_grid (Grid<T> grid) {
+            copy_from_grid (grid);
+        }
+
         public void fill (T value) {
             for (uint x = 0; x < _width; x++) {
                 for (uint y = 0; y < _height; y++) {
@@ -39,19 +43,55 @@ namespace Virgil {
             }
         }
 
-        public int set_cell (uint x, uint y, T value) {
+        public void rotate (uint rotations) {
+            T[,] new_cells = new T[_width, _height];
+
+            for (uint i = 0; i < rotations; ++i) {
+                for (uint j = 0; j < rotations; ++j) {
+                    new_cells[i, j] = _cells[rotations - j - 1, i];
+                }
+            }
+
+            for (uint x = 0; x < _width; x++) {
+                for (uint y = 0; y < _height; y++) {
+                    set_cell (x, y, new_cells[x, y]);
+                }
+            }
+        }
+
+        public void copy_from_grid (Grid<T> grid) {
+            for (uint x = 0; x < _width; x++) {
+                for (uint y = 0; y < _height; y++) {
+                    set_cell (x, y, grid.get_cell_value (x, y));
+                }
+            }
+        }
+
+        public bool within_grid (uint x, uint y) {
             bool within_x = x >= 0 && x <= _width;
             bool within_y = y >= 0 && y <= _height;
 
             if (within_x && within_y) {
-                _cells[x, y] = value;
-
-                return EXIT_SUCCESS;
+                return true;
             } else {
                 print_warning (@"Grid coordinates [$(x), $(y)] exceed grid size");
 
-                return EXIT_FAIL;
+                return false;
             }
+        }
+
+        public bool within_grid_point (Point point) {
+            return within_grid (point.x, point.y);
+        }
+
+        public int set_cell (uint x, uint y, T value) {
+            if (within_grid (x, y)) {
+                _cells[x, y] = value;
+
+                return EXIT_SUCCESS;
+            }
+
+            return EXIT_FAIL;
         }
 
         public void set_region (uint x, uint y, uint width, uint height, T value) {
@@ -66,7 +106,7 @@ namespace Virgil {
             set_region (rectangle.x, rectangle.y, rectangle.width, rectangle.height, value);
         }
 
-        public T get_cell (uint x, uint y) {
+        public T get_cell_value (uint x, uint y) {
             return _cells[x, y];
         }
     }
