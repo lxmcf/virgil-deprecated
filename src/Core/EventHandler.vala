@@ -43,6 +43,7 @@ namespace Virgil.Core {
                     // TODO: Work on controller input
                     case EventType.CONTROLLERBUTTONDOWN:
                     case EventType.CONTROLLERBUTTONUP:
+
                         break;
 
                     case EventType.CONTROLLERDEVICEADDED:

@@ -42,6 +42,9 @@ project_sources = files (
     'Graphics/BlendMode.vala',
     'Graphics/TextureType.vala',
 
+    'Scene/Scene.vala',
+    'Scene/SceneManager.vala',
+
     'Stb/Image.vala',
 
     'Filesystem/Filesystem.vala',
