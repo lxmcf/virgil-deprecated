@@ -44,6 +44,7 @@ namespace Virgil.Graphics {
             RenderQueueCall? queue_call = null;
 
             state.renderer.set_target (_surface);
+            state.renderer.clear_colour_rgb (0xFF, 0xFF, 0xFF);
 
             while ((queue_call = _queue.pop_head ()) != null) {
                 state.renderer.render_texture_point (queue_call.texture, queue_call.point);
@@ -57,6 +58,8 @@ namespace Virgil.Graphics {
             }
 
             state.renderer.reset_target ();
+
+            state.renderer.render_texture (_surface, 0, 0);
         }
     }
 }

@@ -20,5 +20,21 @@ namespace Virgil.Graphics {
                     return "UNKOWN";
             }
         }
+
+        internal SDL.Video.TextureAccess to_sdl () {
+            switch (this) {
+                case STATIC:
+                    return SDL.Video.TextureAccess.STATIC;
+
+                case STREAMING:
+                    return SDL.Video.TextureAccess.STREAMING;
+
+                case TARGET:
+                    return SDL.Video.TextureAccess.TARGET;
+
+                default:
+                    return SDL.Video.TextureAccess.STATIC;
+            }
+        }
     }
 }

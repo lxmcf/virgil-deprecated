@@ -13,7 +13,9 @@ namespace Virgil.Core {
         }
 
         public Renderer (Window window) {
-            _renderer = Video.Renderer.create (window.sdl_window, -1, 0);
+            uint32 renderer_flags = Video.RendererFlags.ACCELERATED | Video.RendererFlags.TARGETTEXTURE;
+
+            _renderer = Video.Renderer.create (window.sdl_window, -1, renderer_flags);
         }
 
         public int clear () {
@@ -70,6 +72,10 @@ namespace Virgil.Core {
         }
 
         public void set_target (Surface surface) {
+            if (_renderer.is_supported ()) {
+
+            }
+
             _renderer.render_target = surface.sdl_texture;
         }
 

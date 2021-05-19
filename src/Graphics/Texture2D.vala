@@ -33,7 +33,7 @@ namespace Virgil.Graphics {
             _blend_mode = BlendMode.BLEND;
 
             _texture = Texture.create (
-                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, (int)width, (int)height
+                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)width, (int)height
             );
 
             _texture.set_blend_mode (_blend_mode.to_sdl ());
