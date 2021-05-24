@@ -30,7 +30,9 @@ namespace Virgil.Scene {
         public int load_scene (string name) {
             unowned Scene? item = _scene_exists_name (name);
 
-            if (item != null {
+            if (item != null) {
+                _current_scene.unload ();
+
                 _current_scene = item;
 
                 _current_scene.activate ();
@@ -47,7 +49,7 @@ namespace Virgil.Scene {
             return _scene_exists (scene);
         }
 
-        public unowned Scene get_current_scene () {
+        public unowned Scene? get_current_scene () {
             return _current_scene;
         }
 
