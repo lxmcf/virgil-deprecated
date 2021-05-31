@@ -29,7 +29,9 @@ namespace Virgil.Scene {
         }
 
         public int deactivate () {
-
+            if (_activated) {
+                _activated = false;
+            }
             return 1;
         }
 

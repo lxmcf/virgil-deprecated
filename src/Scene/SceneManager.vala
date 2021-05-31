@@ -32,6 +32,7 @@ namespace Virgil.Scene {
 
             if (item != null) {
                 _current_scene.unload ();
+                _current_scene.deactivate ();
 
                 _current_scene = item;
 
@@ -51,6 +52,10 @@ namespace Virgil.Scene {
 
         public unowned Scene? get_current_scene () {
             return _current_scene;
+        }
+
+        public unowned Scene? get_nth_scene (uint n) {
+            return _scenes_list.nth_data (n);
         }
 
         private unowned Scene? _scene_exists (Scene scene) {
