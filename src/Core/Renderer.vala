@@ -71,12 +71,16 @@ namespace Virgil.Core {
             _renderer.render_target = null;
         }
 
-        public void set_target (Surface surface) {
+        public int set_target (Surface surface) {
             if (_renderer.is_supported ()) {
+                _renderer.render_target = surface.sdl_texture;
 
+                return EXIT_SUCCESS;
+            } else {
+                print_error ("Target textures not supported!");
+
+                return EXIT_FAIL;
             }
-
-            _renderer.render_target = surface.sdl_texture;
         }
 
         public int set_render_colour (Colour colour) {

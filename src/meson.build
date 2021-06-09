@@ -47,8 +47,6 @@ project_sources = files (
 
     'Stb/Image.vala',
 
-    'Filesystem/Filesystem.vala',
-
     'Math/PerlinGenerator.vala',
     'Math/Math.vala',
 

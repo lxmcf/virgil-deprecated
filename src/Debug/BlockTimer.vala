@@ -1,7 +1,7 @@
 namespace Virgil.Debug {
     public delegate void AnonymousBlock ();
 
-    public static void BLOCK_TIMER (string id, AnonymousBlock block) { // vala-lint=naming-convention
+    public static void block_timer (string id, AnonymousBlock block) {
         GLib.Timer* timer = new GLib.Timer ();
 
         block ();
@@ -14,7 +14,7 @@ namespace Virgil.Debug {
         delete timer;
     }
 
-    public static void BLOCK_TIMER_SECONDS (string id, AnonymousBlock block) { // vala-lint=naming-convention
+    public static void block_timer_seconds (string id, AnonymousBlock block) {
         GLib.Timer* timer = new GLib.Timer ();
 
         block ();
@@ -28,7 +28,7 @@ namespace Virgil.Debug {
         delete timer;
     }
 
-    public static void BLOCK_TIMER_MICROSECONDS (string id, AnonymousBlock block) { // vala-lint=naming-convention
+    public static void block_timer_microseconds (string id, AnonymousBlock block) {
         GLib.Timer* timer = new GLib.Timer ();
 
         block ();

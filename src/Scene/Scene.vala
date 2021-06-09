@@ -5,9 +5,18 @@ namespace Virgil.Scene {
     public class Scene {
         private string _name;
         private bool _activated;
+        private bool _persistent;
 
         public string name {
             get { return _name; }
+        }
+
+        public bool is_active {
+            get { return _activated; }
+        }
+
+        public bool is_persistent {
+            get { return _persistent; }
         }
 
         public Scene (string name) {
@@ -19,6 +28,8 @@ namespace Virgil.Scene {
         public int activate () {
             if (!_activated) {
                 _activated = true;
+
+                start ();
 
                 return EXIT_SUCCESS;
             }
@@ -32,6 +43,7 @@ namespace Virgil.Scene {
             if (_activated) {
                 _activated = false;
             }
+
             return 1;
         }
 

@@ -5,6 +5,7 @@ namespace Virgil.Scene {
         private List<Scene> _scenes_list;
         private unowned Game? _game;
         private Scene? _current_scene;
+        private bool _allow_persistence;
 
         public uint count {
             get { return _scenes_list.length (); }
@@ -40,6 +41,18 @@ namespace Virgil.Scene {
             }
 
             return EXIT_FAIL;
+        }
+
+        public int update () {
+            _current_scene.update ();
+
+            _current_scene.draw ();
+
+            return EXIT_SUCCESS;
+        }
+
+        public void set_allow_persistence (bool allow_persistence) {
+            _allow_persistence = allow_persistence;
         }
 
         public unowned Scene? get_scene_by_name (string name) {
