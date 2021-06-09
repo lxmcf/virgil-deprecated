@@ -28,9 +28,8 @@ namespace Virgil.Core {
             set { set_size (width, value); }
         }
 
-        public Window (int width = 640, int height = 360) {
-            _window = new Video.Window ("", CENTERED, CENTERED, width, height, 0);
-            title = @"$(PROJECT_NAME) - $(PROJECT_TYPE)";
+        public Window (int width = 640, int height = 360, string title = "Made with Virgil") {
+            _window = new Video.Window (title, CENTERED, CENTERED, width, height, 0);
 
             set_size (width, height);
         }

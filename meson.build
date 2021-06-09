@@ -4,8 +4,6 @@ project ('virgil', [ 'vala', 'c' ], version: '0.1.0')
 source_dir = meson.current_source_dir ()
 vapi_dir = source_dir / 'vapi'
 is_subproject = meson.is_subproject ()
-build_type = get_option ('build-type')
-profile = get_option ('profile')
 
 # Compilers
 valac = meson.get_compiler ('vala')
@@ -18,12 +16,6 @@ vala_lint = find_program ('io.elementary.vala-lint', required : false)
 valac_arguments = [
     '--vapidir', vapi_dir
 ]
-
-if build_type == 'development'
-    valac_arguments += [ '-D', 'DEVELOPMENT' ]
-else
-    valac_arguments += [ '-D', 'RELEASE' ]
-endif
 
 cc_arguments = [
     '-DSTB_IMAGE_IMPLEMENTATION'

@@ -1,11 +1,11 @@
 using Virgil.Debug;
 
-namespace Virgil.Scene {
+namespace Virgil.SceneManagement {
     public class SceneManager {
         private List<Scene> _scenes_list;
         private unowned Game? _game;
         private Scene? _current_scene;
-        private bool _allow_persistence;
+        //  private bool _allow_persistence;
 
         public uint count {
             get { return _scenes_list.length (); }
@@ -14,6 +14,14 @@ namespace Virgil.Scene {
         public SceneManager (Game? game = null) {
             _scenes_list = new List<Scene> ();
             _game = game;
+        }
+
+        ~SceneManager () {
+            for (uint i = 0; i < _scenes_list.length (); i++) {
+                unowned Scene item = _scenes_list.nth_data (i);
+
+                item.cleanup ();
+            }
         }
 
         public int add_scene (Scene scene, bool force = false) {
@@ -51,9 +59,9 @@ namespace Virgil.Scene {
             return EXIT_SUCCESS;
         }
 
-        public void set_allow_persistence (bool allow_persistence) {
-            _allow_persistence = allow_persistence;
-        }
+        //  public void set_allow_persistence (bool allow_persistence) {
+        //      _allow_persistence = allow_persistence;
+        //  }
 
         public unowned Scene? get_scene_by_name (string name) {
             return _scene_exists_name (name);

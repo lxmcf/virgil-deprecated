@@ -1,11 +1,12 @@
 using Virgil.Graphics;
 using Virgil.Debug;
 
-namespace Virgil.Scene {
+namespace Virgil.SceneManagement {
     public class Scene {
         private string _name;
         private bool _activated;
-        private bool _persistent;
+        //  private bool _persistent;
+        private bool _loaded;
 
         public string name {
             get { return _name; }
@@ -15,9 +16,9 @@ namespace Virgil.Scene {
             get { return _activated; }
         }
 
-        public bool is_persistent {
-            get { return _persistent; }
-        }
+        //  public bool is_persistent {
+        //      get { return _persistent; }
+        //  }
 
         public Scene (string name) {
             _name = name;
@@ -28,6 +29,7 @@ namespace Virgil.Scene {
         public int activate () {
             if (!_activated) {
                 _activated = true;
+                _loaded = true;
 
                 start ();
 
@@ -45,6 +47,12 @@ namespace Virgil.Scene {
             }
 
             return 1;
+        }
+
+        internal void cleanup () {
+            if (_loaded) {
+                unload ();
+            }
         }
 
         public virtual void start () { }
