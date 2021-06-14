@@ -11,7 +11,6 @@ This is all wishful thinking, who know's if I'll ever hit 1.0
 - Contains basic framework to develop 2D games
 - No networking functionality
 - C header's
-- Potential GTK based IDE
 
 ### Version 2.0
 
@@ -19,6 +18,7 @@ This is all wishful thinking, who know's if I'll ever hit 1.0
 
 - Begin removal of some SDL sister libraries in use (EG. SDL_TTF)
 - Basic built in mod support
+   Potential GTK based IDE
 
 ### Version 3.0
 

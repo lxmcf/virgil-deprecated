@@ -32,9 +32,6 @@ namespace Virgil {
                     framerate = _framerate
                 };
 
-                //  Type type = typeof (Game);
-                //  print_warning (type.name ());
-
                 _running = true;
 
                 _link_events ();
@@ -46,6 +43,7 @@ namespace Virgil {
 
         ~Game () {
             if (InitFlags.SDL in _initialised_modules) SDL.quit ();
+            if (InitFlags.SDL_TTF in _initialised_modules) SDLTTF.quit ();
         }
 
         public int run () {
@@ -89,13 +87,15 @@ namespace Virgil {
         private bool _init () {
             // SDL and external modules
             int sdl_init = SDL.init ();
+            int sdl_ttf_init = SDLTTF.init ();
 
             // Internal modules
             set_print_level (PrintLevel.MESSAGE);
 
             if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
+            if (sdl_ttf_init == 0) _initialised_modules += InitFlags.SDL_TTF;
 
-            return (sdl_init == 0);
+            return (sdl_init == 0) & (sdl_ttf_init == 0);
         }
 
         private void _link_events () {

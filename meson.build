@@ -39,12 +39,19 @@ dependencies_vapi = [
 ]
 
 if is_subproject
-    dependencies_external += [ meson.get_compiler ('c').find_library ('SDL2') ]
-    dependencies_vapi += [ meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir) ]
+    dependencies_external += [
+        meson.get_compiler ('c').find_library ('SDL2'),
+        meson.get_compiler ('c').find_library ('SDL2_ttf')
+    ]
+
+    dependencies_vapi += [
+        meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
+        meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir)
+    ]
 
     libvirgil_dep_dependencies = [ dependencies, dependencies_external, dependencies_vapi ]
 else
-    dependencies += [ dependency ('SDL2') ]
+    dependencies += [ dependency ('SDL2'), dependency ('SDL2_ttf') ]
 endif
 
 subdir ('src')

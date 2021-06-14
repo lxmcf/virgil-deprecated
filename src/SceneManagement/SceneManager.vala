@@ -25,7 +25,7 @@ namespace Virgil.SceneManagement {
         }
 
         public int add_scene (Scene scene, bool force = false) {
-            if (_scene_exists (scene) != null && !force) {
+            if (get_scene_by_type (scene) != null && !force) {
                 print_warning (@"Scene with the name of $(scene.name) already loaded into manager!");
 
                 return EXIT_FAIL_DUPLICATE;
@@ -36,8 +36,20 @@ namespace Virgil.SceneManagement {
             return EXIT_SUCCESS;
         }
 
+        public int remove_scene (string name) {
+            unowned Scene? item = get_scene_by_name (name);
+
+            if (item != null) {
+                _scenes_list.remove (item);
+
+                return EXIT_SUCCESS;
+            } else {
+                return EXIT_FAIL;
+            }
+        }
+
         public int load_scene (string name) {
-            unowned Scene? item = _scene_exists_name (name);
+            unowned Scene? item = get_scene_by_name (name);
 
             if (item != null) {
                 _current_scene.unload ();
@@ -59,27 +71,19 @@ namespace Virgil.SceneManagement {
             return EXIT_SUCCESS;
         }
 
-        //  public void set_allow_persistence (bool allow_persistence) {
-        //      _allow_persistence = allow_persistence;
-        //  }
-
         public unowned Scene? get_scene_by_name (string name) {
-            return _scene_exists_name (name);
+            for (uint i = 0; i < _scenes_list.length (); i++) {
+                unowned Scene item = _scenes_list.nth_data (i);
+
+                if (item.name == name) {
+                    return item;
+                }
+            }
+
+            return null;
         }
 
         public unowned Scene? get_scene_by_type (Scene scene) {
-            return _scene_exists (scene);
-        }
-
-        public unowned Scene? get_current_scene () {
-            return _current_scene;
-        }
-
-        public unowned Scene? get_nth_scene (uint n) {
-            return _scenes_list.nth_data (n);
-        }
-
-        private unowned Scene? _scene_exists (Scene scene) {
             for (uint i = 0; i < _scenes_list.length (); i++) {
                 unowned Scene item = _scenes_list.nth_data (i);
 
@@ -91,16 +95,12 @@ namespace Virgil.SceneManagement {
             return null;
         }
 
-        private unowned Scene? _scene_exists_name (string name) {
-            for (uint i = 0; i < _scenes_list.length (); i++) {
-                unowned Scene item = _scenes_list.nth_data (i);
+        public unowned Scene? get_current_scene () {
+            return _current_scene;
+        }
 
-                if (item.name == name) {
-                    return item;
-                }
-            }
-
-            return null;
+        public unowned Scene? get_nth_scene (uint n) {
+            return _scenes_list.nth_data (n);
         }
     }
 }

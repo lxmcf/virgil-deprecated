@@ -5,7 +5,6 @@ namespace Virgil.SceneManagement {
     public class Scene {
         private string _name;
         private bool _activated;
-        //  private bool _persistent;
         private bool _loaded;
 
         public string name {
@@ -15,10 +14,6 @@ namespace Virgil.SceneManagement {
         public bool is_active {
             get { return _activated; }
         }
-
-        //  public bool is_persistent {
-        //      get { return _persistent; }
-        //  }
 
         public Scene (string name) {
             _name = name;

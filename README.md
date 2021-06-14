@@ -23,6 +23,7 @@ Virgil is built from the ground up using Vala and the SDL2 library, this is my f
 ---
 
 - `libsdl2-2.0-0`
+- `libsdl2-ttf-2.0-0`
 
 ### Build Dependencies
 
@@ -31,6 +32,7 @@ Virgil is built from the ground up using Vala and the SDL2 library, this is my f
 - `valac`
 - `glib-2.0`
 - `libsdl2-dev`
+- `libsdl2-ttf-dev`
 - `meson`
 
 > _**Note:** Virgil can run on Mac OS with the use of `brew` but is not 100% supported at this stage._
