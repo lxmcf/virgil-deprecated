@@ -50,11 +50,15 @@ namespace Virgil.Graphics {
                 quad = { rect.x, rect.y, rect.width, rect.height };
             }
 
-            sdl_texture.do_lock (
+            int test = sdl_texture.do_lock (
                 quad,
                 out pixels,
                 out pitch
             );
+
+            if (test != 0) {
+                print_error (SDL.get_error ());
+            }
 
             _locked = true;
 

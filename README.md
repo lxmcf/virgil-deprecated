@@ -41,7 +41,7 @@ Virgil is built from the ground up using Vala and the SDL2 library, this is my f
 
 ---
 
-Virgil can be built in many ways, as a subprject, a static library or a shared library, please see the example ways of building the library and installing system wide:
+Virgil can be built in many ways, as a subprject, a static library or a shared library. It is recommended to use Virgil as a static library if you are not using [Flatpak](https://www.flatpak.org/). Please see the example ways of building the library and installing system wide:
 
 ```bash
 # Static library
@@ -71,7 +71,8 @@ If you are interested in using Virgil and want some help, the below table is an 
 | MacOS | aarch64 | Partial |
 | Crostini | x86_64 | Minimal |
 | Crostini | aarch64 | Minimal |
-| BSD | x86_64 | Minimal |
+| BSD | x86_64 | Experimental* |
+| Ubuntu Touch | aarch64 | Experimental* |
 | Windows | x86_64 | None |
 | Windows | aarch64 | None |
 | WSL | x86_64 | None |
@@ -87,16 +88,24 @@ A: I don't hate Windows at all, it is a great OS for what it does, however Virgi
 
 **Q: Will Virgil ever officially support Windows?**
 
-A: Nope, Virgil will always be officially exclusive to Linux and UNIX systems, however if you wish to create a Windows compatible fork of Virgil, I encourage you to do it!
+A: Nope, Virgil will always be __officially__ exclusive to Linux and UNIX systems, however if you wish to create a Windows compatible fork of Virgil, I encourage you to do it!
 
 **Q: Will Virgil ever cost money?**
 
 A: Never, Virgil will remain a FOSS piece of software and I will NEVER charge for use of Virgil, however if enough interest is gathered, I may consider donations but have no plans at this stage!
+
+**Q: What do you mean by 'experimental' support for an OS?**
+
+A: It means I might be working on adding it to the engine however there is no guarantee it will ever be considered 'stable' or make it to a full release.
 
 **Q: Do you know what you are doing with this?**
 
 A: No 🙂
 
 **Q: How many times are you going to rewrite Virgil?**
+
+A: Yes 🙂
+
+**Q: When will version X come out?**
 
 A: Yes 🙂

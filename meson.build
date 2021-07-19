@@ -1,4 +1,4 @@
-project ('virgil', [ 'vala', 'c' ], version: '0.1.0')
+project ('virgil', [ 'vala', 'c' ], version: '0.1.0', license: 'MIT')
 
 # Variables
 source_dir = meson.current_source_dir ()
@@ -18,7 +18,13 @@ valac_arguments = [
 ]
 
 cc_arguments = [
-    '-DSTB_IMAGE_IMPLEMENTATION'
+    '-DSTB_IMAGE_IMPLEMENTATION',
+
+    # Temporarily remove some aspects of STBI
+    '-DSTBI_NO_GIF',
+    '-DSTBI_NO_LINEAR',
+    '-DSTBI_NO_HDR',
+    '-DSTBI_NO_LINEAR'
 ]
 
 add_project_arguments (valac_arguments, language: 'vala')
@@ -45,8 +51,8 @@ if is_subproject
     ]
 
     dependencies_vapi += [
-        meson.get_compiler('vala').find_library('sdl2', dirs: vapi_dir),
-        meson.get_compiler('vala').find_library('SDL2_ttf', dirs: vapi_dir)
+        meson.get_compiler ('vala').find_library ('sdl2', dirs: vapi_dir),
+        meson.get_compiler ('vala').find_library ('SDL2_ttf', dirs: vapi_dir)
     ]
 
     libvirgil_dep_dependencies = [ dependencies, dependencies_external, dependencies_vapi ]
@@ -101,13 +107,12 @@ libvirgil_dep = declare_dependency (
 if not is_subproject
     pkgconfig = import ('pkgconfig')
 
-    virgil_pkg = pkgconfig.generate(
+    virgil_pkg = pkgconfig.generate (
         libvirgil,
         name: 'virgil',
         requires: dependencies,
-        # subdirs: [ 'virgil' ],
         description: 'A basic game engine!',
         version: meson.project_version(),
         url: 'https://github.com/lxmcf/virgil',
-)
+    )
 endif

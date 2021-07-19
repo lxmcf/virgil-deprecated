@@ -54,7 +54,7 @@ namespace Virgil.Graphics {
                 uchar* pixels = Image.load (filename, out width, out height, out channels);
 
                 _texture = Texture.create (
-                    state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, width, height
+                    state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), width, height
                 );
 
                 _texture.update (null, pixels, channels * width);
@@ -76,7 +76,7 @@ namespace Virgil.Graphics {
             _channels = (int)raw.channels;
 
             _texture = Texture.create (
-                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type, (int)raw.width, (int)raw.height
+                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)raw.width, (int)raw.height
             );
 
             _texture.update (null, raw.get_pixels (), (int)raw.pitch);

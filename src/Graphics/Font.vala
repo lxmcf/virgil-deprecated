@@ -19,5 +19,30 @@ namespace Virgil.Graphics {
         ~Font () {
             delete _font;
         }
+
+        public StaticTexture2D render (string text, Colour colour) {
+            SDL.Video.Surface* surface = _font->render (text, { colour.red, colour.green, colour.blue, colour.alpha });
+
+            TextureRaw* raw = render_raw (text, colour);
+
+            delete surface;
+
+            StaticTexture2D new_texture = new StaticTexture2D.from_texture_raw (raw);
+
+            delete raw;
+
+            return new_texture;
+        }
+
+        public TextureRaw render_raw (string text, Colour colour) {
+            SDL.Video.Surface* surface = _font->render (text, { colour.red, colour.green, colour.blue, colour.alpha });
+
+            TextureRaw raw = new TextureRaw (surface->w, surface->h);
+            raw.set_pixels (surface->pixels);
+
+            delete surface;
+
+            return raw;
+        }
     }
 }

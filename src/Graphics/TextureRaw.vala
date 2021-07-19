@@ -85,6 +85,13 @@ namespace Virgil.Graphics {
             return EXIT_SUCCESS;
         }
 
+        // TODO: Impliment ByteArray to allow to avoid memory leaks, this will do for now
+        public int set_pixels (uchar* pixels) {
+            Memory.copy (_pixels, pixels, length);
+
+            return 0;
+        }
+
         public int set_pixel_colour (int x, int y, Colour colour) {
             return set_pixel (x, y, colour.red, colour.green, colour.blue, colour.alpha);
         }
