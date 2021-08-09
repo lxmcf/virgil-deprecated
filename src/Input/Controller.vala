@@ -11,7 +11,7 @@ namespace Virgil.Input {
 
                 return 0;
             } else {
-                print_warning ("Keyboard already initialised");
+                print_warning ("Controller already initialised");
 
                 return 1;
             }

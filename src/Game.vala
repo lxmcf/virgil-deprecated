@@ -66,9 +66,21 @@ namespace Virgil {
         }
 
         // Default runtime methods
-        public virtual void start () { }
-        public virtual void update () { }
-        public virtual void draw () { }
+        public virtual void start () {
+            on_start ();
+        }
+
+        public virtual void update () {
+            on_update ();
+        }
+
+        public virtual void draw () {
+            on_draw ();
+        }
+
+        public signal void on_start ();
+        public signal void on_update ();
+        public signal void on_draw ();
 
         public bool running () {
             return _running;
@@ -116,6 +128,7 @@ namespace Virgil {
             });
         }
 
+        // TODO: Remove this and GameState
         public static unowned GameState get_state () {
             return _game_state;
         }

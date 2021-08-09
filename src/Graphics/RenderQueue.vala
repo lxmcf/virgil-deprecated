@@ -8,7 +8,7 @@ namespace Virgil.Graphics {
         private Surface _surface;
 
         // TODO: Impliment texture caching to allow text rendering (That isn't totally [ADVERTISER FRIENDLY WORDING])
-        private Texture2D[] _texture_cache;
+        //  private Texture2D[] _texture_cache;
 
         private BlendMode _blend_mode;
 

@@ -6,7 +6,7 @@
         {
             "label": "Compile Project",
             "type": "shell",
-            "command": "meson build --default-library=${input:libtype} && ninja -C build",
+            "command": "meson build --default-library=${input:libtype} -Dbuild-tests=${input:buildTests} && ninja -C build",
             "problemMatcher": "$valac",
             "group": {
                 "kind": "build",
@@ -52,6 +52,17 @@
             ],
             "description": "Whether to build Virgil as a static or shared library",
             "default": "static"
+        },
+
+        {
+            "id": "buildTests",
+            "type": "pickString",
+            "options": [
+                "true",
+                "false"
+            ],
+            "description": "Whether to build Virgil tests or not",
+            "default": "true"
         }
     ]
 }

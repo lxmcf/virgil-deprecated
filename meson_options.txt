@@ -1,2 +1,6 @@
-option ('build-type', type: 'combo', choices: [ 'flatpak', 'legacy' ], value: 'legacy')
-option ('profile', type: 'combo', choices: [ 'release', 'development' ], value: 'development')
+# Build Type
+option ('build-type', type: 'combo', choices: [ 'flatpak', 'legacy', 'clickable' ], value: 'legacy', description: 'The final build type.')
+option ('profile', type: 'combo', choices: [ 'release', 'development' ], value: 'development', description: 'The build profile.')
+
+# Build Tests?
+option ('build-tests', type: 'boolean', value: 'true', description: 'Build tests.')

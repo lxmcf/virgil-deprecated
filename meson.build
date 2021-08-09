@@ -1,9 +1,14 @@
-project ('virgil', [ 'vala', 'c' ], version: '0.1.0', license: 'MIT')
+project ('virgil', [ 'vala', 'c' ], version: '0.2.0', license: 'MIT')
 
 # Variables
 source_dir = meson.current_source_dir ()
 vapi_dir = source_dir / 'vapi'
 is_subproject = meson.is_subproject ()
+
+# Build info
+build_type = get_option ('build-type')
+profile = get_option ('profile')
+build_tests = get_option ('build-tests')
 
 # Compilers
 valac = meson.get_compiler ('vala')
@@ -18,13 +23,7 @@ valac_arguments = [
 ]
 
 cc_arguments = [
-    '-DSTB_IMAGE_IMPLEMENTATION',
-
-    # Temporarily remove some aspects of STBI
-    '-DSTBI_NO_GIF',
-    '-DSTBI_NO_LINEAR',
-    '-DSTBI_NO_HDR',
-    '-DSTBI_NO_LINEAR'
+    '-DSTB_IMAGE_IMPLEMENTATION'
 ]
 
 add_project_arguments (valac_arguments, language: 'vala')
@@ -46,13 +45,13 @@ dependencies_vapi = [
 
 if is_subproject
     dependencies_external += [
-        meson.get_compiler ('c').find_library ('SDL2'),
-        meson.get_compiler ('c').find_library ('SDL2_ttf')
+        cc.find_library ('SDL2'),
+        cc.find_library ('SDL2_ttf')
     ]
 
     dependencies_vapi += [
-        meson.get_compiler ('vala').find_library ('sdl2', dirs: vapi_dir),
-        meson.get_compiler ('vala').find_library ('SDL2_ttf', dirs: vapi_dir)
+        valac.find_library ('sdl2', dirs: vapi_dir),
+        valac.find_library ('SDL2_ttf', dirs: vapi_dir)
     ]
 
     libvirgil_dep_dependencies = [ dependencies, dependencies_external, dependencies_vapi ]
@@ -64,7 +63,7 @@ subdir ('src')
 
 # Vala lint
 if vala_lint.found ()
-    test ('Vala lint', vala_lint, args: [ '-d', source_dir ])
+    test ('Vala lint', vala_lint, args: [ '-c', '.vala-lint.conf', source_dir ])
 endif
 
 # Library
@@ -112,7 +111,11 @@ if not is_subproject
         name: 'virgil',
         requires: dependencies,
         description: 'A basic game engine!',
-        version: meson.project_version(),
+        version: meson.project_version (),
         url: 'https://github.com/lxmcf/virgil',
     )
+
+    if build_tests
+        subdir ('tests')
+    endif
 endif

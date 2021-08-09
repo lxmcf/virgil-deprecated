@@ -2,9 +2,9 @@ version = meson.project_version ().split ('.')
 
 config_data = configuration_data ()
 config_data.set ('PROJECT_VERSION', meson.project_version ())
-config_data.set ('PROJECT_MAJOR', version[0].to_int())
-config_data.set ('PROJECT_MINOR', version[1].to_int())
-config_data.set ('PROJECT_MICRO', version[2].to_int())
+config_data.set ('PROJECT_MAJOR', version[0].to_int ())
+config_data.set ('PROJECT_MINOR', version[1].to_int ())
+config_data.set ('PROJECT_MICRO', version[2].to_int ())
 
 config_header = configure_file (
     input: 'Config.vala.conf',
@@ -45,8 +45,8 @@ project_sources = files (
     'Graphics/BlendMode.vala',
     'Graphics/TextureType.vala',
 
-    'SceneManagement/Scene.vala',
-    'SceneManagement/SceneManager.vala',
+    'Scenes/Scene.vala',
+    'Scenes/SceneManager.vala',
 
     'Stb/Image.vala',
 
