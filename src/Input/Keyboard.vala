@@ -10,6 +10,8 @@ namespace Virgil.Input {
             if (!_is_initialised) {
                 _key_list = new List<KeyboardKey> ();
 
+                _is_initialised = true;
+
                 return 0;
             } else {
                 print_warning ("Keyboard already initialised");

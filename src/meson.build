@@ -13,6 +13,7 @@ config_header = configure_file (
 )
 
 project_sources = files (
+    'Virgil.vala',
     'Game.vala',
     'GameState.vala',
     'Point.vala',
@@ -20,7 +21,7 @@ project_sources = files (
     'Rectangle.vala',
     'Colour.vala',
     'Grid.vala',
-    'InitFlags.vala',
+    'InitFlag.vala',
     'Constants.vala',
 
     'Core/EventHandler.vala',

@@ -3,6 +3,7 @@ using Virgil.Debug;
 namespace Virgil.Input {
     public class Mouse {
         private static List<Button> _button_list;
+        private static bool _is_initialised;
 
         private static Point _position;
         private static Point _position_relative;
@@ -22,17 +23,27 @@ namespace Virgil.Input {
             get { return _position_relative.y; }
         }
 
-        public static void init () {
-            _button_list = new List<Button> ();
+        public static int init () {
+            if (!_is_initialised) {
+                _button_list = new List<Button> ();
 
-            _button_list.append (new Button (MouseButton.LEFT));
-            _button_list.append (new Button (MouseButton.RIGHT));
-            _button_list.append (new Button (MouseButton.MIDDLE));
-            _button_list.append (new Button (MouseButton.BACK));
-            _button_list.append (new Button (MouseButton.FORWARD));
+                _button_list.append (new Button (MouseButton.LEFT));
+                _button_list.append (new Button (MouseButton.RIGHT));
+                _button_list.append (new Button (MouseButton.MIDDLE));
+                _button_list.append (new Button (MouseButton.BACK));
+                _button_list.append (new Button (MouseButton.FORWARD));
 
-            _position = new Point.zero ();
-            _position_relative = new Point.zero ();
+                _position = new Point.zero ();
+                _position_relative = new Point.zero ();
+
+                _is_initialised = true;
+
+                return 0;
+            } else {
+                print_warning ("Mouse already initialised");
+
+                return 1;
+            }
         }
 
         public static bool check_button (MouseButton button) {

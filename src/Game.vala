@@ -8,7 +8,7 @@ namespace Virgil {
 
         private static GameState _game_state;
 
-        private InitFlags _initialised_modules;
+        private InitFlag _initialised_modules;
         private Window _window;
         private Renderer _renderer;
 
@@ -42,8 +42,8 @@ namespace Virgil {
         }
 
         ~Game () {
-            if (InitFlags.SDL in _initialised_modules) SDL.quit ();
-            if (InitFlags.SDL_TTF in _initialised_modules) SDLTTF.quit ();
+            if (InitFlag.SDL in _initialised_modules) SDL.quit ();
+            if (InitFlag.SDL_TTF in _initialised_modules) SDLTTF.quit ();
         }
 
         public int run () {
@@ -104,8 +104,8 @@ namespace Virgil {
             // Internal modules
             set_print_level (PrintLevel.MESSAGE);
 
-            if (sdl_init == 0) _initialised_modules += InitFlags.SDL;
-            if (sdl_ttf_init == 0) _initialised_modules += InitFlags.SDL_TTF;
+            if (sdl_init == 0) _initialised_modules += InitFlag.SDL;
+            if (sdl_ttf_init == 0) _initialised_modules += InitFlag.SDL_TTF;
 
             return (sdl_init == 0) & (sdl_ttf_init == 0);
         }
