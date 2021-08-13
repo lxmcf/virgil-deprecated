@@ -8,7 +8,7 @@
     <a href="#faq">FAQ</a>
 </p>
 
-Virgil is a basic 2D game engine built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
+Virgil is a basic 2D game library built using [SDL2](https://www.libsdl.org/index.php) and [Vala](https://wiki.gnome.org/Projects/Vala); designed for Linux and directly built for [elementary OS](https://elementary.io)...
 
 ### What is Virgil?
 
@@ -96,7 +96,7 @@ A: Never, Virgil will remain a FOSS piece of software and I will NEVER charge fo
 
 **Q: What do you mean by 'experimental' support for an OS?**
 
-A: It means I might be working on adding it to the engine however there is no guarantee it will ever be considered 'stable' or make it to a full release.
+A: It means I might be working on adding it to the core library however there is no guarantee it will ever be considered 'stable' or make it to a full release.
 
 **Q: Do you know what you are doing with this?**
 
