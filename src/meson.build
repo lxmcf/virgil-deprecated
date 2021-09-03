@@ -43,6 +43,8 @@ project_sources = files (
     'Graphics/Surface.vala',
     'Graphics/Font.vala',
 
+    'Graphics/Cache/FontTexture.vala',
+
     'Graphics/BlendMode.vala',
     'Graphics/TextureType.vala',
 
@@ -62,6 +64,8 @@ project_sources = files (
     'Input/MouseButton.vala',
     'Input/Mouse.vala',
 
-    'Input/Controller.vala',
-    'Input/Gamepad.vala'
+    # Don't compile the gamepad stuff... I haven't even started it
+
+    # 'Input/Controller.vala',
+    # 'Input/Gamepad.vala'
 )

@@ -128,7 +128,7 @@ namespace Virgil {
             });
         }
 
-        // TODO: Remove this and GameState
+        // TODO: Impliment instance system to avoid GameState
         public static unowned GameState get_state () {
             return _game_state;
         }

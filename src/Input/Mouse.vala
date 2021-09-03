@@ -139,23 +139,5 @@ namespace Virgil.Input {
 
             return null;
         }
-
-        public static int print_buttons () {
-            if (_button_list.length () == 0) {
-                return EXIT_FAIL;
-            }
-
-            print_message ("=== BEGIN BUTTON PRINT ===");
-
-            for (int i = 0; i < _button_list.length (); i++) {
-                Button item = _button_list.nth_data (i);
-
-                print_message (item.to_string ());
-            }
-
-            print_message ("==== END BUTTON PRINT ====");
-
-            return EXIT_SUCCESS;
-        }
     }
 }

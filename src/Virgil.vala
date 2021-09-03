@@ -39,7 +39,7 @@ namespace Virgil {
     }
 
     public static int init_subsystem (InitFlag flag) {
-        if (flag == InitFlag.EVERYTHING)  {
+        if (flag == InitFlag.EVERYTHING) {
             print_warning ("Can only initialise all systems at for init");
 
             return 1;

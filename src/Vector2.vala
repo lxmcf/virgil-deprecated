@@ -43,12 +43,5 @@ namespace Virgil {
         public Point to_point () {
             return new Point ((int)x, (int)y);
         }
-
-        public string to_string () {
-            string string_x = x.to_string ();
-            string string_y = y.to_string ();
-
-            return @"{ x: $(string_x), y: $(string_y) }";
-        }
     }
 }

@@ -28,10 +28,10 @@ namespace Virgil {
         }
 
         public void set_values_float (float red = 0.0f, float green = 0.0f, float blue = 0.0f, float alpha = 1.0f) {
-            this.red = (uint8)(red * 255.999f);
-            this.green = (uint8)(green * 255.999f);
-            this.blue = (uint8)(blue * 255.999f);
-            this.alpha = (uint8)(alpha * 255.999f);
+            this.red = (uint8)(red * 255.0f);
+            this.green = (uint8)(green * 255.0f);
+            this.blue = (uint8)(blue * 255.0f);
+            this.alpha = (uint8)(alpha * 255.0f);
         }
 
         public bool equals (Colour colour) {
@@ -53,13 +53,8 @@ namespace Virgil {
             blue = (uint8)b.clamp (0f, 255f);
         }
 
-        public string to_string () {
-            string string_red = red.to_string ();
-            string string_green = green.to_string ();
-            string string_blue = blue.to_string ();
-            string string_alpha = alpha.to_string ();
-
-            return @"{ red: $(string_red), green: $(string_green), blue: $(string_blue), alpha: $(string_alpha) }";
+        internal SDL.Video.Color get_sdl_colour () {
+            return { red, green, blue, alpha };
         }
     }
 }

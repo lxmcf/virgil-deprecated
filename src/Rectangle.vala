@@ -86,12 +86,8 @@ namespace Virgil {
         }
 
         public int copy (Rectangle rectangle) {
-            if (rectangle.is_empty ()) {
+            if (rectangle.is_empty () || is_equal (rectangle)) {
                 return EXIT_FAIL;
-            }
-
-            if (is_equal (rectangle)) {
-                return EXIT_FAIL_DUPLICATE;
             }
 
             x = rectangle.x;
@@ -105,16 +101,6 @@ namespace Virgil {
 
         public bool is_empty () {
             return (width == 0 || height == 0);
-        }
-
-        public string to_string () {
-            string string_x = x.to_string ();
-            string string_y = y.to_string ();
-
-            string string_width = width.to_string ();
-            string string_height = height.to_string ();
-
-            return @"{ x: $(string_x), y: $(string_y), width: $(string_width), height: $(string_height) }";
         }
     }
 }

@@ -17,14 +17,5 @@ namespace Virgil.Input {
             is_pressed = false;
             is_released = true;
         }
-
-        public string to_string () {
-            string button = _button.to_string ();
-            string down = is_down.to_string ();
-            string pressed = is_pressed.to_string ();
-            string released = is_released.to_string ();
-
-            return @"{ keycode: $(button), is_down: $(down), is_pressed: $(pressed), is_released: $(released) }";
-        }
     }
 }

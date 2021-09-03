@@ -9,9 +9,8 @@ namespace Virgil {
 
         internal string to_string () {
             switch (this) {
-
                 default:
-                    return  "null";
+                    return "null";
             }
         }
     }

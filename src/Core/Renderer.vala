@@ -35,15 +35,15 @@ namespace Virgil.Core {
             return clear_code;
         }
 
-        public int clear_colour_rgb (uint8 red, uint8 green, uint8 blue) {
-            uint8 current_red, current_green, current_blue;
+        public int clear_colour_rgba (uint8 red, uint8 green, uint8 blue, uint8 alpha) {
+            uint8 current_red, current_green, current_blue, current_alpha;
 
-            _renderer.get_draw_color (out current_red, out current_green, out current_blue, null);
-            _renderer.set_draw_color (red, green, blue, uint8.MAX);
+            _renderer.get_draw_color (out current_red, out current_green, out current_blue, out current_alpha);
+            _renderer.set_draw_color (red, green, blue, current_alpha);
 
             int clear_code = _renderer.clear ();
 
-            _renderer.set_draw_color (current_red, current_green, current_blue, uint8.MAX);
+            _renderer.set_draw_color (current_red, current_green, current_blue, current_alpha);
 
             return clear_code;
         }

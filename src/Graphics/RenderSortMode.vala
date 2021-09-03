@@ -1,8 +1,7 @@
 namespace Virgil.Graphics {
     public enum RenderSortMode {
-        DEFERED,
-        DEPTH,
-        DEPTH_REVERSED,
-        IMMEDIATE
+        ORDERED,    // In order of draw call
+        REVERSED,   // In reverse order of draw call
+        IMMEDIATE   // As soon as draw call initialised
     }
 }

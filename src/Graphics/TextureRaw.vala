@@ -144,31 +144,5 @@ namespace Virgil.Graphics {
                 _pixels[(i * _channels) + 1] = colour.green;
             }
         }
-
-        public string to_string () {
-            print_warning ("TextureRaw.to_string () is a very slow function, recommend running on a seperate thread!");
-
-            // Provide further warning if texture is greater than 64x64 pixels
-            if (pixel_count > 4096) {
-                print_warning ("TextureRaw size greater than 64x64 detected, perfomence may be impacted!");
-            }
-
-            string json_string = "";
-
-            for (uint i = 0; i < _pixel_count; i++) {
-                string red = _pixels[(i * _channels)].to_string ();
-                string green = _pixels[(i * _channels) + 1].to_string ();
-                string blue = _pixels[(i * _channels) + 2].to_string ();
-                string alpha = _pixels[(i * _channels) + 3].to_string ();
-
-                json_string += @"[ red: $(red), green: $(green), blue: $(blue), alpha: $(alpha) ]";
-
-                if (i != (_pixel_count - 1)) {
-                    json_string += ", ";
-                }
-            }
-
-            return @"{ $(json_string) }";
-        }
     }
 }

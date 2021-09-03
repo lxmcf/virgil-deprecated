@@ -121,18 +121,12 @@ namespace Virgil.Graphics {
             _texture.query (null, null, out width, out height);
         }
 
-        public string to_string () {
-            int _width, _height;
+        internal void set_sdl_texture (owned SDL.Video.Texture new_texture) {
+            _texture = (owned)new_texture;
 
-            _texture.query (null, null, out _width, out _height);
+            int width, height;
 
-            string id = _texture_id;
-            string width = _width.to_string ();
-            string height = _height.to_string ();
-            string channels = _channels.to_string ();
-            string type = texture_type.to_string ();
-
-            return @"{ id: $(id), width: $(width), height: $(height), channels: $(channels), type: $(type) }";
+            get_size (out width, out height);
         }
     }
 }

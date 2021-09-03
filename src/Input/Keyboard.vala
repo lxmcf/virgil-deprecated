@@ -114,23 +114,5 @@ namespace Virgil.Input {
             // Will always return null on first call
             return null;
         }
-
-        public static int print_keys () {
-            if (_key_list.length () == 0) {
-                return EXIT_FAIL;
-            }
-
-            print_message ("=== BEGIN KEY PRINT ===");
-
-            for (int i = 0; i < _key_list.length (); i++) {
-                KeyboardKey item = _key_list.nth_data (i);
-
-                print_message (item.to_string ());
-            }
-
-            print_message ("==== END KEY PRINT ====");
-
-            return EXIT_SUCCESS;
-        }
     }
 }
