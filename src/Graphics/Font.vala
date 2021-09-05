@@ -1,4 +1,6 @@
-using SDL.Video;
+using SDL;
+
+using Virgil.Core;
 
 namespace Virgil.Graphics {
     public class Font {
@@ -49,10 +51,9 @@ namespace Virgil.Graphics {
 
         public StaticTexture2D render (string text, Colour colour) {
             StaticTexture2D texture = new StaticTexture2D (0, 0);
-            GameState state = Game.get_state ();
 
-            Texture sdl_texture = Texture.create_from_surface (
-                state.renderer.sdl_renderer, _font.render (text, colour.get_sdl_colour ())
+            Video.Texture sdl_texture = Video.Texture.create_from_surface (
+                Renderer.instance.sdl_renderer, _font.render (text, colour.get_sdl_colour ())
             );
 
             texture.set_sdl_texture ((owned)sdl_texture);

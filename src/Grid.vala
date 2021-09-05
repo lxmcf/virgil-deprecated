@@ -1,5 +1,3 @@
-using Virgil.Debug;
-
 namespace Virgil {
     public class Grid <T> {
         private T[,] _cells;
@@ -74,7 +72,7 @@ namespace Virgil {
             if (within_x && within_y) {
                 return true;
             } else {
-                print_warning (@"Grid coordinates [$(x), $(y)] exceed grid size");
+                print ("Grid coordinates [%u, %u] exceed grid size", x, y);
 
                 return false;
             }

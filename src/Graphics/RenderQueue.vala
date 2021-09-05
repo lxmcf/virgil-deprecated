@@ -1,5 +1,4 @@
 using Virgil;
-using Virgil.Debug;
 using Virgil.Graphics.Cache;
 
 using Virgil.Core;
@@ -10,7 +9,6 @@ namespace Virgil.Graphics {
 
         private Surface _surface;
 
-        // TODO: Impliment texture caching to allow text rendering (That isn't totally [ADVERTISER FRIENDLY WORDING])
         private List<FontTexture> _texture_cache;
 
         private BlendMode _blend_mode;
@@ -26,9 +24,8 @@ namespace Virgil.Graphics {
 
             int width, height;
 
-            GameState state = Game.get_state ();
-            state.window.get_size (out width, out height);
-            _renderer = state.renderer;
+            Window.instance.get_size (out width, out height);
+            _renderer = Renderer.instance;
 
             _surface = new Surface (width, height);
             _surface.set_blend_mode (_blend_mode);
@@ -39,7 +36,7 @@ namespace Virgil.Graphics {
 
         public int render_texture (Texture2D texture, int x, int y) {
             if (texture.texture_type == TextureType.TARGET) {
-                print_error ("RenderQueue's do not support target textures in queue calls!");
+                print ("RenderQueue's do not support target textures in queue calls!\n");
 
                 return EXIT_FAIL;
             }

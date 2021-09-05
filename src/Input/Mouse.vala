@@ -1,5 +1,3 @@
-using Virgil.Debug;
-
 namespace Virgil.Input {
     public class Mouse {
         private static List<Button> _button_list;
@@ -40,7 +38,7 @@ namespace Virgil.Input {
 
                 return 0;
             } else {
-                print_warning ("Mouse already initialised");
+                print ("Mouse already initialised\n");
 
                 return 1;
             }

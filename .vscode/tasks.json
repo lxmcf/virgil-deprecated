@@ -6,29 +6,11 @@
         {
             "label": "Compile Project",
             "type": "shell",
-            "command": "meson build --default-library=${input:libtype} -Dbuild-tests=${input:buildTests} && ninja -C build",
-            "problemMatcher": "$valac",
+            "command": "meson build --default-library=shared -Dbuild-tests=true && ninja -C build",
+            "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        },
-        {
-            "label": "Compile & Install Project",
-            "type": "shell",
-            "command": "meson build --default-library=${input:libtype} && sudo ninja install -C build",
-            "problemMatcher": "$valac",
-            "presentation": {
-                "focus": true,
-            }
-        },
-        {
-            "label": "Uninstall Project",
-            "type": "shell",
-            "command": "sudo ninja uninstall -C build",
-            "problemMatcher": [],
-            "presentation": {
-                "focus": true,
             }
         },
         {
@@ -37,32 +19,32 @@
             "command": "sudo rm -r build",
             "problemMatcher": [],
             "presentation": {
-                "focus": true,
+                "focus": true
             }
         }
     ],
 
-    "inputs": [
-        {
-            "id": "libtype",
-            "type": "pickString",
-            "options": [
-                "static",
-                "shared"
-            ],
-            "description": "Whether to build Virgil as a static or shared library",
-            "default": "static"
-        },
+    // "inputs": [
+    //     {
+    //         "id": "libtype",
+    //         "type": "pickString",
+    //         "options": [
+    //             "static",
+    //             "shared"
+    //         ],
+    //         "description": "Whether to build Virgil as a static or shared library",
+    //         "default": "shared"
+    //     },
 
-        {
-            "id": "buildTests",
-            "type": "pickString",
-            "options": [
-                "true",
-                "false"
-            ],
-            "description": "Whether to build Virgil tests or not",
-            "default": "true"
-        }
-    ]
+    //     {
+    //         "id": "buildTests",
+    //         "type": "pickString",
+    //         "options": [
+    //             "true",
+    //             "false"
+    //         ],
+    //         "description": "Whether to build Virgil tests or not",
+    //         "default": "true"
+    //     }
+    // ]
 }

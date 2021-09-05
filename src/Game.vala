@@ -1,14 +1,10 @@
 using Virgil.Core;
 using Virgil.Input;
-using Virgil.Debug;
 
 namespace Virgil {
     public class Game {
         private bool _running;
 
-        private static GameState _game_state;
-
-        private InitFlag _initialised_modules;
         private Window _window;
         private Renderer _renderer;
 
@@ -16,34 +12,21 @@ namespace Virgil {
         private FramerateHandler _framerate;
 
         public Game () {
-            if (_init ()) {
-                _window = new Window ();
-                _renderer = new Renderer (_window);
+            Virgil.init ();
 
-                _event = new EventHandler ();
-                _framerate = new FramerateHandler ();
+            _window = new Window ();
+            _renderer = new Renderer (_window);
 
-                Keyboard.init ();
-                Mouse.init ();
+            _event = new EventHandler ();
+            _framerate = new FramerateHandler ();
 
-                _game_state = new GameState () {
-                    window = _window,
-                    renderer = _renderer,
-                    framerate = _framerate
-                };
+            _running = true;
 
-                _running = true;
-
-                _link_events ();
-
-            } else {
-                print_error ("{ SDL_Error: " + SDL.get_error () + "}");
-            }
+            _link_events ();
         }
 
         ~Game () {
-            if (InitFlag.SDL in _initialised_modules) SDL.quit ();
-            if (InitFlag.SDL_TTF in _initialised_modules) SDLTTF.quit ();
+            Virgil.quit ();
         }
 
         public int run () {
@@ -96,20 +79,6 @@ namespace Virgil {
             return EXIT_FAIL;
         }
 
-        private bool _init () {
-            // SDL and external modules
-            int sdl_init = SDL.init ();
-            int sdl_ttf_init = SDLTTF.init ();
-
-            // Internal modules
-            set_print_level (PrintLevel.MESSAGE);
-
-            if (sdl_init == 0) _initialised_modules += InitFlag.SDL;
-            if (sdl_ttf_init == 0) _initialised_modules += InitFlag.SDL_TTF;
-
-            return (sdl_init == 0) & (sdl_ttf_init == 0);
-        }
-
         private void _link_events () {
             _event.on_close.connect (() => {
                 quit ();
@@ -126,11 +95,6 @@ namespace Virgil {
             _event.on_mouse_motion.connect ((x, y, relative_x, relative_y) => {
                 Mouse.set_position (x, y);
             });
-        }
-
-        // TODO: Impliment instance system to avoid GameState
-        public static unowned GameState get_state () {
-            return _game_state;
         }
     }
 }

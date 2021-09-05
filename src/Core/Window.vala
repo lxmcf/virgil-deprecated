@@ -2,6 +2,12 @@ using SDL;
 
 namespace Virgil.Core {
     public class Window {
+        private static Window? _instance = null;
+
+        public static Window? instance {
+            get { return _instance; }
+        }
+
         private Video.Window _window;
 
         internal Video.Window sdl_window {
@@ -32,6 +38,8 @@ namespace Virgil.Core {
             _window = new Video.Window (title, CENTERED, CENTERED, width, height, 0);
 
             set_size (width, height);
+
+            _instance = this;
         }
 
         public void set_size (int width, int height) {

@@ -1,4 +1,3 @@
-using Virgil.Debug;
 using Virgil.Stb;
 
 namespace Virgil.Graphics {

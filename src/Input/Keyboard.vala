@@ -1,5 +1,4 @@
 using SDL.Input;
-using Virgil.Debug;
 
 namespace Virgil.Input {
     public class Keyboard {
@@ -14,7 +13,7 @@ namespace Virgil.Input {
 
                 return 0;
             } else {
-                print_warning ("Keyboard already initialised");
+                print ("Keyboard already initialised\n");
 
                 return 1;
             }
@@ -25,8 +24,6 @@ namespace Virgil.Input {
 
             if (item == null) {
                 _key_list.append (new KeyboardKey (keycode));
-            } else {
-                print_warning ("Attempted to add already monitored key");
             }
         }
 

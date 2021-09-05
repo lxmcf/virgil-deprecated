@@ -1,7 +1,6 @@
 // TODO: Split into gamecomponent class
 
 using Virgil.Graphics;
-using Virgil.Debug;
 
 namespace Virgil.Scenes {
     public class Scene {

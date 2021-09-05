@@ -1,5 +1,3 @@
-using Virgil.Debug;
-
 namespace Virgil.Input {
     public class Controller {
         private static List<Gamepad> _gamepad_list;

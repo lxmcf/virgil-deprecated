@@ -15,13 +15,11 @@ config_header = configure_file (
 project_sources = files (
     'Virgil.vala',
     'Game.vala',
-    'GameState.vala',
     'Point.vala',
     'Vector2.vala',
     'Rectangle.vala',
     'Colour.vala',
     'Grid.vala',
-    'InitFlag.vala',
     'Constants.vala',
 
     'Core/EventHandler.vala',
@@ -29,9 +27,8 @@ project_sources = files (
     'Core/Renderer.vala',
     'Core/FramerateHandler.vala',
 
-    'Debug/Print.vala',
-    'Debug/PrintLevel.vala',
     'Debug/BlockTimer.vala',
+    # 'Debug/Print.vala',
 
     'Graphics/Texture2D.vala',
     'Graphics/DynamicTexture2D.vala',

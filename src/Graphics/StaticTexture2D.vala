@@ -1,5 +1,4 @@
 using Virgil;
-using Virgil.Debug;
 
 using SDL.Video;
 

@@ -1,8 +1,6 @@
 using Virgil;
 using Virgil.Graphics;
 
-using Virgil.Debug;
-
 Font font;
 
 public static int main (string[] args) {

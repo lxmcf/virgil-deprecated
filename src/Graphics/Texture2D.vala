@@ -1,5 +1,4 @@
 using Virgil;
-using Virgil.Debug;
 using Virgil.Stb;
 
 using SDL.Video;
@@ -29,11 +28,10 @@ namespace Virgil.Graphics {
         }
 
         public Texture2D (uint width, uint height, TextureType type) {
-            GameState state = Game.get_state ();
             _blend_mode = BlendMode.BLEND;
 
             _texture = Texture.create (
-                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)width, (int)height
+                Core.Renderer.instance.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)width, (int)height
             );
 
             _texture.set_blend_mode (_blend_mode.to_sdl ());
@@ -45,7 +43,6 @@ namespace Virgil.Graphics {
 
         public Texture2D.from_file (string filename, TextureType type) {
             bool file_exists = FileUtils.test (filename, GLib.FileTest.EXISTS);
-            GameState state = Game.get_state ();
             _blend_mode = BlendMode.BLEND;
 
             if (file_exists) {
@@ -54,7 +51,7 @@ namespace Virgil.Graphics {
                 uchar* pixels = Image.load (filename, out width, out height, out channels);
 
                 _texture = Texture.create (
-                    state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), width, height
+                    Core.Renderer.instance.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), width, height
                 );
 
                 _texture.update (null, pixels, channels * width);
@@ -70,13 +67,12 @@ namespace Virgil.Graphics {
         }
 
         public Texture2D.from_texture_raw (TextureRaw raw, TextureType type) {
-            GameState state = Game.get_state ();
             _blend_mode = BlendMode.BLEND;
 
             _channels = (int)raw.channels;
 
             _texture = Texture.create (
-                state.renderer.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)raw.width, (int)raw.height
+                Core.Renderer.instance.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)raw.width, (int)raw.height
             );
 
             _texture.update (null, raw.get_pixels (), (int)raw.pitch);

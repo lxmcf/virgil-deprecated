@@ -1,5 +1,3 @@
-using Virgil.Debug;
-
 namespace Virgil.Math {
     public class PerlinGenerator {
         private uint8[] _hash;

@@ -1,5 +1,4 @@
 using Virgil;
-using Virgil.Debug;
 
 using SDL.Video;
 
@@ -10,23 +9,17 @@ namespace Virgil.Graphics {
         public DynamicTexture2D (uint width, uint height) {
             base (width, height, TextureType.STREAMING);
 
-            print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
-
             _locked = false;
         }
 
         public DynamicTexture2D.from_file (string filename) {
             base.from_file (filename, TextureType.STREAMING);
 
-            print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
-
             _locked = false;
         }
 
         public DynamicTexture2D.from_texture_raw (TextureRaw raw) {
             base.from_texture_raw (raw, TextureType.STREAMING);
-
-            print_warning ("DynamicTexture2D is currently not fully functional, please use StaticTexture2D");
 
             _locked = false;
         }
@@ -39,7 +32,7 @@ namespace Virgil.Graphics {
             Rect? quad;
 
             if (_locked) {
-                print_error (@"DynamicTexture2D { $texture_id } already locked!");
+                print ("DynamicTexture2D [%s] is already locked!\n", texture_id);
 
                 return EXIT_FAIL;
             }
@@ -57,7 +50,7 @@ namespace Virgil.Graphics {
             );
 
             if (test != 0) {
-                print_error (SDL.get_error ());
+                print ("%s", SDL.get_error ());
             }
 
             _locked = true;
@@ -67,7 +60,7 @@ namespace Virgil.Graphics {
 
         public int @unlock () {
             if (!_locked) {
-                print_error (@"DynamicTexture2D { $texture_id } already unlocked!");
+                print ("DynamicTexture2D [%s] already unlocked!\n", texture_id);
             }
 
             sdl_texture.unlock ();

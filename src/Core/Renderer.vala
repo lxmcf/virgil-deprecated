@@ -2,10 +2,15 @@ using SDL;
 
 using Virgil;
 using Virgil.Graphics;
-using Virgil.Debug;
 
 namespace Virgil.Core {
     public class Renderer {
+        private static Renderer? _instance = null;
+
+        public static Renderer? instance {
+            get { return _instance; }
+        }
+
         private Video.Renderer _renderer;
 
         internal Video.Renderer sdl_renderer {
@@ -16,6 +21,8 @@ namespace Virgil.Core {
             uint32 renderer_flags = Video.RendererFlags.ACCELERATED | Video.RendererFlags.TARGETTEXTURE;
 
             _renderer = Video.Renderer.create (window.sdl_window, -1, renderer_flags);
+
+            _instance = this;
         }
 
         public int clear () {
@@ -77,7 +84,7 @@ namespace Virgil.Core {
 
                 return EXIT_SUCCESS;
             } else {
-                print_error ("Target textures not supported!");
+                print ("Target textures are not supported!");
 
                 return EXIT_FAIL;
             }
