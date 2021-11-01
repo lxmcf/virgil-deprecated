@@ -12,12 +12,15 @@ namespace Virgil.Core {
         }
 
         private Video.Renderer _renderer;
+        private Window _window;
 
         internal Video.Renderer sdl_renderer {
             get { return _renderer; }
         }
 
         public Renderer (Window window) {
+            _window = window;
+
             uint32 renderer_flags = Video.RendererFlags.ACCELERATED | Video.RendererFlags.TARGETTEXTURE;
 
             _renderer = Video.Renderer.create (window.sdl_window, -1, renderer_flags);
@@ -72,10 +75,24 @@ namespace Virgil.Core {
             return render_texture (texture, point.x, point.y);
         }
 
+        public int render_texture_vector2 (Texture2D texture, Vector2 vector) {
+            return render_texture (texture, (int)vector.x, (int)vector.y);
+        }
+
         // TODO: Impliment primitives
 
         public void reset_target () {
             _renderer.render_target = null;
+        }
+
+        public int set_viewport (int x, int y, uint width = 0, uint height = 0) {
+            uint temp_width = width;
+            uint temp_height = height;
+
+            if (width == 0) temp_width = _window.width;
+            if (height == 0) temp_height = _window.height;
+
+            return _renderer.set_viewport ({ x, y, temp_width, temp_height });
         }
 
         public int set_target (Surface surface) {

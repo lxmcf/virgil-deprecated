@@ -2,6 +2,12 @@
 // TODO: Move to using GLib timer's, should allow for uncapped framerates with accurate delta time
 namespace Virgil.Core {
     public class FramerateHandler {
+        private static FramerateHandler? _instance = null;
+
+        public static FramerateHandler? instance {
+            get { return _instance; }
+        }
+
         public uint32 _frame_count;
         public uint32 _base_ticks;
         public uint32 _last_ticks;
@@ -24,6 +30,8 @@ namespace Virgil.Core {
             _rate_ticks = (1000.0f / (float)framerate);
             _base_ticks = _get_ticks ();
             _last_ticks = _base_ticks;
+
+            _instance = this;
         }
 
         public void update () {
@@ -51,7 +59,7 @@ namespace Virgil.Core {
             _delta_time = time_passed;
         }
 
-        public void set_framerate (int? framerate) {
+        public void set_framerate (int framerate) {
             _frame_count = 0;
             _rate = framerate;
             _rate_ticks = (1000.0f / (float)framerate);

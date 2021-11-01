@@ -47,14 +47,9 @@ namespace Virgil.Graphics {
         }
 
         public int render_text (Font font, int x, int y, string text, Colour colour) {
-            string red, green, blue, alpha;
+            string preformat = "%s|%d|%d|%d|%d|%s";
+            string id = preformat.printf (font.font_id, colour.red, colour.green, colour.blue, colour.alpha, text);
 
-            red = colour.red.to_string ();
-            green = colour.green.to_string ();
-            blue = colour.blue.to_string ();
-            alpha = colour.alpha.to_string ();
-
-            string id = font.font_id + "|" + red + green + blue + alpha + "|" + text;
             FontTexture? cache_item = _cached_text_exists (id);
 
             if (cache_item == null) {

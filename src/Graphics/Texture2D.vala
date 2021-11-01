@@ -29,10 +29,9 @@ namespace Virgil.Graphics {
 
         public Texture2D (uint width, uint height, TextureType type) {
             _blend_mode = BlendMode.BLEND;
+            unowned Renderer sdl_renderer = Core.Renderer.instance.sdl_renderer;
 
-            _texture = Texture.create (
-                Core.Renderer.instance.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)width, (int)height
-            );
+            _texture = Texture.create (sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)width, (int)height);
 
             _texture.set_blend_mode (_blend_mode.to_sdl ());
 
@@ -47,12 +46,11 @@ namespace Virgil.Graphics {
 
             if (file_exists) {
                 int width, height, channels;
+                unowned Renderer sdl_renderer = Core.Renderer.instance.sdl_renderer;
 
                 uchar* pixels = Image.load (filename, out width, out height, out channels);
 
-                _texture = Texture.create (
-                    Core.Renderer.instance.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), width, height
-                );
+                _texture = Texture.create (sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), width, height);
 
                 _texture.update (null, pixels, channels * width);
                 _texture.set_blend_mode (_blend_mode.to_sdl ());
@@ -68,11 +66,12 @@ namespace Virgil.Graphics {
 
         public Texture2D.from_texture_raw (TextureRaw raw, TextureType type) {
             _blend_mode = BlendMode.BLEND;
+            unowned Renderer sdl_renderer = Core.Renderer.instance.sdl_renderer;
 
             _channels = (int)raw.channels;
 
             _texture = Texture.create (
-                Core.Renderer.instance.sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)raw.width, (int)raw.height
+                sdl_renderer, PixelRAWFormat.ABGR8888, type.to_sdl (), (int)raw.width, (int)raw.height
             );
 
             _texture.update (null, raw.get_pixels (), (int)raw.pitch);

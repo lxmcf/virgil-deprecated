@@ -10,7 +10,7 @@ public static int main (string[] args) {
     RenderQueue queue = new RenderQueue ();
 
     game.on_draw.connect (() => {
-        queue.render_text (font, 32, 32, "Hello World!", new Colour (255, 255, 255));
+        queue.render_text (font, 0, 0, "Hello World!", new Colour (255, 255, 255));
 
         queue.render ();
     });
