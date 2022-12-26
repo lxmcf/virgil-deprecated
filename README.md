@@ -1,4 +1,8 @@
-<h1 align="center">Virgil</h1>
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+<p align="center">This version of Virgil has been deprecated and all active development has moved to <a href="https://github.com/lxmcf/virgil-runtime">THIS REPOSITORY</a>, this repo will no longer recieve updates and will be archived, please feel free to fork if you wish to continue on with this messy version!</p>
+
+<h1 align="center">Virgil (Deprecated)</h1>
 
 <p align="center">
     <a href="#what-is-virgil">Description</a> |
